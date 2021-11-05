@@ -1,0 +1,13 @@
+<mat-card *ngFor="let product of products" class="card mt-3 p-0 bg-transparent col-12 col-md-3">
+  <mat-card-content class="products-image" [routerLink]="['/product', 12345]"></mat-card-content>
+  <div>
+    {{product.name}}
+    <span class="badge-pill badge-primary">
+          {{ product.price | currency:"USD":"symbol":"2.2-2" }}
+        </span>
+  </div>
+  <mat-card-content class="card-text bg-transparent p-1">{{product.description}}</mat-card-content>
+  <mat-card-actions>
+    <!--quantity buttons-->
+  </mat-card-actions>
+</mat-card>

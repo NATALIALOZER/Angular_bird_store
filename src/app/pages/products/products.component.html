@@ -1,0 +1,41 @@
+<!--slider-->
+<mat-card class="result-card">
+  <mat-card-content>
+    <div class="example-label-container" [class]="vertical ? 'example-label-vertical' : 'example-label-horizontal'">
+      <label class="example-value-label">{{value}}</label>
+      <label id="example-name-label" class="example-name-label"> per page</label>
+    </div>
+    <mat-slider
+      [disabled]="disabled"
+      [max]="max"
+      [min]="min"
+      [step]="step"
+      [thumbLabel]="thumbLabel"
+      [(ngModel)]="value"
+      (change)="changePageSize()">
+    </mat-slider>
+  </mat-card-content>
+</mat-card>
+
+<div class="row">
+  <div class="col bg-transparent mt-3">
+    <a class="text-secondary">cute items</a>
+  </div>
+</div>
+<div class="row">
+  <div class="col-12 text-center">
+    <app-item [products]="products"></app-item>
+
+    <div class="btn-group shadow mb-3">
+      <button *counter="let page of pageCount" (click)="changePage(page)"
+              class="btn btn-primary" [class.active]="page == selectedPage">
+        {{page}}
+      </button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
