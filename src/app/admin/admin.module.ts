@@ -9,6 +9,7 @@ import { EditComponent } from './pages/edit/edit.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {AuthService} from "./shared/services/auth.service";
 import {HttpClientModule} from "@angular/common/http";
+import {AuthGuard} from "./shared/services/auth.guard";
 
 
 
@@ -35,13 +36,13 @@ import {HttpClientModule} from "@angular/common/http";
             path: 'login', component: LoginComponent
           },
           {
-            path: 'dashboard', component: DashboardComponent
+            path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]
           },
           {
-            path: 'create', component: CreateComponent
+            path: 'create', component: CreateComponent, canActivate: [AuthGuard]
           },
           {
-            path: 'product/:id/edit', component: EditComponent
+            path: 'product/:id/edit', component: EditComponent, canActivate: [AuthGuard]
           }
         ]
       }
@@ -50,6 +51,6 @@ import {HttpClientModule} from "@angular/common/http";
   exports:[
     RouterModule
   ],
-  providers: [AuthService]
+  providers: [AuthGuard]
 })
 export class AdminModule { }

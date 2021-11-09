@@ -1,1 +1,42 @@
-<p>dashboard works!</p>
+<div *ngIf="products.length; else Loading">
+  <div class="row">
+    <div class="form-control col-12">
+      <input class="w-100" type="text" placeholder="Шукати товар...">
+    </div>
+    <table class="col-12 text-center">
+    <thead class="bg-secondary">
+    <tr>
+      <th>#</th>
+      <th>ID товару</th>
+      <th>Назва товару</th>
+      <th>Характеристика</th>
+      <th>Ціна</th>
+      <th>Дія</th>
+    </tr>
+    </thead>
+    <tbody class="text-center">
+    <tr *ngFor="let product of products; let i = index">
+      <td>{{ i }}</td>
+      <td>{{ product.id }}</td>
+      <td>{{ product.name }}</td>
+      <!--<td>{{ product.category }}</td>-->
+      <td>{{ product.description }}</td>
+      <td>{{ product.price }}</td>
+      <!--<td>{{ product.date | date: 'medium' }}</td>-->
+      <td>
+        <button class="btn btn-outline-dark m-1"
+                [routerLink]="['/admin','product', product.id, 'edit']"
+        >
+          Відкрити
+        </button>
+        <a class="btn btn-danger m-1" (click)="remove(product.id)">Видалити</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<ng-template #Loading>
+  <p class="text-center">Дані завантажуються...</p>
+</ng-template>

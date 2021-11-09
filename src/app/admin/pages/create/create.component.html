@@ -1,1 +1,91 @@
-<p>create works!</p>
+<form [formGroup]="form" (ngSubmit)="submit()" class="mt-5 d-flex flex-column align-items-center">
+  <h1 class="text-center text-secondary">Створення нового товару</h1>
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-6">
+
+      <div class="form-control text-secondary"
+           [ngClass]="{invalid: form.get('name')?.touched && form.get('name')?.invalid}"
+      >
+        <label for="name">Назва товару:</label>
+        <input id="name" type="text" formControlName="name">
+        <div
+          *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+          class="validation"
+        >
+          <small *ngIf="form.get('name')?.errors?.required">
+            Введіть назву
+          </small>
+        </div>
+      </div>
+
+      <div class="form-control text-secondary"
+           [ngClass]="{invalid: form.get('price')?.touched && form.get('price')?.invalid}"
+      >
+        <label for="price">Вартість товару:</label>
+        <input id="price" type="number" formControlName="price">
+        <div
+          *ngIf="form.get('price')?.touched && form.get('price')?.invalid"
+          class="validation"
+        >
+          <small *ngIf="form.get('price')?.errors?.required">
+            Введіть вартість товару
+          </small>
+        </div>
+      </div>
+
+      <div class="form-control text-secondary"
+           [ngClass]="{invalid: form.get('description')?.touched && form.get('description')?.invalid}"
+      >
+        <label for="description">Опис товару:</label>
+        <input id="description" type="text" formControlName="description">
+        <div
+          *ngIf="form.get('description')?.touched && form.get('description')?.invalid"
+          class="validation"
+        >
+          <small *ngIf="form.get('description')?.errors?.required">
+            Введіть опис товару
+          </small>
+        </div>
+      </div>
+
+    <!--  <div class="form-control text-secondary"
+           [ngClass]="{invalid: form.get('category')?.touched && form.get('category')?.invalid}"
+      >
+        <label for="category">Категорія:</label>
+        <input id="category" type="checkbox" formControlName="category">
+        <div
+          *ngIf="form.get('category')?.touched && form.get('category')?.invalid"
+          class="validation"
+        >
+          <small *ngIf="form.get('category')?.errors?.required">
+            Оберіть товару
+          </small>
+        </div>
+      </div>-->
+    </div>
+    <!--<div class="image-controller col-11 col-sm-5 mt-3 mt-sm-0">
+      <label class="image-upload-container btn btn-bwn" [ngStyle]="{'visibility': selected ? 'hidden' : 'visible' }">
+        <span><img src="assets/images/upload.png" alt=""></span>
+        <input
+          class="form-control"
+          type="file"
+          accept="image/*"
+          (change)="processFile(imageInput)"
+          #imageInput
+        />
+      </label>
+      <div *ngIf="selectedFile" class="img-preview-container">
+        <div class="img-preview"
+             [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}">
+        </div>
+      </div>
+    </div>-->
+  </div>
+
+
+  <button
+  type="submit"
+  class="btn btn-block btn-dark mt-5 mb-3 w-70"
+  [disabled]="form.invalid"
+  >Створити товар</button>
+</form>

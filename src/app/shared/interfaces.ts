@@ -1,4 +1,25 @@
 export interface User{
-  login: string;
+  email: string;
   password: string;
+  returnSecureToken?: boolean
+}
+
+export interface fbAuthResponse{
+  displayName?: string;
+  email?: string;
+  idToken: string;
+  kind?: string;
+  localId?: string;
+  registered?: boolean;
+  expiresIn: string;
+}
+
+export interface ImageSnippet {
+  file?: File;
+  src: string;
+}
+
+export interface FbCreateResponse {
+  id: string;
+  name: string;
 }

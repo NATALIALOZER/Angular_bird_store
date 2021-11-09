@@ -23,7 +23,7 @@ import {HttpClientModule} from "@angular/common/http";
   ,
   exports: [
     ItemComponent,
-    HttpClientModule
+    HttpClientModule,
   ]
 })
 export class SharedModule { }
