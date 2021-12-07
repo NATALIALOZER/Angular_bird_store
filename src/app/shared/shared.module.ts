@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MainLayoutComponent } from './components/main-layout/main-layout.component';
 import {AppRoutingModule} from "../app-routing.module";
 import { ItemComponent } from './components/item/item.component';
 import {MaterialModule} from "../material/material.module";
 import {ModelModule} from "../models/model.module";
 import {HttpClientModule} from "@angular/common/http";
+import { NgxPaginationModule } from 'ngx-pagination';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -18,12 +20,20 @@ import {HttpClientModule} from "@angular/common/http";
     AppRoutingModule,
     MaterialModule,
     ModelModule,
-    HttpClientModule
-  ]
-  ,
+    HttpClientModule,
+    NgxPaginationModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ModelModule
+  ],
   exports: [
     ItemComponent,
     HttpClientModule,
+    MaterialModule,
+    NgxPaginationModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    ModelModule
   ]
 })
 export class SharedModule { }

@@ -11,7 +11,7 @@
 
       <img *ngIf="!checked" src="assets/images/Bird-logo.png" alt="logo"><img *ngIf="checked" src="assets/images/Bird-logo2.png" alt="logo">
 
-      <button mat-icon-button class="btn btn-primary shadow rounded active" [ngStyle]="{'backgroundColor': checked ? '#526AF2' : '#F2E9E9'}">
+      <button [routerLink]="['/cart-page']" mat-icon-button class="btn btn-primary shadow rounded active" [ngStyle]="{'backgroundColor': checked ? '#526AF2' : '#F2E9E9'}">
         <mat-icon><img *ngIf="!checked" src="assets/images/Cart.png" alt="cart"><img *ngIf="checked" src="assets/images/Cart2.png" alt="cart"></mat-icon>
       </button>
     </div>
@@ -23,8 +23,8 @@
       <mat-list-item role="listitem">SALE %</mat-list-item>
     </mat-list>
 
-    <form class="search_form d-flex justify-content-end mt-3">
-      <!--*ngIf="location!=='/product'"-->
+    <form class="search_form d-flex justify-content-end mt-3" >
+      <!--*ngIf="location!=='/product-page'"-->
       <mat-form-field class="search_field"  [ngStyle]="{'width': checked ? '100%' : '80%', 'color': checked ? 'plum' : 'grey'}">
         <input type="tel" matInput placeholder="Search" name= "search" [(ngModel)]="search">
         <button matSuffix mat-button ><mat-icon>search</mat-icon></button>

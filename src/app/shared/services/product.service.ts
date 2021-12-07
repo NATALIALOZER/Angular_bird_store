@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Product} from "../models/product.model";
-import {environment} from "../../environments/environment";
+import {Product} from "../../models/product.model";
+import {environment} from "../../../environments/environment";
 import {map} from "rxjs/operators";
-import {FbCreateResponse} from "./interfaces";
+import {FbCreateResponse} from "../models/interfaces";
 
 @Injectable({providedIn: "root"})
 export class ProductService {
@@ -32,7 +32,25 @@ export class ProductService {
           name: response[key].name}
           ))
       }))
-  }}
+  }
+
+  getById(id: string): Observable<Product> {
+    return this.http.get<Product>(`${environment.fbDbUrl}/products/${id}.json`)
+      .pipe(map((product: Product) => {
+      return { ...product,
+        id, name: product.name,
+      };
+    }))
+  }
+
+  update(product: Product): Observable<Product> {
+    return this.http.patch<Product>(`${environment.fbDbUrl}/products/${product.id}.json`, product)
+  }
+
+  remove(id: string): Observable<void> {
+    return this.http.delete<void>(`${environment.fbDbUrl}/products/${id}.json`)
+  }
+}
 
 
 

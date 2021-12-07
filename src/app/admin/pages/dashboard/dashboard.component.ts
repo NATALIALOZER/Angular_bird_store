@@ -1,7 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ProductService} from "../../../shared/product.service";
+import {ProductService} from "../../../shared/services/product.service";
 import {Product} from "../../../models/product.model";
 import {Subscription} from "rxjs";
+import {AlertService} from "../../shared/services/alert.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -9,11 +10,15 @@ import {Subscription} from "rxjs";
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
-  products: Product[] = [];
+  public products: Product[] = [];
   // @ts-ignore
   pSubscription: Subscription;
+  // @ts-ignore
+  delSubscription: Subscription;
+  public searchStr = ''
 
-  constructor( private productService: ProductService) { }
+  constructor( private productService: ProductService,
+               private alert: AlertService) { }
 
   ngOnInit(): void {
     this.productService.getAll().subscribe(products => {
@@ -21,13 +26,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
     })
   }
 
+  remove(id: string | undefined) {
+    if (id != null) {
+      this.productService.remove(id).subscribe(() => {
+        this.products = this.products.filter(product => product.id !== id)
+        this.alert.danger("Товар видалено")
+      })
+    }
+  }
+
   ngOnDestroy(): void {
     if (this.pSubscription) {
       this.pSubscription.unsubscribe()
     }
-  }
-
-  remove(id: string | undefined) {
-
+    if (this.delSubscription) {
+      this.delSubscription.unsubscribe()
+    }
   }
 }

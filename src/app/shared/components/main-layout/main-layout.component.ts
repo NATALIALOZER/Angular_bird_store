@@ -10,7 +10,8 @@ export class MainLayoutComponent implements OnInit {
   checked = false;
   search : string = "";
 
-  constructor() { }
+  constructor( ) {
+  }
 
   ngOnInit(): void {
   }

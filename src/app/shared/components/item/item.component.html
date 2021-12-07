@@ -1,5 +1,5 @@
-<mat-card *ngFor="let product of products" class="card mt-3 p-0 bg-transparent col-12 col-md-3">
-  <mat-card-content class="products-image" [routerLink]="['/product', 12345]"></mat-card-content>
+<mat-card class="card mt-3 p-0 bg-transparent col-12 col-md-3">
+  <mat-card-content class="products-image" [routerLink]="['/product-page', product.id]"></mat-card-content>
   <div>
     {{product.name}}
     <span class="badge-pill badge-primary">

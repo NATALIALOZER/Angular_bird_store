@@ -1,8 +1,9 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ImageSnippet} from "../../../shared/interfaces";
-import {ProductService} from "../../../shared/product.service";
+import {ImageSnippet} from "../../../shared/models/interfaces";
+import {ProductService} from "../../../shared/services/product.service";
 import {Product} from "../../../models/product.model";
+import {AlertService} from "../../shared/services/alert.service";
 
 @Component({
   selector: 'app-create',
@@ -16,7 +17,8 @@ export class CreateComponent implements OnInit {
   public selected: boolean = false;
 
   public form!: FormGroup;
-  constructor( private productService: ProductService) { }
+  constructor( private productService: ProductService,
+               private  alert: AlertService) { }
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -45,8 +47,10 @@ export class CreateComponent implements OnInit {
 
     this.productService.create(product).subscribe(() => {
       this.form.reset()
+      this.alert.success("Товар успішно створений")
     })
   }
+
 
   public processFile(imageInput: any): void {
     const file: File = imageInput.files[0];

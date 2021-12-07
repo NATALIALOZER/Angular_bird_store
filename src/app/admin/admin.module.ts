@@ -7,9 +7,11 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { CreateComponent } from './pages/create/create.component';
 import { EditComponent } from './pages/edit/edit.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {AuthService} from "./shared/services/auth.service";
 import {HttpClientModule} from "@angular/common/http";
 import {AuthGuard} from "./shared/services/auth.guard";
+import {SearchPipe} from "./shared/pipes/search.pipe";
+import { AlertComponent } from './shared/components/alert/alert.component';
+import {AlertService} from "./shared/services/alert.service";
 
 
 
@@ -19,7 +21,9 @@ import {AuthGuard} from "./shared/services/auth.guard";
     LoginComponent,
     DashboardComponent,
     CreateComponent,
-    EditComponent
+    EditComponent,
+    SearchPipe,
+    AlertComponent
   ],
   imports: [
     CommonModule,
@@ -42,7 +46,7 @@ import {AuthGuard} from "./shared/services/auth.guard";
             path: 'create', component: CreateComponent, canActivate: [AuthGuard]
           },
           {
-            path: 'product/:id/edit', component: EditComponent, canActivate: [AuthGuard]
+            path: 'product-page/:id/edit', component: EditComponent, canActivate: [AuthGuard]
           }
         ]
       }
@@ -51,6 +55,6 @@ import {AuthGuard} from "./shared/services/auth.guard";
   exports:[
     RouterModule
   ],
-  providers: [AuthGuard]
+  providers: [AuthGuard, AlertService]
 })
 export class AdminModule { }

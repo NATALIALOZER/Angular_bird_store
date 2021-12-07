@@ -92,6 +92,30 @@ mat-slider {
 
 
 /*paginator*/
+.paginator-custom{
+  ::ng-deep ul.ngx-pagination{
+    padding-left: 0;
+    .pagination-previous a::before, .pagination-previous.disabled::before, .pagination-next a::after, .pagination-next.disabled::after {
+      content: '';
+    }
+    .pagination-next, .pagination-previous{
+      display: none;
+    }
+    li, li.current{
+      background-color: transparent;
+      color: #7C838A;
+      min-width: 30px;
+    }
+    a, button {
+      color: #7C838A;
+      text-decoration: none;
+      display: block;
+      padding: 7px;
+      border-radius: 10px;
+      @include shadow;
+    }
+  }
+}
 .btn-group{
   border-radius: 10px;
   margin-top: 10px;
@@ -104,6 +128,7 @@ mat-slider {
     @include primary-text-color;
   }
 }
+
 
 
 

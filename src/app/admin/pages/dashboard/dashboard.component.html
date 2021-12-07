@@ -1,7 +1,7 @@
 <div *ngIf="products.length; else Loading">
   <div class="row">
     <div class="form-control col-12">
-      <input class="w-100" type="text" placeholder="Шукати товар...">
+      <input class="w-100" type="text" placeholder="Шукати товар..." [(ngModel)]="searchStr">
     </div>
     <table class="col-12 text-center">
     <thead class="bg-secondary">
@@ -15,14 +15,14 @@
     </tr>
     </thead>
     <tbody class="text-center">
-    <tr *ngFor="let product of products; let i = index">
+    <tr *ngFor="let product of products | searchProducts: searchStr; let i = index">
       <td>{{ i }}</td>
       <td>{{ product.id }}</td>
       <td>{{ product.name }}</td>
-      <!--<td>{{ product.category }}</td>-->
+      <!--<td>{{ product-page.category }}</td>-->
       <td>{{ product.description }}</td>
       <td>{{ product.price }}</td>
-      <!--<td>{{ product.date | date: 'medium' }}</td>-->
+      <!--<td>{{ product-page.date | date: 'medium' }}</td>-->
       <td>
         <button class="btn btn-outline-dark m-1"
                 [routerLink]="['/admin','product', product.id, 'edit']"

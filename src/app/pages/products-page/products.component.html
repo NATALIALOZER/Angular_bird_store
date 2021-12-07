@@ -17,22 +17,25 @@
   </mat-card-content>
 </mat-card>
 
-<div class="row">
+<!--<div class="row">
   <div class="col bg-transparent mt-3">
     <a class="text-secondary">cute items</a>
   </div>
-</div>
-<div class="row">
-  <div class="col-12 text-center">
-    <app-item [products]="products"></app-item>
+</div>-->
 
-    <div class="btn-group shadow mb-3">
-      <button *counter="let page of pageCount" (click)="changePage(page)"
-              class="btn btn-primary" [class.active]="page == selectedPage">
-        {{page}}
-      </button>
-    </div>
+<!--pagination-->
+<div class="row">
+  <div class="col-12 text-center" *ngIf="productsArray; else Loading">
+    <app-item *ngFor="let product of productsArray | paginate: { itemsPerPage: productsPerPage, currentPage: page }" [product]="product" ></app-item>
+    <pagination-controls previousLabel=""
+                         nextLabel=""
+                         (pageChange)="page = $event"
+                         class="paginator-custom"
+    ></pagination-controls>
   </div>
+  <ng-template #Loading>
+    <p class="text-center">Дані завантажуються...</p>
+  </ng-template>
 </div>
 
 
