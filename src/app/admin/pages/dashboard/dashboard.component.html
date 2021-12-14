@@ -9,8 +9,9 @@
       <th>#</th>
       <th>ID товару</th>
       <th>Назва товару</th>
-      <th>Характеристика</th>
+      <th>Опис</th>
       <th>Ціна</th>
+      <th>Фото</th>
       <th>Дія</th>
     </tr>
     </thead>
@@ -22,6 +23,12 @@
       <!--<td>{{ product-page.category }}</td>-->
       <td>{{ product.description }}</td>
       <td>{{ product.price }}</td>
+      <td>
+        <img src="{{product.imageUrl}}" alt="product photo" width="40px" *ngIf="product.imageUrl; else noPhoto">
+        <ng-template #noPhoto>
+          <img src="assets/images/no-product-image.png" alt="product photo" width="40px">
+        </ng-template>
+      </td>
       <!--<td>{{ product-page.date | date: 'medium' }}</td>-->
       <td>
         <button class="btn btn-outline-dark m-1"

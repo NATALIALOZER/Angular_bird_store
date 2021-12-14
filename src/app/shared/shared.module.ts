@@ -3,12 +3,10 @@ import { CommonModule } from '@angular/common';
 import {AppRoutingModule} from "../app-routing.module";
 import { ItemComponent } from './components/item/item.component';
 import {MaterialModule} from "../material/material.module";
-import {ModelModule} from "../models/model.module";
 import {HttpClientModule} from "@angular/common/http";
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-
 
 
 @NgModule({
@@ -19,12 +17,10 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     AppRoutingModule,
     MaterialModule,
-    ModelModule,
     HttpClientModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
-    FormsModule,
-    ModelModule
+    FormsModule
   ],
   exports: [
     ItemComponent,
@@ -32,8 +28,7 @@ import { FormsModule } from '@angular/forms';
     MaterialModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
-    FormsModule,
-    ModelModule
+    FormsModule
   ]
 })
 export class SharedModule { }

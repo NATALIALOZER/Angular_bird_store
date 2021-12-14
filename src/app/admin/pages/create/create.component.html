@@ -63,7 +63,7 @@
         </div>
       </div>-->
     </div>
-    <!--<div class="image-controller col-11 col-sm-5 mt-3 mt-sm-0">
+    <div class="image-controller col-11 col-sm-5 mt-3 mt-sm-0">
       <label class="image-upload-container btn btn-bwn" [ngStyle]="{'visibility': selected ? 'hidden' : 'visible' }">
         <span><img src="assets/images/upload.png" alt=""></span>
         <input
@@ -71,6 +71,7 @@
           type="file"
           accept="image/*"
           (change)="processFile(imageInput)"
+          id="image"
           #imageInput
         />
       </label>
@@ -79,7 +80,7 @@
              [ngStyle]="{'background-image': 'url('+ selectedFile.src + ')'}">
         </div>
       </div>
-    </div>-->
+    </div>
   </div>
 
 

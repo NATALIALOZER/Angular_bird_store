@@ -1,5 +1,6 @@
 <mat-card class="card mt-3 p-0 bg-transparent col-12 col-md-3">
-  <mat-card-content class="products-image" [routerLink]="['/product-page', product.id]"></mat-card-content>
+  <mat-card-content class="products-image" [routerLink]="['/product-page', product.id]" [ngStyle]="{'background-image' : product.imageUrl ? 'url(' + product.imageUrl + ')' : 'url(../../../../assets/images/404.jpeg)'}"></mat-card-content>
+  <!--[style.background-image]="'url(' + product.imageUrl + ')'"-->
   <div>
     {{product.name}}
     <span class="badge-pill badge-primary">

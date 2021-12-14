@@ -1,12 +1,11 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from "@angular/router";
 import {ProductService} from "../../../shared/services/product.service";
-import {query} from "@angular/animations";
 import {switchMap} from "rxjs/operators";
-import {Product} from "../../../models/product.model";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {AlertService} from "../../shared/services/alert.service";
+import { Product } from '../../../shared/models/interfaces';
 
 @Component({
   selector: 'app-edit',

@@ -1,10 +1,9 @@
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Product} from "../../models/product.model";
 import {environment} from "../../../environments/environment";
 import {map} from "rxjs/operators";
-import {FbCreateResponse} from "../models/interfaces";
+import { FbCreateResponse, Product } from "../models/interfaces";
 
 @Injectable({providedIn: "root"})
 export class ProductService {
@@ -12,9 +11,7 @@ export class ProductService {
   }
 
   create(product: Product): Observable<Product>{
-
     return this.http.post<Product>(`${environment.fbDbUrl}/products.json`, product)
-      // @ts-ignore
       .pipe(map((response: FbCreateResponse) => {
         return { ...product,
           id: response.name,

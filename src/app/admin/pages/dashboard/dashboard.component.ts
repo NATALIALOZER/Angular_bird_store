@@ -1,8 +1,8 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ProductService} from "../../../shared/services/product.service";
-import {Product} from "../../../models/product.model";
 import {Subscription} from "rxjs";
 import {AlertService} from "../../shared/services/alert.service";
+import { Product } from '../../../shared/models/interfaces';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,10 +11,8 @@ import {AlertService} from "../../shared/services/alert.service";
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   public products: Product[] = [];
-  // @ts-ignore
-  pSubscription: Subscription;
-  // @ts-ignore
-  delSubscription: Subscription;
+  pSubscription: Subscription = new Subscription();
+  delSubscription: Subscription = new Subscription();
   public searchStr = ''
 
   constructor( private productService: ProductService,
@@ -26,7 +24,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     })
   }
 
-  remove(id: string | undefined) {
+  remove(id: string ) {
     if (id != null) {
       this.productService.remove(id).subscribe(() => {
         this.products = this.products.filter(product => product.id !== id)

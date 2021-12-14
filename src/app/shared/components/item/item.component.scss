@@ -47,7 +47,9 @@ mat-card {
   .products-image {
     width: 100%;
     height: 370px;
-    background-image: url("../../../../assets/images/Products/1.png");
+    background-image: url("../../../../assets/images/404.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
     border-radius: 15px;
     @include inner-shadow;
   }

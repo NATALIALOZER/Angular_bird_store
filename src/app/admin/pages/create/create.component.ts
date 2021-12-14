@@ -1,8 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ImageSnippet} from "../../../shared/models/interfaces";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { ImageSnippet, Product } from "../../../shared/models/interfaces";
 import {ProductService} from "../../../shared/services/product.service";
-import {Product} from "../../../models/product.model";
 import {AlertService} from "../../shared/services/alert.service";
 
 @Component({
@@ -17,40 +16,31 @@ export class CreateComponent implements OnInit {
   public selected: boolean = false;
 
   public form!: FormGroup;
-  constructor( private productService: ProductService,
-               private  alert: AlertService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private productService: ProductService,
+    private alert: AlertService
+  ) { }
 
   ngOnInit(): void {
-    this.form = new FormGroup({
-      name: new FormControl(null, [
-        Validators.required
-      ]),
-      price: new FormControl(null, [
-        Validators.required
-      ]),
-      description: new FormControl(null, [Validators.required]),
-      /*image: new FormControl(null, [Validators.required,])*/
-    })
+    this.buildForm();
   }
 
   submit() {
     if(this.form.invalid){
       return
     }
-
-    const product: Product = {
-      name: this.form.value.name,
-      /*category: this.form.value.category,*/
-      description: this.form.value.description,
-      price: this.form.value.price
+    if(this.selected){
+      const product: Product = { ...this.form.value, id: this.form.value.name, imageUrl: this.selectedFile.src }
+      console.log(product)
+      this.productService.create(product).subscribe(() => {
+        this.form.reset()
+        this.alert.success("Товар успішно створений")
+      })
+    } else {
+      this.alert.danger("Будь ласка, додай фото товару")
     }
-
-    this.productService.create(product).subscribe(() => {
-      this.form.reset()
-      this.alert.success("Товар успішно створений")
-    })
   }
-
 
   public processFile(imageInput: any): void {
     const file: File = imageInput.files[0];
@@ -63,7 +53,15 @@ export class CreateComponent implements OnInit {
       this.selected = true;
       this.onAdd.emit(this.selectedFile);
     });
-
     reader.readAsDataURL(file);
+  }
+
+  private buildForm(): void {
+    this.form = this.formBuilder.group({
+      name: [ '', [ Validators.required ]],
+      price: [ null, [ Validators.required ]],
+      description: [ '', [ Validators.required ]],
+      imageUrl: ['']
+    });
   }
 }
