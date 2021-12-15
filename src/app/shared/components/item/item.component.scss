@@ -46,11 +46,19 @@ mat-card {
   @include primary-text-color;
   .products-image {
     width: 100%;
+    max-width: 600px;
     height: 370px;
     background-image: url("../../../../assets/images/404.jpeg");
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 15px;
     @include inner-shadow;
+  }
+  .small{
+    max-width: 260px;
+    height: 300px;
+  }
+  .small-two-columns {
+    height: 200px;
   }
 }

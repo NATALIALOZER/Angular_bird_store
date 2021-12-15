@@ -24,9 +24,13 @@
 </div>-->
 
 <!--pagination-->
-<div class="row">
-  <div class="col-12 text-center" *ngIf="productsArray; else Loading">
-    <app-item *ngFor="let product of productsArray | paginate: { itemsPerPage: productsPerPage, currentPage: page }" [product]="product" ></app-item>
+<div>
+  <div *ngIf="productsArray; else Loading" class="row">
+    <app-item [ngClass]="{'col-12': value === 5, 'col-12 col-md-4': value === 20, 'col-6 col-md-3': value === 35}"
+              [value] = 'value'
+              *ngFor="let product of productsArray | paginate: { itemsPerPage: productsPerPage, currentPage: page }"
+              [product]="product"
+    ></app-item>
     <pagination-controls previousLabel=""
                          nextLabel=""
                          (pageChange)="page = $event"

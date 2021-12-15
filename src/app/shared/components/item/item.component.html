@@ -1,6 +1,9 @@
-<mat-card class="card mt-3 p-0 bg-transparent col-12 col-md-3">
-  <mat-card-content class="products-image" [routerLink]="['/product-page', product.id]" [ngStyle]="{'background-image' : product.imageUrl ? 'url(' + product.imageUrl + ')' : 'url(../../../../assets/images/404.jpeg)'}"></mat-card-content>
-  <!--[style.background-image]="'url(' + product.imageUrl + ')'"-->
+<mat-card class="card mt-3 p-0 bg-transparent d-flex flex-column align-items-center col-12">
+  <mat-card-content class="products-image"
+                    [ngClass]="{ 'small': value === 20, 'small-two-columns': value === 35}"
+                    [routerLink]="['/product-page', product.id]"
+                    [ngStyle]="{'background-image' : product.imageUrl ? 'url(' + product.imageUrl + ')' : 'url(../../../../assets/images/404.jpeg)'}"
+  ></mat-card-content>
   <div>
     {{product.name}}
     <span class="badge-pill badge-primary">

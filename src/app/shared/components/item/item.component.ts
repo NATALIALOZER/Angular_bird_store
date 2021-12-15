@@ -8,6 +8,7 @@ import { Product } from '../../models/interfaces';
 })
 export class ItemComponent implements OnInit {
   @Input() public product!: Product;
+  @Input() public value: number = 5;
 
   constructor() { }
 
