@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from "../../shared/services/product.service";
 import { Observable } from "rxjs";
 import { Product } from '../../shared/models/interfaces';
+import { CartService } from '../../shared/services/cart.service';
 
 @Component({
   selector: 'app-products',
@@ -26,19 +27,33 @@ export class ProductsComponent implements OnInit{
   public productsPerPage = this.value;
 
 
-  constructor( private productService: ProductService) {
+  public search: string = '';
+  public loading: boolean = false;
+
+
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService
+  ) {
     this.products$ = this.productService.getAll()
   }
 
   public ngOnInit(): void {
+    this.loading = true;
     this.products$.subscribe(res => {
         this.productsArray = res;
+        this.loading = false;
       }
     );
+    this.cartService.getItems();
   }
 
-  public changePageSize() {
+  public changePageSize(): void {
     this.productsPerPage = Number(this.value);
     this.page = 1;
+  }
+
+  public searchItem(newItem: string): void {
+    this.search = newItem;
   }
 }

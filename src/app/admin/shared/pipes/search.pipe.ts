@@ -6,7 +6,10 @@ import { Product } from '../../../shared/models/interfaces';
 })
 export class SearchPipe implements PipeTransform {
   transform(products: Product[], search = ''): Product[] {
+    console.log('search.pipe: ', search)
+    console.log('search.pipe products: ', products)
     if (!search.trim()) {
+      console.log('no str')
       return products;
     }
 

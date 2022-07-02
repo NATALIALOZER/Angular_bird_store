@@ -32,9 +32,8 @@ export class CreateComponent implements OnInit {
     }
     if(this.selected){
       const product: Product = { ...this.form.value, id: this.form.value.name, imageUrl: this.selectedFile.src }
-      console.log(product)
       this.productService.create(product).subscribe(() => {
-        this.form.reset()
+        this.form.reset();
         this.alert.success("Товар успішно створений")
       })
     } else {

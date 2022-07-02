@@ -2,9 +2,9 @@ import {NgModule} from '@angular/core'
 import {PreloadAllModules, RouterModule, Routes} from "@angular/router";
 import {ProductsComponent} from "./pages/products-page/products.component";
 import {MainLayoutComponent} from "./shared/components/main-layout/main-layout.component";
-import {ProductComponent} from "./pages/product-page/product.component";
 import {CartComponent} from "./pages/cart-page/cart.component";
-import {config} from "rxjs";
+import { ProductInfoComponent } from './pages/product-info-page/product-info.component';
+import { PaymentComponent } from './pages/payment-page/payment.component';
 
   const routes: Routes = [
     {
@@ -17,13 +17,17 @@ import {config} from "rxjs";
           component: ProductsComponent
         },
         {
-          path: 'product-page/:id',
-          component: ProductComponent
+          path: 'product/:id',
+          component: ProductInfoComponent
         },
         {
-          path: 'cart-page',
+          path: 'cart',
           component: CartComponent
         },
+        {
+          path: 'payment',
+          component: PaymentComponent
+          },
       ]
     },
     {

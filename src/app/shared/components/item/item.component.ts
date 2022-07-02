@@ -1,5 +1,7 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../../models/interfaces';
+import { CartService } from '../../services/cart.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-item',
@@ -10,10 +12,55 @@ export class ItemComponent implements OnInit {
   @Input() public product!: Product;
   @Input() public value: number = 5;
 
-  constructor() { }
+  public checked: boolean = false;
+  public quantityForm!: FormGroup;
+  private itemQuantity: number = 1;
 
-  ngOnInit(): void {
+  constructor(
+    private cartService: CartService,
+    private formBuilder: FormBuilder
+  ) {
+  }
+
+  public ngOnInit(): void {
+    this.checkInCart();
+    this.buildForm();
+  }
+
+  public addToCart(product: Product, quantity: string): void {
+    this.cartService.addToCart(product, quantity);
+    console.log('Product has been added to/removed from the cart');
+
 
   }
 
+
+  public decreaseValue(): void {
+    if (this.quantityForm.get('quantity')?.value > 1) {
+      this.quantityForm.setValue({
+        quantity: this.quantityForm.get('quantity')?.value - 1
+      });
+    }
+  }
+
+  public increaseValue(): void {
+    this.quantityForm.setValue({
+      quantity: this.quantityForm.get('quantity')?.value + 1
+    });
+  }
+
+  private buildForm(): void {
+    this.quantityForm = this.formBuilder.group({
+      quantity: [ this.itemQuantity , [Validators.required]]
+    })
+  }
+
+  private checkInCart(): void {
+    let item = this.cartService.getProduct(this.product);
+    this.checked = !!item;
+    if (this.checked) {
+      // @ts-ignore
+      this.itemQuantity = item.quantity;
+    }
+  }
 }

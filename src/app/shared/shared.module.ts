@@ -6,29 +6,35 @@ import {MaterialModule} from "../material/material.module";
 import {HttpClientModule} from "@angular/common/http";
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SearchInputComponent } from './components/search-input/search-input.component';
+import { HtmlConvertPipe } from './pipes/html-convert.pipe';
 
 
 @NgModule({
   declarations: [
-    ItemComponent
-  ],
-  imports: [
-    CommonModule,
-    AppRoutingModule,
-    MaterialModule,
-    HttpClientModule,
-    NgxPaginationModule,
-    BrowserAnimationsModule,
-    FormsModule
-  ],
-  exports: [
     ItemComponent,
-    HttpClientModule,
-    MaterialModule,
-    NgxPaginationModule,
-    BrowserAnimationsModule,
-    FormsModule
-  ]
+    SearchInputComponent,
+    HtmlConvertPipe
+  ],
+    imports: [
+        CommonModule,
+        AppRoutingModule,
+        MaterialModule,
+        HttpClientModule,
+        NgxPaginationModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule
+    ],
+    exports: [
+        ItemComponent,
+        HttpClientModule,
+        MaterialModule,
+        NgxPaginationModule,
+        BrowserAnimationsModule,
+        FormsModule,
+        SearchInputComponent
+    ]
 })
 export class SharedModule { }

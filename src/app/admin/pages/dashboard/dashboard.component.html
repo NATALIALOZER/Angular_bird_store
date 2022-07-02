@@ -20,7 +20,7 @@
       <td>{{ i }}</td>
       <td>{{ product.id }}</td>
       <td>{{ product.name }}</td>
-      <!--<td>{{ product-page.category }}</td>-->
+      <!--<td>{{ product-info-page.category }}</td>-->
       <td>{{ product.description }}</td>
       <td>{{ product.price }}</td>
       <td>
@@ -29,7 +29,7 @@
           <img src="assets/images/no-product-image.png" alt="product photo" width="40px">
         </ng-template>
       </td>
-      <!--<td>{{ product-page.date | date: 'medium' }}</td>-->
+      <!--<td>{{ product-info-page.date | date: 'medium' }}</td>-->
       <td>
         <button class="btn btn-outline-dark m-1"
                 [routerLink]="['/admin','product', product.id, 'edit']"

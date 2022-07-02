@@ -44,15 +44,13 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Alatsi, sans-serif; }
 
 /*import customize bootstrap*/
-@import 'customize-bootstrap.scss';
+@import 'stylings/customize-bootstrap';
 @import '../node_modules/bootstrap/scss/bootstrap';
-
 
 
 .container{
   padding: 0 25px;
 }
-
 
 /*.menu_btn{
   width: 45px;

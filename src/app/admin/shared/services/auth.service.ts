@@ -64,7 +64,8 @@ export class AuthService {
       localStorage.setItem('fb-token', response.idToken)
       localStorage.setItem('fb-token-exp', expDate.toString())
     } else {
-      localStorage.clear()
+      /*localStorage.clear()*/
+      console.log('"localStorage.clear()"')
     }
   }
 }

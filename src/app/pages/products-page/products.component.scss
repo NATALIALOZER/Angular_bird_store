@@ -1,35 +1,5 @@
-@mixin primary-color-bg{
-  background-color: #F2E9E9;
-}
-@mixin primary-text-color{
-  color: #7C838A;
-}
-@mixin secondary-color-bg{
-  background-color: #526AF2;
-}
-@mixin secondary-text-color{
-  color: #F279EA;
-}
-@mixin font-menu{
-  font-family: altasi, sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 18px;
-  letter-spacing: 2px;
-}
-@mixin font-page{
-  font-family: altasi, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 14px;
-  letter-spacing: 2px;
-}
-@mixin shadow{
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-}
-@mixin inner-shadow{
-  box-shadow: inset 7px 5px 8px 2px rgba(0,0,0,0.2);
-}
+@import "../../../stylings/helpers/mixins";
+@import "../../../stylings/components/loader";
 
 
 /*main*/
@@ -40,12 +10,15 @@
   padding: 0;
   @include font-page;
   @include primary-text-color;
+  ::ng-deep mat-card-content{
+    @include font-page;
+  }
 }
 .mat-card:not([class*=mat-elevation-z]){
   box-shadow: 0 0 0 0;
 }
 mat-slider {
-  width: 95%;
+  width: 100%;
   padding: 0;
   height:40px;
   ::ng-deep .mat-slider-wrapper {
@@ -93,6 +66,7 @@ mat-slider {
 
 /*paginator*/
 .paginator-custom{
+  margin-top: 5px;
   display: flex;
   justify-content: center;
   ::ng-deep ul.ngx-pagination{
@@ -107,13 +81,15 @@ mat-slider {
       background-color: transparent;
       color: #7C838A;
       min-width: 30px;
+      @include font-numb;
     }
     a, button {
       color: #7C838A;
       text-decoration: none;
-      display: block;
       padding: 7px;
       border-radius: 10px;
+      display: flex;
+      justify-content: center;
       @include shadow;
     }
   }
@@ -130,6 +106,8 @@ mat-slider {
     @include primary-text-color;
   }
 }
+
+
 
 
 

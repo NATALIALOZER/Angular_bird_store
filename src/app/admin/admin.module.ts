@@ -12,6 +12,7 @@ import {AuthGuard} from "./shared/services/auth.guard";
 import {SearchPipe} from "./shared/pipes/search.pipe";
 import { AlertComponent } from './shared/components/alert/alert.component';
 import {AlertService} from "./shared/services/alert.service";
+import { DialogComponent } from '../shared/components/modals/dialog/dialog.component';
 
 
 
@@ -46,15 +47,16 @@ import {AlertService} from "./shared/services/alert.service";
             path: 'create', component: CreateComponent, canActivate: [AuthGuard]
           },
           {
-            path: 'product-page/:id/edit', component: EditComponent, canActivate: [AuthGuard]
+            path: 'product-info-page/:id/edit', component: EditComponent, canActivate: [AuthGuard]
           }
         ]
       }
     ])
   ],
-  exports:[
-    RouterModule
-  ],
+    exports: [
+        RouterModule,
+        SearchPipe
+    ],
   providers: [AuthGuard, AlertService]
 })
 export class AdminModule { }

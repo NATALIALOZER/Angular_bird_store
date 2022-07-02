@@ -1,5 +1,8 @@
 <!--slider-->
-<mat-card class="result-card">
+<!--/*search line component*/-->
+<app-search-input (searchEvent)="searchItem($event)"></app-search-input>
+
+<mat-card class="result-card" *ngIf="!loading">
   <mat-card-content>
     <div class="example-label-container" [class]="vertical ? 'example-label-vertical' : 'example-label-horizontal'">
       <label class="example-value-label">{{value}}</label>
@@ -25,10 +28,11 @@
 
 <!--pagination-->
 <div>
-  <div *ngIf="productsArray; else Loading" class="row">
-    <app-item [ngClass]="{'col-12': value === 5, 'col-12 col-md-4': value === 20, 'col-6 col-md-3': value === 35}"
+  <div *ngIf="!loading; else Loading" class="row" >
+    <app-item
+              [ngClass]="{'col-12': value === 5, 'col-12 col-md-4': value === 20, 'col-6 col-md-3': value === 35}"
               [value] = 'value'
-              *ngFor="let product of productsArray | paginate: { itemsPerPage: productsPerPage, currentPage: page }"
+              *ngFor="let product of productsArray | searchProducts: search | paginate: { itemsPerPage: productsPerPage, currentPage: page }"
               [product]="product"
     ></app-item>
     <pagination-controls previousLabel=""
@@ -37,10 +41,16 @@
                          class="paginator-custom"
     ></pagination-controls>
   </div>
-  <ng-template #Loading>
-    <p class="text-center">Дані завантажуються...</p>
-  </ng-template>
 </div>
+
+<ng-template #Loading>
+  <div class="text-center pt-5">
+    <div class="lds-ripple">
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+</ng-template>
 
 
 

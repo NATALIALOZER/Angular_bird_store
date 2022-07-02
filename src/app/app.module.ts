@@ -4,11 +4,13 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import {ProductsComponent} from "./pages/products-page/products.component";
 import { CartComponent } from './pages/cart-page/cart.component';
-import { ProductComponent } from './pages/product-page/product.component';
+import { ProductInfoComponent } from './pages/product-info-page/product-info.component';
 import {MainLayoutComponent} from "./shared/components/main-layout/main-layout.component";
 import {SharedModule} from "./shared/shared.module";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {AuthInterceptor} from "./shared/interceptors/auth.interceptor";
+import { AdminModule } from './admin/admin.module';
+import { PaymentComponent } from './pages/payment-page/payment.component';
 
 
 const INTERCEPTOR_PROVIDER: Provider = {
@@ -20,16 +22,18 @@ const INTERCEPTOR_PROVIDER: Provider = {
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MainLayoutComponent,
-    ProductsComponent,
-    CartComponent,
-    ProductComponent
+      AppComponent,
+      MainLayoutComponent,
+      ProductsComponent,
+      CartComponent,
+      ProductInfoComponent,
+      PaymentComponent
   ],
   imports: [
       BrowserModule,
       AppRoutingModule,
-      SharedModule
+      SharedModule,
+      AdminModule
   ],
   providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent]
