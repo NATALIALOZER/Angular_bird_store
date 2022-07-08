@@ -61,6 +61,9 @@ mat-slider {
     @include shadow;
     @include primary-color-bg;
   }
+  ::ng-deep .mat-slider-thumb {
+    background-color: #F2E9E9 !important;
+  }
 }
 
 
