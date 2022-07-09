@@ -28,7 +28,6 @@ export class ItemComponent implements OnInit {
 
   public addToCart(product: Product, quantity: string): void {
     this.cartService.addToCart(product, quantity);
-    console.log('Product has been added to/removed from the cart');
   }
 
   public decreaseValue(): void {

@@ -18,9 +18,11 @@
       {{ product.price | currency: "USD":"symbol":"2.2-2" }}
     </span>
   </div>
-  <mat-card-content class="card-text bg-transparent p-1">{{
+  <mat-card-subtitle class="card-text bg-transparent p-1"
+                     title='{{product.description}}'
+  >{{
     product.description
-  }}</mat-card-content>
+  }}</mat-card-subtitle>
   <mat-card-actions class="d-flex">
     <!--quantity buttons-->
     <form [formGroup]="quantityForm" class="quantity_form">
@@ -35,7 +37,7 @@
       </button>
       <input
         matInput
-        type="number"
+        type="text"
         formControlName="quantity"
         [ngStyle]="{
           'box-shadow': !checked
@@ -55,6 +57,7 @@
         <mat-icon [inline]="true">chevron_right</mat-icon>
       </button>
     </form>
+
     <!--add to cart button-->
     <section class="check_section" [ngClass]="{ 'cart-upper': value === 35 }">
       <mat-checkbox

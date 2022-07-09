@@ -32,6 +32,11 @@ mat-card {
     border-radius: 15px;
     @include inner-shadow;
   }
+  .mat-card-subtitle {
+    overflow:hidden ;
+    text-overflow:ellipsis;
+    height: 2.5rem;
+  }
   .small {
     //max-width: 260px;
     height: 300px;
