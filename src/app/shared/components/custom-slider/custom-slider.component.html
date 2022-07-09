@@ -1,0 +1,23 @@
+<mat-card class="result-card">
+  <mat-card-content>
+    <div
+      class="example-label-container"
+      [class]="vertical ? 'example-label-vertical' : 'example-label-horizontal'"
+    >
+      <label class="example-value-label">{{ value }}</label>
+      <label id="example-name-label" class="example-name-label">
+        per page</label
+      >
+    </div>
+    <mat-slider
+      [disabled]="disabled"
+      [max]="max"
+      [min]="min"
+      [step]="step"
+      [thumbLabel]="thumbLabel"
+      [(ngModel)]="value"
+      (change)="changePageSize()"
+    >
+    </mat-slider>
+  </mat-card-content>
+</mat-card>

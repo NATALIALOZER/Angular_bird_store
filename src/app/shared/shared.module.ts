@@ -10,9 +10,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchInputComponent } from './components/search-input/search-input.component';
 import { HtmlConvertPipe } from './pipes/html-convert.pipe';
 import { CounterDirective } from '../directives/counter.directive';
+import { CustomSliderComponent } from './components/custom-slider/custom-slider.component';
 
 @NgModule({
-  declarations: [ItemComponent, SearchInputComponent, HtmlConvertPipe, CounterDirective],
+  declarations: [ItemComponent, SearchInputComponent, HtmlConvertPipe, CounterDirective, CustomSliderComponent],
   imports: [
     CommonModule,
     AppRoutingModule,
@@ -30,7 +31,8 @@ import { CounterDirective } from '../directives/counter.directive';
     NgxPaginationModule,
     BrowserAnimationsModule,
     FormsModule,
-    SearchInputComponent
+    SearchInputComponent,
+    CustomSliderComponent,
   ],
 })
 export class SharedModule {}
