@@ -1,14 +1,23 @@
-<form class="card bg-primary text-secondary" [formGroup]="form" (ngSubmit)="submit()">
+<form
+  class="card bg-primary text-secondary"
+  [formGroup]="form"
+  (ngSubmit)="submit()"
+>
   <h2>Вхід до панелі адміністрування</h2>
 
-  <div class="alert alert-danger" *ngIf="auth.error$ | async as error">{{error}}</div>
-  <div class="alert alert-info" *ngIf="message">{{message}}</div>
+  <div class="alert alert-danger" *ngIf="auth.error$ | async as error">
+    {{ error }}
+  </div>
+  <div class="alert alert-info" *ngIf="message">{{ message }}</div>
 
-  <div class="form-control text-secondary"
-       [ngClass]="{invalid: form.get('email')?.touched && form.get('email')?.invalid}"
+  <div
+    class="form-control text-secondary"
+    [ngClass]="{
+      invalid: form.get('email')?.touched && form.get('email')?.invalid
+    }"
   >
     <label for="email">Email:</label>
-    <input id="email" type="email" formControlName="email">
+    <input id="email" type="email" formControlName="email" />
     <div
       *ngIf="form.get('email')?.touched && form.get('email')?.invalid"
       class="validation"
@@ -21,19 +30,33 @@
       </small>
     </div>
   </div>
-  <div class="form-control text-secondary"
-       [ngClass]="{invalid:form.get('password')?.touched&&form.get('password')?.invalid}"
+  <div
+    class="form-control text-secondary"
+    [ngClass]="{
+      invalid: form.get('password')?.touched && form.get('password')?.invalid
+    }"
   >
     <label for="password">Пароль</label>
-    <input id="password" type="password"  formControlName="password">
-    <div *ngIf="form.get('password')?.touched&&form.get('password')?.invalid"
-         class="validation">
-      <small *ngIf="form.get('password')?.errors?.required">Введи таємні знаки</small>
-      <small *ngIf="form.get('password')?.errors?.minlength">Знаків має бути {{form.get('password')?.errors?.minlength.requiredLength}} і більше</small>
+    <input id="password" type="password" formControlName="password" />
+    <div
+      *ngIf="form.get('password')?.touched && form.get('password')?.invalid"
+      class="validation"
+    >
+      <small *ngIf="form.get('password')?.errors?.required"
+        >Введи таємні знаки</small
+      >
+      <small *ngIf="form.get('password')?.errors?.minlength"
+        >Знаків має бути
+        {{ form.get("password")?.errors?.minlength.requiredLength }} і
+        більше</small
+      >
     </div>
   </div>
-  <button type="submit"
-          class="btn btn-primary shadow mt-3"
-          [disabled]="form.invalid || submitted"
-  >Увійти</button>
+  <button
+    type="submit"
+    class="btn btn-primary shadow mt-3"
+    [disabled]="form.invalid || submitted"
+  >
+    Увійти
+  </button>
 </form>

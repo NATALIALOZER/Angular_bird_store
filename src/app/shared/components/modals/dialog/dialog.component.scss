@@ -1,6 +1,5 @@
 @import "../../../../../stylings/helpers/mixins";
 
-
 ::ng-deep .mat-dialog-container {
   min-width: 200px;
   @include font-page;
@@ -8,7 +7,7 @@
   @include primary-color-bg;
 }
 
-button{
+button {
   padding: 10px;
   border: none;
   border-radius: 5px;
@@ -17,5 +16,3 @@ button{
   @include primary-text-color;
   @include primary-color-bg;
 }
-
-

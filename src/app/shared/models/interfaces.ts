@@ -1,10 +1,10 @@
-export interface User{
+export interface User {
   email: string;
   password: string;
-  returnSecureToken?: boolean
+  returnSecureToken?: boolean;
 }
 
-export interface fbAuthResponse{
+export interface fbAuthResponse {
   displayName?: string;
   email?: string;
   idToken: string;
@@ -16,7 +16,7 @@ export interface fbAuthResponse{
 
 export interface ImageSnippet {
   file?: File;
-  src: string;
+  src: string | ArrayBuffer | null | undefined;
 }
 
 export interface FbCreateResponse {
@@ -25,11 +25,10 @@ export interface FbCreateResponse {
 }
 
 export interface Product {
-  id: string,
-  name: string,
-  description: string,
-  price: number,
-  imageUrl: string
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  imageUrl: string;
   quantity?: number;
 }
-

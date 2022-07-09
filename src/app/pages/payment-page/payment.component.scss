@@ -1,11 +1,11 @@
 @import "../../../stylings/helpers/mixins";
 @import "../../../stylings/components/buttons";
 
-.custom_button{
+.custom_button {
   width: 100%;
 }
 
-mat-card{
+mat-card {
   padding: 10px 15px;
   border-radius: 10px;
   border: 0;
@@ -18,11 +18,10 @@ mat-card{
   @include font-menu;
 }
 
-mat-card:not([class*=mat-elevation-z]) {
+mat-card:not([class*="mat-elevation-z"]) {
   @include inner-shadow;
 }
 
-img{
+img {
   height: 45px;
 }
-

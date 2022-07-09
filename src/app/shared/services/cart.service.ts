@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Product } from '../models/interfaces';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
   public items: Product[] = [];
@@ -12,11 +12,11 @@ export class CartService {
     if (this.items) {
       isInCart = this.items.find((item: Product) => product.id === item.id);
     }
-    product = {...product, quantity: Number(q)}
+    product = { ...product, quantity: Number(q) };
     if (isInCart) {
-      this.removeFromCart(product)
+      this.removeFromCart(product);
     } else {
-      this.items.push(product)
+      this.items.push(product);
       localStorage.setItem('ItemsInCart', JSON.stringify(this.items));
     }
   }
@@ -27,13 +27,15 @@ export class CartService {
   }
 
   public getItems(): Product[] {
-    let cartData = JSON.parse(localStorage.getItem('ItemsInCart') as string);
+    const cartData = JSON.parse(localStorage.getItem('ItemsInCart') as string);
     this.items = cartData || [];
-    return cartData
+    return cartData;
   }
 
   public getProduct(product: Product): Product | undefined {
-    return this.items ? this.items.find(item => item.id === product.id) : undefined;
+    return this.items
+      ? this.items.find(item => item.id === product.id)
+      : undefined;
   }
 
   public clearCart(): Product[] {

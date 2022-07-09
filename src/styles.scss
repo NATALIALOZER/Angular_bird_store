@@ -1,7 +1,6 @@
-
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
-@use '~@angular/material' as mat;
+@use "~@angular/material" as mat;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -20,13 +19,15 @@ $NewProject-warn: mat.define-palette(mat.$red-palette);
 
 // Create the theme object. A theme consists of configurations for individual
 // theming systems such as "color" or "typography".
-$NewProject-theme: mat.define-light-theme((
-  color: (
-    primary: $NewProject-primary,
-    accent: $NewProject-accent,
-    warn: $NewProject-warn,
+$NewProject-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $NewProject-primary,
+      accent: $NewProject-accent,
+      warn: $NewProject-warn,
+    ),
   )
-));
+);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -40,15 +41,20 @@ $NewProject-theme: mat.define-light-theme((
   src: url(./assets/fonts/Alatsi-Regular.ttf) format("truetype");
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Alatsi, sans-serif; }
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Alatsi, sans-serif;
+}
 
 /*import customize bootstrap*/
-@import 'stylings/customize-bootstrap';
-@import '../node_modules/bootstrap/scss/bootstrap';
+@import "stylings/customize-bootstrap";
+@import "../node_modules/bootstrap/scss/bootstrap";
 
-
-.container{
+.container {
   padding: 0 25px;
 }
 
@@ -56,6 +62,3 @@ body { margin: 0; font-family: Alatsi, sans-serif; }
   width: 45px;
   height: 45px;
 }*/
-
-
-

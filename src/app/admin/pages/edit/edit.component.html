@@ -1,10 +1,13 @@
 <div *ngIf="form; else Loading">
   <form [formGroup]="form" (ngSubmit)="submit()">
-    <div class="form-control text-secondary"
-         [ngClass]="{invalid: form.get('name')?.touched && form.get('name')?.invalid}"
+    <div
+      class="form-control text-secondary"
+      [ngClass]="{
+        invalid: form.get('name')?.touched && form.get('name')?.invalid
+      }"
     >
       <label for="name">Назва товару:</label>
-      <input id="name" type="text" formControlName="name">
+      <input id="name" type="text" formControlName="name" />
       <div
         *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
         class="validation"
@@ -15,11 +18,14 @@
       </div>
     </div>
 
-    <div class="form-control text-secondary"
-         [ngClass]="{invalid: form.get('price')?.touched && form.get('price')?.invalid}"
+    <div
+      class="form-control text-secondary"
+      [ngClass]="{
+        invalid: form.get('price')?.touched && form.get('price')?.invalid
+      }"
     >
       <label for="price">Вартість товару:</label>
-      <input id="price" type="number" formControlName="price">
+      <input id="price" type="number" formControlName="price" />
       <div
         *ngIf="form.get('price')?.touched && form.get('price')?.invalid"
         class="validation"
@@ -30,7 +36,13 @@
       </div>
     </div>
 
-    <button class="btn btn-primary" type="submit" [disabled]="form.invalid || submitted">Оновити</button>
+    <button
+      class="btn btn-primary"
+      type="submit"
+      [disabled]="form.invalid || submitted"
+    >
+      Оновити
+    </button>
   </form>
 </div>
 <ng-template #Loading>

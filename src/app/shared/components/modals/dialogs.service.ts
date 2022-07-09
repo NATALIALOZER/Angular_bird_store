@@ -5,10 +5,10 @@ import { map, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DialogsService {
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog) {}
 
   protected dialogRef!: MatDialogRef<DialogComponent>;
 
@@ -18,16 +18,18 @@ export class DialogsService {
         title: options.title,
         message: options.message,
         cancelText: options.cancelText,
-        confirmText: options.confirmText
-      }
+        confirmText: options.confirmText,
+      },
     });
   }
 
   public confirmed(): Observable<any> {
-    return this.dialogRef.afterClosed().pipe(take(1), map(res => {
+    return this.dialogRef.afterClosed().pipe(
+      take(1),
+      map(res => {
         return res;
-      }
-    ));
+      })
+    );
   }
 }
 

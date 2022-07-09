@@ -1,13 +1,13 @@
 @import "../../../../stylings/helpers/mixins";
 
 /*header*/
-.mat-toolbar{
+.mat-toolbar {
   background-color: transparent;
   padding: 25px 25px 10px 25px;
   align-items: inherit;
   height: auto;
 }
-.mat-icon{
+.mat-icon {
   width: 40px;
   height: 40px;
   padding: 3px;
@@ -27,22 +27,22 @@
     height: 45px;
     opacity: 0;
   }
-  .check_margin{
+  .check_margin {
     margin: 0;
   }
-  button{
+  button {
     width: 45px;
     height: 45px;
   }
 }
-mat-list{
+mat-list {
   display: flex;
   flex-direction: column;
   /*padding-bottom: 25px;*/
   @include font-menu;
   @include secondary-color-bg;
 }
-::ng-deep .mat-list-base .mat-list-item .mat-list-item-content{
+::ng-deep .mat-list-base .mat-list-item .mat-list-item-content {
   justify-content: space-around;
   @include secondary-text-color;
 }

@@ -1,15 +1,15 @@
 <app-alert></app-alert>
 
 <nav class="navbar bg-secondary">
-  <h2 class="m-0 ">
+  <h2 class="m-0">
     <a class="btn-primary" routerLink="/">До головної сторінки магазину</a>
   </h2>
   <ul *ngIf="auth.isAuthenticated()">
     <li routerLinkActive="active">
-      <a [routerLink]="['/admin','dashboard']">Головна</a>
+      <a [routerLink]="['/admin', 'dashboard']">Головна</a>
     </li>
     <li routerLinkActive="active">
-      <a [routerLink]="['/admin','create']">Створити</a>
+      <a [routerLink]="['/admin', 'create']">Створити</a>
     </li>
     <li>
       <a class="btn-danger" href="#" (click)="logout($event)">Вийти</a>

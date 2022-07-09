@@ -4,9 +4,14 @@
 
 <mat-card class="result-card" *ngIf="!loading">
   <mat-card-content>
-    <div class="example-label-container" [class]="vertical ? 'example-label-vertical' : 'example-label-horizontal'">
-      <label class="example-value-label">{{value}}</label>
-      <label id="example-name-label" class="example-name-label"> per page</label>
+    <div
+      class="example-label-container"
+      [class]="vertical ? 'example-label-vertical' : 'example-label-horizontal'"
+    >
+      <label class="example-value-label">{{ value }}</label>
+      <label id="example-name-label" class="example-name-label">
+        per page</label
+      >
     </div>
     <mat-slider
       [disabled]="disabled"
@@ -15,7 +20,8 @@
       [step]="step"
       [thumbLabel]="thumbLabel"
       [(ngModel)]="value"
-      (change)="changePageSize()">
+      (change)="changePageSize()"
+    >
     </mat-slider>
   </mat-card-content>
 </mat-card>
@@ -28,17 +34,26 @@
 
 <!--pagination-->
 <div>
-  <div *ngIf="!loading; else Loading" class="row" >
+  <div *ngIf="!loading; else Loading" class="row">
     <app-item
-              [ngClass]="{'col-12': value === 5, 'col-12 col-md-4': value === 20, 'col-6 col-md-3': value === 35}"
-              [value] = 'value'
-              *ngFor="let product of productsArray | searchProducts: search | paginate: { itemsPerPage: productsPerPage, currentPage: page }"
-              [product]="product"
+      [ngClass]="{
+        'col-12': value === 5,
+        'col-12 col-md-4': value === 20,
+        'col-6 col-md-3': value === 35
+      }"
+      [value]="value"
+      *ngFor="
+        let product of productsArray
+          | searchProducts: search
+          | paginate: { itemsPerPage: productsPerPage, currentPage: page }
+      "
+      [product]="product"
     ></app-item>
-    <pagination-controls previousLabel=""
-                         nextLabel=""
-                         (pageChange)="page = $event"
-                         class="paginator-custom"
+    <pagination-controls
+      previousLabel=""
+      nextLabel=""
+      (pageChange)="page = $event"
+      class="paginator-custom"
     ></pagination-controls>
   </div>
 </div>
@@ -51,8 +66,3 @@
     </div>
   </div>
 </ng-template>
-
-
-
-
-

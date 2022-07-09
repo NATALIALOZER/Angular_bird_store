@@ -1,65 +1,67 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {ActivatedRoute, Params} from "@angular/router";
-import {ProductService} from "../../../shared/services/product.service";
-import {switchMap} from "rxjs/operators";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Subscription} from "rxjs";
-import {AlertService} from "../../shared/services/alert.service";
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { ProductService } from '../../../shared/services/product.service';
+import { switchMap } from 'rxjs/operators';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { AlertService } from '../../shared/services/alert.service';
 import { Product } from '../../../shared/models/interfaces';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss']
+  styleUrls: ['./edit.component.scss'],
 })
 export class EditComponent implements OnInit, OnDestroy {
+  public form!: FormGroup;
+  public product!: Product;
+  public submitted = false;
+  private updateSubscription: Subscription = new Subscription();
 
-  public form!: FormGroup
-  public product!: Product
-  public submitted: boolean = false;
-  // @ts-ignore
-  updateSubcription: Subscription;
-
-  constructor( private route: ActivatedRoute,
-               private productService: ProductService,
-               private alert: AlertService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private productService: ProductService,
+    private alert: AlertService
+  ) {}
 
   ngOnInit(): void {
     this.route.params
-      .pipe(switchMap((params:Params) => {
-        return this.productService.getById(params['id'])
-    })).subscribe((product:Product) => {
-      this.product = product
-      this.form = new FormGroup(
-        {
-          name: new FormControl(product.name, [Validators.required]),
-          price: new FormControl(product.price, [Validators.required])
+      .pipe(
+        switchMap((params: Params) => {
+          return this.productService.getById(params['id']);
         })
-    })
+      )
+      .subscribe((product: Product) => {
+        this.product = product;
+        this.form = new FormGroup({
+          name: new FormControl(product.name, [Validators.required]),
+          price: new FormControl(product.price, [Validators.required]),
+        });
+      });
   }
 
   ngOnDestroy() {
-    if(this.updateSubcription) {
-      this.updateSubcription.unsubscribe()
+    if (this.updateSubscription) {
+      this.updateSubscription.unsubscribe();
     }
   }
 
   submit() {
     if (this.form.invalid) {
-      return
+      return;
     }
 
     this.submitted = true;
 
-    this.updateSubcription = this.productService.update({
-      ...this.product,
-      name: this.form.value.name,
-      price: this.form.value.price
-    }).subscribe( () => {
-      this.submitted = false;
-      this.alert.warning("Товар оновлено")
-    })
+    this.updateSubscription = this.productService
+      .update({
+        ...this.product,
+        name: this.form.value.name,
+        price: this.form.value.price,
+      })
+      .subscribe(() => {
+        this.submitted = false;
+        this.alert.warning('Товар оновлено');
+      });
   }
-
-
 }

@@ -1,37 +1,36 @@
 /*Change font:*/
-@mixin app-main-font{
+@mixin app-main-font {
   font-family: altasi, sans-serif;
 }
 
+@mixin primary-color-bg {
+  background-color: #f2e9e9;
+}
+@mixin primary-text-color {
+  color: #7c838a;
+}
+@mixin secondary-color-bg {
+  background-color: #526af2;
+}
+@mixin secondary-text-color {
+  color: #f279ea;
+}
 
-@mixin primary-color-bg{
-  background-color: #F2E9E9;
-}
-@mixin primary-text-color{
-  color: #7C838A;
-}
-@mixin secondary-color-bg{
-  background-color: #526AF2;
-}
-@mixin secondary-text-color{
-  color: #F279EA;
-}
-
-@mixin font-menu{
+@mixin font-menu {
   @include app-main-font;
   font-size: 14px;
   font-weight: 500;
   line-height: 18px;
   letter-spacing: 2px;
 }
-@mixin font-page{
+@mixin font-page {
   @include app-main-font;
   font-size: 12px;
   font-weight: 400;
   line-height: 14px;
   letter-spacing: 2px;
 }
-@mixin font-numb{
+@mixin font-numb {
   @include app-main-font;
   font-size: 18px;
   font-weight: 400;
@@ -39,9 +38,9 @@
   letter-spacing: 2px;
 }
 
-@mixin shadow{
-  box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+@mixin shadow {
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
 }
-@mixin inner-shadow{
-  box-shadow: inset 7px 5px 8px 2px rgba(0,0,0,0.2);
+@mixin inner-shadow {
+  box-shadow: inset 7px 5px 8px 2px rgba(0, 0, 0, 0.2);
 }
