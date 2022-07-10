@@ -10,8 +10,8 @@
 </div>-->
 
 <!--pagination-->
-<div>
-  <div *ngIf="!loading; else Loading" class="row">
+<div [appIsLoading]="loadingService.isLoading(this, LoadingIndicator.OPERATOR)">
+  <div class="row">
     <app-item
       [ngClass]="{
         'col-12': value === 5,
@@ -35,11 +35,4 @@
   </div>
 </div>
 
-<ng-template #Loading>
-  <div class="text-center pt-5">
-    <div class="lds-ripple">
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-</ng-template>
+

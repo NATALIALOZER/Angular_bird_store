@@ -11,9 +11,11 @@ import { SearchInputComponent } from './components/search-input/search-input.com
 import { HtmlConvertPipe } from './pipes/html-convert.pipe';
 import { CounterDirective } from '../directives/counter.directive';
 import { CustomSliderComponent } from './components/custom-slider/custom-slider.component';
+import { LoaderComponent } from './components/loading/loader/loader.component';
+import { LoadingDirective } from './components/loading/loading.directive';
 
 @NgModule({
-  declarations: [ItemComponent, SearchInputComponent, HtmlConvertPipe, CounterDirective, CustomSliderComponent],
+  declarations: [ItemComponent, SearchInputComponent, HtmlConvertPipe, CounterDirective, CustomSliderComponent, LoaderComponent, LoadingDirective],
   imports: [
     CommonModule,
     AppRoutingModule,
@@ -33,6 +35,7 @@ import { CustomSliderComponent } from './components/custom-slider/custom-slider.
     FormsModule,
     SearchInputComponent,
     CustomSliderComponent,
+    LoadingDirective,
   ],
 })
 export class SharedModule {}
