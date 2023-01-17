@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { ImageSnippet, Product } from '../../../shared/models/interfaces';
 import { ProductService } from '../../../shared/services/product.service';
 import { AlertService } from '../../shared/services/alert.service';
@@ -16,9 +16,9 @@ export class CreateComponent implements OnInit {
   public selectedFile!: ImageSnippet;
   public selected = false;
 
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
   constructor(
-    private formBuilder: FormBuilder,
+    private formBuilder: UntypedFormBuilder,
     private productService: ProductService,
     private alert: AlertService
   ) {}

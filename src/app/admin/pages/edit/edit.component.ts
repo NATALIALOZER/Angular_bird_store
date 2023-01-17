@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from '../../../shared/services/product.service';
 import { switchMap } from 'rxjs/operators';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AlertService } from '../../shared/services/alert.service';
 import { Product } from '../../../shared/models/interfaces';
@@ -13,7 +13,7 @@ import { Product } from '../../../shared/models/interfaces';
   styleUrls: ['./edit.component.scss'],
 })
 export class EditComponent implements OnInit, OnDestroy {
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
   public product!: Product;
   public submitted = false;
   private updateSubscription: Subscription = new Subscription();
@@ -33,9 +33,9 @@ export class EditComponent implements OnInit, OnDestroy {
       )
       .subscribe((product: Product) => {
         this.product = product;
-        this.form = new FormGroup({
-          name: new FormControl(product.name, [Validators.required]),
-          price: new FormControl(product.price, [Validators.required]),
+        this.form = new UntypedFormGroup({
+          name: new UntypedFormControl(product.name, [Validators.required]),
+          price: new UntypedFormControl(product.price, [Validators.required]),
         });
       });
   }

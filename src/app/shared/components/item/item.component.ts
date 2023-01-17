@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../../models/interfaces';
 import { CartService } from '../../services/cart.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-item',
@@ -13,12 +13,12 @@ export class ItemComponent implements OnInit {
   @Input() public value = 5;
 
   public checked = false;
-  public quantityForm!: FormGroup;
+  public quantityForm!: UntypedFormGroup;
   private itemQuantity: number | undefined = 1;
 
   constructor(
     private cartService: CartService,
-    private formBuilder: FormBuilder
+    private formBuilder: UntypedFormBuilder
   ) {}
 
   public ngOnInit(): void {

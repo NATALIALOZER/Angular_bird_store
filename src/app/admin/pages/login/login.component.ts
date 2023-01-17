@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../shared/services/auth.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { User } from '../../../shared/models/interfaces';
@@ -10,7 +10,7 @@ import { User } from '../../../shared/models/interfaces';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  public form!: FormGroup;
+  public form!: UntypedFormGroup;
   public submitted = false;
   public message = '';
 
@@ -28,9 +28,9 @@ export class LoginComponent implements OnInit {
         this.message = 'Сесія закінчилась. Веддіть дані повторно';
       }
     });
-    this.form = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [
+    this.form = new UntypedFormGroup({
+      email: new UntypedFormControl(null, [Validators.required, Validators.email]),
+      password: new UntypedFormControl(null, [
         Validators.required,
         Validators.minLength(6),
       ]),
