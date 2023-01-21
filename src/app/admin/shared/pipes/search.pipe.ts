@@ -1,15 +1,12 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Product } from '../../../shared/models/interfaces';
+import { Product } from '@shared/common_types/interfaces';
 
 @Pipe({
   name: 'searchProducts',
 })
 export class SearchPipe implements PipeTransform {
-  transform(products: Product[], search = ''): Product[] {
-    console.log('search.pipe: ', search);
-    console.log('search.pipe products: ', products);
+  public transform(products: Product[], search = ''): Product[] {
     if (!search.trim()) {
-      console.log('no str');
       return products;
     }
 

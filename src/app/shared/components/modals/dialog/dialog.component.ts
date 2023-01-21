@@ -18,17 +18,17 @@ export class DialogComponent {
     private mdDialogRef: MatDialogRef<DialogComponent>
   ) {}
 
-  public cancel() {
+  public cancel(): void {
     this.close(false);
   }
-  public close(value: any) {
+  public close(value: boolean | string): void {
     this.mdDialogRef.close(value);
   }
-  public confirm() {
+  public confirm(): void {
     this.close(true);
   }
   @HostListener('keydown.esc')
-  public onEsc() {
+  public onEsc(): void {
     this.close(false);
   }
 }

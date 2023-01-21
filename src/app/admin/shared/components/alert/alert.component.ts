@@ -1,23 +1,25 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AlertService } from '../../services/alert.service';
-import { Subscription } from 'rxjs';
+import { WithDestroy } from '@shared/mixins/destroy';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-alert',
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
 })
-export class AlertComponent implements OnInit, OnDestroy {
+export class AlertComponent extends WithDestroy() implements OnInit {
   @Input() delay = 5000;
 
-  public text!: string;
+  public text = '';
   public type = 'success';
-  private alertSubscription: Subscription = new Subscription();
 
-  constructor(private alertService: AlertService) {}
+  constructor(private alertService: AlertService) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.alertSubscription = this.alertService.alert$.subscribe(alert => {
+    this.alertService.alert$.pipe(takeUntil(this.destroy$)).subscribe(alert => {
       this.text = alert.text;
       this.type = alert.type;
 
@@ -26,11 +28,5 @@ export class AlertComponent implements OnInit, OnDestroy {
         this.text = '';
       }, this.delay);
     });
-  }
-
-  ngOnDestroy(): void {
-    if (this.alertSubscription) {
-      this.alertSubscription.unsubscribe();
-    }
   }
 }

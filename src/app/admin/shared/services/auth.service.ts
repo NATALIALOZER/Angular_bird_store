@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subject, throwError } from 'rxjs';
-import { User, fbAuthResponse } from '../../../shared/models/interfaces';
+import { User } from '@shared/common_types/interfaces';
 import { environment } from '../../../../environments/environment';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
+import { fbAuthResponse } from './services_types/auth-service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -20,7 +21,7 @@ export class AuthService {
     return <string>localStorage.getItem('fb-token');
   }
 
-  login(user: User): Observable<any> {
+  public login(user: User): Observable<any> {
     user.returnSecureToken = true;
 
     return this.http
@@ -28,24 +29,18 @@ export class AuthService {
         `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`,
         user
       )
-      .pipe(
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        // eslint-disable-next-line @typescript-eslint/unbound-method
-        tap(this.setToken),
-        catchError(this.handleError.bind(this))
-      );
+      .pipe(catchError(this.handleError.bind(this)));
   }
 
-  logout() {
+  public logout(): void {
     this.setToken(null);
   }
 
-  isAuthenticated(): boolean {
+  public isAuthenticated(): boolean {
     return !!this.token;
   }
 
-  private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse): Observable<never> {
     const { message } = error.error.error;
 
     switch (message) {
@@ -63,7 +58,7 @@ export class AuthService {
     return throwError(error);
   }
 
-  private setToken(response: fbAuthResponse | null) {
+  private setToken(response: fbAuthResponse | null): void {
     if (response) {
       const expDate = new Date(
         new Date().getTime() + +response.expiresIn * 1000
@@ -72,7 +67,6 @@ export class AuthService {
       localStorage.setItem('fb-token-exp', expDate.toString());
     } else {
       /*localStorage.clear()*/
-      console.log('"localStorage.clear()"');
     }
   }
 }

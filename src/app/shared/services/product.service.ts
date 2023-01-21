@@ -3,13 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { map } from 'rxjs/operators';
-import { FbCreateResponse, Product } from '../models/interfaces';
+import { Product } from '../common_types/interfaces';
+import { FbCreateResponse } from '@shared/services/services_types/product-service';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
   constructor(private http: HttpClient) {}
 
-  create(product: Product): Observable<Product> {
+  public create(product: Product): Observable<Product> {
     return this.http
       .post<Product>(`${environment.fbDbUrl}/products.json`, product)
       .pipe(
@@ -19,7 +20,7 @@ export class ProductService {
       );
   }
 
-  getAll(): Observable<Product[]> {
+  public getAll(): Observable<Product[]> {
     return this.http
       .get<Product[]>(`${environment.fbDbUrl}/products.json`)
       .pipe(
@@ -33,7 +34,7 @@ export class ProductService {
       );
   }
 
-  getById(id: string): Observable<Product> {
+  public getById(id: string): Observable<Product> {
     return this.http
       .get<Product>(`${environment.fbDbUrl}/products/${id}.json`)
       .pipe(
@@ -43,14 +44,14 @@ export class ProductService {
       );
   }
 
-  update(product: Product): Observable<Product> {
+  public update(product: Product): Observable<Product> {
     return this.http.patch<Product>(
       `${environment.fbDbUrl}/products/${product.id}.json`,
       product
     );
   }
 
-  remove(id: string): Observable<void> {
+  public remove(id: string): Observable<void> {
     return this.http.delete<void>(`${environment.fbDbUrl}/products/${id}.json`);
   }
 }

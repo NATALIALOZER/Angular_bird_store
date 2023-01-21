@@ -21,9 +21,7 @@ export class AuthInterceptor implements HttpInterceptor {
     if (this.auth.isAuthenticated()) {
       req = req.clone({
         setParams: {
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          auth: this.auth.token,
+          auth: this.auth.token as string,
         },
       });
     }

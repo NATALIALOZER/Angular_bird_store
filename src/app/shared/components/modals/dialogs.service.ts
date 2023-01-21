@@ -12,7 +12,7 @@ export class DialogsService {
 
   protected dialogRef!: MatDialogRef<DialogComponent>;
 
-  public open(options: any) {
+  public open(options: any): void {
     this.dialogRef = this.dialog.open(DialogComponent, {
       data: {
         title: options.title,

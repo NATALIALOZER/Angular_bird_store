@@ -2,13 +2,12 @@ import {
   Directive,
   Input,
   OnChanges,
-  SimpleChanges,
   TemplateRef,
   ViewContainerRef,
 } from '@angular/core';
+
 @Directive({
-  // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: '[counterOf]',
+  selector: '[appCounterOf]',
 })
 export class CounterDirective implements OnChanges {
   constructor(
@@ -16,10 +15,9 @@ export class CounterDirective implements OnChanges {
     private template: TemplateRef<CounterDirectiveContext>
   ) {}
 
-  @Input('counterOf') counter!: number;
+  @Input('appCounterOf') counter!: number;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public ngOnChanges(changes: SimpleChanges): void {
+  public ngOnChanges(): void {
     this.container.clear();
     for (let i = 0; i < this.counter; i++) {
       this.container.createEmbeddedView(
@@ -29,6 +27,7 @@ export class CounterDirective implements OnChanges {
     }
   }
 }
+
 class CounterDirectiveContext {
-  constructor(public $implicit: any) {}
+  constructor(public $implicit: number) {}
 }

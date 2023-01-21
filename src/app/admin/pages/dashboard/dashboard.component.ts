@@ -1,46 +1,42 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ProductService } from '../../../shared/services/product.service';
-import { Subscription } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from '@shared/services/product.service';
 import { AlertService } from '../../shared/services/alert.service';
-import { Product } from '../../../shared/models/interfaces';
+import { Product } from '@shared/common_types/interfaces';
+import { WithDestroy } from '@shared/mixins/destroy';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent extends WithDestroy() implements OnInit {
   public products: Product[] = [];
-  pSubscription: Subscription = new Subscription();
-  delSubscription: Subscription = new Subscription();
   public searchStr = '';
 
   constructor(
     private productService: ProductService,
     private alert: AlertService
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
-    this.productService.getAll().subscribe(products => {
-      this.products = products;
-    });
+    this.productService
+      .getAll()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(products => (this.products = products));
   }
 
-  remove(id: string) {
-    if (id != null) {
-      this.productService.remove(id).subscribe(() => {
-        this.products = this.products.filter(product => product.id !== id);
-        this.alert.danger('Товар видалено');
-      });
-    }
-  }
-
-  ngOnDestroy(): void {
-    if (this.pSubscription) {
-      this.pSubscription.unsubscribe();
-    }
-    if (this.delSubscription) {
-      this.delSubscription.unsubscribe();
+  public remove(id: string): void {
+    if (!id) {
+      this.productService
+        .remove(id)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe(() => {
+          this.products = this.products.filter(product => product.id !== id);
+          this.alert.danger('Товар видалено');
+        });
     }
   }
 }

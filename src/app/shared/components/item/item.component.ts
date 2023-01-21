@@ -1,7 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Product } from '../../models/interfaces';
+import { Product } from '../../common_types/interfaces';
 import { CartService } from '../../services/cart.service';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-item',
@@ -21,7 +25,7 @@ export class ItemComponent implements OnInit {
     private formBuilder: UntypedFormBuilder
   ) {}
 
-  public ngOnInit(): void {
+  ngOnInit(): void {
     this.checkInCart();
     this.buildForm();
   }

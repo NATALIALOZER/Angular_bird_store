@@ -8,10 +8,11 @@ import { CreateComponent } from './pages/create/create.component';
 import { EditComponent } from './pages/edit/edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { AuthGuard } from './shared/services/auth.guard';
+import { AuthGuard } from './shared/guards/auth.guard';
 import { SearchPipe } from './shared/pipes/search.pipe';
 import { AlertComponent } from './shared/components/alert/alert.component';
 import { AlertService } from './shared/services/alert.service';
+import { MaterialModule } from '../shared/material/material.module';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { AlertService } from './shared/services/alert.service';
         ],
       },
     ]),
+    MaterialModule,
   ],
   exports: [RouterModule, SearchPipe],
   providers: [AuthGuard, AlertService],

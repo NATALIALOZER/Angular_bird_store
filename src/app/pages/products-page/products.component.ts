@@ -1,29 +1,24 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ProductService } from '../../shared/services/product.service';
-import { Observable, Subject } from 'rxjs';
-import { Product } from '../../shared/models/interfaces';
-import { CartService } from '../../shared/services/cart.service';
-import { IPageSizeParams } from '../../shared/components/custom-slider/slider.interface';
-import { LoadingService } from '../../shared/components/loading/loading.service';
+import { Component, OnInit } from '@angular/core';
+import { ProductService } from '@shared/services/product.service';
+import { Observable } from 'rxjs';
+import { Product } from '@shared/common_types/interfaces';
+import { CartService } from '@shared/services/cart.service';
+import { IPageSizeParams } from '@shared/components/custom-slider/types/slider.interface';
+import { LoadingService } from '@shared/components/loading/loading.service';
 import { takeUntil } from 'rxjs/operators';
-
-// contains identifiers of all loading indicators in this component
-enum LoadingIndicator {
-  OPERATOR,
-  MANUAL,
-  ASYNC_PIPE
-}
+import { LoadingIndicator } from './types/products';
+import { WithDestroy } from '@shared/mixins/destroy';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent implements OnInit, OnDestroy {
-  public products$!: Observable<Product[]>;
+export class ProductsComponent extends WithDestroy() implements OnInit {
+  public products$: Observable<Product[]>;
 
   /*loader*/
-  LoadingIndicator = LoadingIndicator;
+  public LoadingIndicator = LoadingIndicator;
 
   /*paginator_native*/
   public value = 5;
@@ -33,31 +28,23 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   public search = '';
 
-  private destroy$: Subject<void> = new Subject<void>();
-
   constructor(
     public loadingService: LoadingService,
     private productService: ProductService,
     private cartService: CartService
   ) {
+    super();
     this.products$ = this.productService.getAll();
   }
 
   public ngOnInit(): void {
-    this.loadingService.doLoading(
-        this.products$,
-        this,
-        LoadingIndicator.OPERATOR
-    ).pipe( takeUntil(this.destroy$)
-    ).subscribe(res => {
-      this.productsArray = res;
-    });
+    this.loadingService
+      .doLoading(this.products$, this, LoadingIndicator.OPERATOR)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(res => {
+        this.productsArray = res;
+      });
     this.cartService.getItems();
-  }
-
-  public ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
   }
 
   public searchItem(newItem: string): void {

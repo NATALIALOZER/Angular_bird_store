@@ -5,10 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { ProductsComponent } from './pages/products-page/products.component';
 import { CartComponent } from './pages/cart-page/cart.component';
 import { ProductInfoComponent } from './pages/product-info-page/product-info.component';
-import { MainLayoutComponent } from './shared/components/main-layout/main-layout.component';
-import { SharedModule } from './shared/shared.module';
+import { MainLayoutComponent } from '@shared/components/main-layout/main-layout.component';
+import { SharedModule } from '@shared/shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from './shared/interceptors/auth.interceptor';
+import { AuthInterceptor } from '@shared/interceptors/auth.interceptor';
 import { AdminModule } from './admin/admin.module';
 import { PaymentComponent } from './pages/payment-page/payment.component';
 
