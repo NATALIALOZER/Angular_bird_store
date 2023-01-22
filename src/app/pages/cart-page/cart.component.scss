@@ -1,13 +1,14 @@
 @import "../../../assets/styles/helpers/mixins";
+@import "../../../assets/styles/helpers/variables";
 @import "../../../assets/styles/components/buttons";
 
 .custom_button {
   padding: 10px 20px;
   @include font-numb;
-  @include secondary-text-color;
+  color: $secondary-text-color;
 }
 .mat-card:not([class*="mat-elevation-z"]) {
-  @include inner-shadow;
+  box-shadow: $inner-shadow;
 }
 mat-card {
   padding: 10px 15px;
@@ -18,7 +19,7 @@ mat-card {
   display: flex;
   justify-content: space-between;
   gap: 15px;
-  @include primary-text-color;
+  color: $primary-text-color;
   @include font-menu;
   mat-card-content {
     margin-bottom: 0;
@@ -39,6 +40,6 @@ mat-card {
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 15px;
-    @include inner-shadow;
+    box-shadow: $inner-shadow;
   }
 }

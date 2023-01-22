@@ -48,6 +48,8 @@ import { ButtonCheckboxComponent } from './components/button-checkbox/button-che
     SearchInputComponent,
     CustomSliderComponent,
     LoadingDirective,
+    ButtonCheckboxComponent,
+    ButtonComponent,
   ],
 })
 export class SharedModule {}

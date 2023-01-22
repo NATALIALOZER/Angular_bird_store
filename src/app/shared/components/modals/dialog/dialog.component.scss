@@ -1,10 +1,11 @@
 @import "../../../../../assets/styles/helpers/mixins";
+@import "../../../../../assets/styles/helpers/variables";
 
 ::ng-deep .mat-dialog-container {
   min-width: 200px;
   @include font-page;
-  @include primary-text-color;
-  @include primary-color-bg;
+  color: $primary-text-color;
+  background-color: $primary-color-bg;
 }
 
 button {
@@ -13,6 +14,6 @@ button {
   border-radius: 5px;
   font-size: 18px;
   font-weight: 400;
-  @include primary-text-color;
-  @include primary-color-bg;
+  color: $primary-text-color;
+  background-color: $primary-color-bg;
 }

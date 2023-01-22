@@ -1,4 +1,5 @@
 @import "../../../../../assets/styles/helpers/mixins";
+@import "../../../../../assets/styles/helpers/variables";
 
 /*header*/
 .mat-toolbar {
@@ -38,17 +39,17 @@ mat-list {
   flex-direction: column;
   /*padding-bottom: 25px;*/
   @include font-menu;
-  @include secondary-color-bg;
+  background-color: $secondary-color-bg;
 }
 ::ng-deep .mat-list-base .mat-list-item .mat-list-item-content {
   justify-content: space-around;
-  @include secondary-text-color;
+  color: $secondary-text-color;
 }
 
 /*search line*/
 /*.search_field{
   border-radius: 20px;
-  @include inner-shadow;
+  box-shadow: $inner-shadow;
   ::ng-deep .mat-form-field-wrapper{
     padding: 0 0 0 15px;
   }
@@ -60,7 +61,7 @@ mat-list {
     height: 30px;
     border-radius: 10px;
     z-index: 1000;
-    @include shadow;
+    box-shadow: $shadow;
   }
 }*/
 

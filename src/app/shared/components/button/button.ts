@@ -1,6 +1,7 @@
 export enum ButtonType {
   DEFAULT = 'default',
   OUTLINE = 'outline',
+  CONTRAST = 'contrast',
 }
 
 export enum ButtonSize {

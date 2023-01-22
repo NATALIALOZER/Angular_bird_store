@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ButtonSize } from '@shared/components/button/button';
 
@@ -8,8 +8,17 @@ import { ButtonSize } from '@shared/components/button/button';
   styleUrls: ['./button-checkbox.component.scss'],
 })
 export class ButtonCheckboxComponent {
+  @Input() public iconName = '';
+  @Input() public buttonSize: ButtonSize = ButtonSize.SMALL;
   @Input() public checked = false;
-  @Input() public control!: FormControl<boolean>;
+  @Input() public sharedVal: unknown;
+  @Input() public control: FormControl<boolean> = new FormControl();
+  @Output() public sharedChanges: EventEmitter<unknown> =
+    new EventEmitter<unknown>();
 
-  public ButtonSize: typeof ButtonSize = ButtonSize;
+  public change(newValue: unknown): void {
+    this.sharedVal = newValue;
+    newValue = newValue !== 0 ? newValue : '';
+    this.sharedChanges.emit(newValue);
+  }
 }

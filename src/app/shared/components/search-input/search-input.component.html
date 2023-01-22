@@ -15,8 +15,9 @@
       name="search"
       #searchInput
     />
-    <button matSuffix mat-button (click)="searchProducts(searchInput.value)">
-      <mat-icon>search</mat-icon>
-    </button>
+    <app-button icon_name='search'
+                [size]='ButtonSize.SMALL'
+                (click)="searchProducts(searchInput.value)"
+    ></app-button>
   </mat-form-field>
 </form>

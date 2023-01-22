@@ -1,6 +1,9 @@
-<mat-checkbox class="check_margin" [formControl]="control">
+<mat-checkbox [formControl]="control"
+              [ngModel]="sharedVal"
+              (ngModelChange)="change($event)"
+>
   <app-button [checked]='control.value'
-              icon_name='add_shopping_cart'
-              [size]='ButtonSize.SMALL'
+              [icon_name]='iconName'
+              [size]='buttonSize'
   ></app-button>
 </mat-checkbox>

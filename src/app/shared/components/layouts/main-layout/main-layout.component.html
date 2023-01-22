@@ -11,42 +11,25 @@
             class="btn btn-primary shadow rounded active"
             [ngStyle]="{ backgroundColor: checked ? '#526AF2' : '#F2E9E9' }"
           >
-            <mat-icon
-              ><img
-                *ngIf="!checked"
-                src='../../../../../assets/images/Menu.png'
-                alt="menu" /><img
-                *ngIf="checked"
-                src='../../../../../assets/images/Menu2.png'
-                alt="menu"
-            /></mat-icon>
+            <mat-icon>
+              <img *ngIf="!checked" src='../../../../../assets/images/Menu.png' alt="menu"/>
+              <img *ngIf="checked" src='../../../../../assets/images/Menu2.png' alt="menu"/>
+            </mat-icon>
           </button>
         </mat-checkbox>
       </section>
 
-      <a [routerLink]="['/']"
-        ><img
-          *ngIf="!checked"
-          src='../../../../../assets/images/Bird-logo.png'
-          alt="logo" /><img
-          *ngIf="checked"
-          src='../../../../../assets/images/Bird-logo2.png'
-          alt="logo"
-      /></a>
+      <a routerLink="/">
+        <img *ngIf="!checked" src='../../../../../assets/images/Bird-logo.png' alt="logo"/>
+        <img *ngIf="checked" src='../../../../../assets/images/Bird-logo2.png' alt="logo"/>
+      </a>
 
-      <button
-        [routerLink]="['/cart']"
-        mat-icon-button
-        class="btn btn-primary shadow rounded active"
-        [ngStyle]="{ backgroundColor: checked ? '#526AF2' : '#F2E9E9' }"
-      >
-        <mat-icon
-          ><img *ngIf="!checked" src='../../../../../assets/images/Cart.png' alt="cart" /><img
-            *ngIf="checked"
-            src='../../../../../assets/images/Cart2.png'
-            alt="cart"
-        /></mat-icon>
-      </button>
+      <app-button [buttonType]='ButtonType.CONTRAST'
+                  [checked]='checked'
+                  routerLink="/cart">
+        <img *ngIf="!checked" src='../../../../../assets/images/Cart.png' alt="cart"/>
+        <img *ngIf="checked" src='../../../../../assets/images/Cart2.png' alt="cart"/>
+      </app-button>
     </div>
 
     <mat-list role="list" *ngIf="checked">

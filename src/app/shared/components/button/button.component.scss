@@ -1,4 +1,5 @@
 @import "../../../../assets/styles/helpers/mixins";
+@import "../../../../assets/styles/helpers/variables";
 
 ::ng-deep .mat-button-wrapper {
   display: flex;
@@ -6,16 +7,22 @@
 }
 
 .btn-primary {
-  @include shadow;
+  box-shadow: $shadow;
 }
 
-.checked {
-  @include inner-shadow;
+.default.checked {
+  box-shadow: $inner-shadow;
+}
+
+.contrast.checked {
+  background-color: $secondary-color-bg;
+  color: $secondary-text-color;
 }
 
 .small {
   height: 30px;
   width: 30px;
+  border-radius: 10px !important;
 }
 .medium {
   height: 40px;

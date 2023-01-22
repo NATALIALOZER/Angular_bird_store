@@ -50,7 +50,8 @@
 
       <!--add to cart button-->
       <section class="check-section" [ngClass]="{ 'cart-upper': value === 35 }">
-        <app-button-checkbox [control]='getControl(form.checkedCart)'
+        <app-button-checkbox [control]='form.checkedCart'
+                             iconName='add_shopping_cart'
                              (click)="addToCart(product, quantity.value)"
         ></app-button-checkbox>
       </section>
