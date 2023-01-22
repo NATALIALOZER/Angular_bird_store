@@ -1,4 +1,4 @@
-@import "../../../../stylings/helpers/mixins";
+@import "../../../../../assets/styles/helpers/mixins";
 
 /*header*/
 .mat-toolbar {
@@ -15,7 +15,7 @@
 }
 
 /*checkbox btn for menu button*/
-.check_section {
+.check-section {
   display: flex;
   align-content: center;
   align-items: center;
@@ -27,14 +27,12 @@
     height: 45px;
     opacity: 0;
   }
-  .check_margin {
-    margin: 0;
-  }
   button {
     width: 45px;
     height: 45px;
   }
 }
+
 mat-list {
   display: flex;
   flex-direction: column;

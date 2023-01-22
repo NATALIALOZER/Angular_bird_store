@@ -51,14 +51,10 @@ body {
 }
 
 /*import customize bootstrap*/
-@import "stylings/customize-bootstrap";
+@import "assets/styles/customize-bootstrap";
 @import "../node_modules/bootstrap/scss/bootstrap";
 
-.container {
-  padding: 0 25px;
-}
+/*import file to style whole app*/
+@import "assets/styles/common-styles";
 
-/*.menu_btn{
-  width: 45px;
-  height: 45px;
-}*/
+

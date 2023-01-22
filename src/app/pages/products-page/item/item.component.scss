@@ -1,4 +1,4 @@
-@import "../../../../stylings/helpers/mixins";
+@import "../../../../assets/styles/helpers/mixins";
 
 /*buttons*/
 .btn-primary {
@@ -46,7 +46,7 @@ mat-card {
   }
   mat-card-actions {
     width: 100%;
-    .check_section {
+    .check-section {
       display: flex;
       align-content: center;
       align-items: center;
@@ -59,16 +59,14 @@ mat-card {
         height: 34px;
         opacity: 0;
       }
-      .check_margin {
-        margin: 0;
-      }
     }
-    .check_section.cart-upper {
+    .check-section.cart-upper {
       margin-top: -220px;
       margin-left: -30px;
     }
-    .quantity_form {
+    .quantity-form {
       display: flex;
+      column-gap: 8px;
       justify-content: center;
       width: 100%;
       .value-button {

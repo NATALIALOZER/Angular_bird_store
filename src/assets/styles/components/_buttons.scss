@@ -10,4 +10,9 @@
   justify-content: center;
   @include font-numb;
   @include primary-text-color;
+  &:hover, &:focus {
+    border-color: #f3ebeb;
+    @include hover-color-bg;
+    @include hover-text-color;
+  }
 }

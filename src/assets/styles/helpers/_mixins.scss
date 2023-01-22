@@ -15,6 +15,12 @@
 @mixin secondary-text-color {
   color: #f279ea;
 }
+@mixin hover-color-bg {
+  color: #7c838a;
+}
+@mixin hover-text-color {
+  background-color: #f2e9e9;
+}
 
 @mixin font-menu {
   @include app-main-font;

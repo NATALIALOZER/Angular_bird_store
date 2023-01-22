@@ -1,0 +1,7 @@
+<button mat-icon-button
+        class="btn btn-primary rounded {{size}}"
+        [ngClass]="{'checked': checked}"
+        [disabled]="disabled">
+  <mat-icon *ngIf="icon_name">{{icon_name}}</mat-icon>
+  <ng-content></ng-content>
+</button>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from '../app-routing.module';
-import { ItemComponent } from './components/item/item.component';
+import { ItemComponent } from '../pages/products-page/item/item.component';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -13,6 +13,8 @@ import { CounterDirective } from './directives/counter.directive';
 import { CustomSliderComponent } from './components/custom-slider/custom-slider.component';
 import { LoaderComponent } from './components/loading/loader/loader.component';
 import { LoadingDirective } from './components/loading/loading.directive';
+import { ButtonComponent } from './components/button/button.component';
+import { ButtonCheckboxComponent } from './components/button-checkbox/button-checkbox.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import { LoadingDirective } from './components/loading/loading.directive';
     CustomSliderComponent,
     LoaderComponent,
     LoadingDirective,
+    ButtonComponent,
+    ButtonCheckboxComponent,
   ],
   imports: [
     CommonModule,

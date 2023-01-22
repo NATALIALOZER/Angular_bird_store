@@ -1,7 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Product } from '../../common_types/interfaces';
-import { CartService } from '../../services/cart.service';
+import { Product } from '@shared/common_types/interfaces';
+import { CartService } from '@shared/services/cart.service';
+import { ButtonSize } from '@shared/components/button/button';
 import {
+  AbstractControl,
+  FormControl,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
@@ -16,8 +19,8 @@ export class ItemComponent implements OnInit {
   @Input() public product!: Product;
   @Input() public value = 5;
 
-  public checked = false;
   public quantityForm!: UntypedFormGroup;
+  public ButtonSize: typeof ButtonSize = ButtonSize;
   private itemQuantity: number | undefined = 1;
 
   constructor(
@@ -26,8 +29,8 @@ export class ItemComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.checkInCart();
     this.buildForm();
+    this.checkInCart();
   }
 
   public addToCart(product: Product, quantity: string): void {
@@ -35,29 +38,35 @@ export class ItemComponent implements OnInit {
   }
 
   public decreaseValue(): void {
-    if (this.quantityForm.get('quantity')?.value > 1) {
-      this.quantityForm.setValue({
-        quantity: this.quantityForm.get('quantity')?.value - 1,
-      });
+    if (this.form.quantity?.value > 1) {
+      this.form.quantity.setValue(this.form.quantity?.value - 1);
     }
   }
 
   public increaseValue(): void {
-    this.quantityForm.setValue({
-      quantity: +this.quantityForm.get('quantity')?.value + 1,
-    });
+    this.form.quantity.setValue(+this.form.quantity?.value + 1);
+  }
+
+  get form(): { [key: string]: AbstractControl } {
+    return this.quantityForm.controls;
+  }
+
+  public getControl(control: AbstractControl): FormControl {
+    return control as FormControl;
   }
 
   private buildForm(): void {
     this.quantityForm = this.formBuilder.group({
       quantity: [this.itemQuantity, [Validators.required]],
+      checkedCart: [false],
     });
   }
 
   private checkInCart(): void {
     const item = this.cartService.getProduct(this.product);
-    this.checked = !!item;
-    if (this.checked) {
+
+    this.form.checkedCart.setValue(!!item);
+    if (this.quantityForm.value.checkedCart) {
       this.itemQuantity = item?.quantity;
     }
   }
