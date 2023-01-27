@@ -1,6 +1,11 @@
 /*file to style whole app*/
 @import "components/buttons";
+@import "helpers/variables";
 
 .container {
   padding: 0 25px;
+}
+
+.inner-shadow {
+  box-shadow: $inner-shadow;
 }

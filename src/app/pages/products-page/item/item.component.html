@@ -4,7 +4,7 @@
 >
   <mat-card-content
     class="products-image"
-    [ngClass]="{ small: value === 20, 'small-two-columns': value === 35 }"
+    [ngClass]="{ 'small': value === 20, 'small-two-columns': value === 35 }"
     [routerLink]="['/product-info-page', product.id]"
     [ngStyle]="{
         'background-image': product.imageUrl
@@ -34,13 +34,8 @@
         matInput
         type="text"
         formControlName="quantity"
-        [ngStyle]="{
-          'box-shadow': !form.checkedCart.value
-            ? 'inset 7px 5px 8px 2px rgba(0,0,0,0.2)'
-            : 'none'
-        }"
+        [ngClass]="{'inner-shadow': !form.checkedCart.value}"
         #quantity
-        [readonly]="form.checkedCart.value"
       />
       <app-button *ngIf="!form.checkedCart.value"
                   (click)="increaseValue()"
