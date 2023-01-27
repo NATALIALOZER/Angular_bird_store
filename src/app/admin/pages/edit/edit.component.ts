@@ -2,15 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from '@shared/services/product.service';
 import { switchMap, takeUntil } from 'rxjs/operators';
-import {
-  UntypedFormControl,
-  UntypedFormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AlertService } from '../../shared/services/alert.service';
 import { Product } from '@shared/common_types/interfaces';
 import { WithDestroy } from '@shared/mixins/destroy';
+import { IEditForm } from './types/edit';
 
 @Component({
   selector: 'app-edit',
@@ -18,8 +15,8 @@ import { WithDestroy } from '@shared/mixins/destroy';
   styleUrls: ['./edit.component.scss'],
 })
 export class EditComponent extends WithDestroy() implements OnInit {
-  public form!: UntypedFormGroup;
-  public product!: Product;
+  public editForm: FormGroup<IEditForm>;
+  public product: Product;
   public submitted = false;
   private updateSubscription: Subscription = new Subscription();
 
@@ -41,15 +38,15 @@ export class EditComponent extends WithDestroy() implements OnInit {
       )
       .subscribe((product: Product) => {
         this.product = product;
-        this.form = new UntypedFormGroup({
-          name: new UntypedFormControl(product.name, [Validators.required]),
-          price: new UntypedFormControl(product.price, [Validators.required]),
+        this.editForm = new FormGroup<IEditForm>({
+          name: new FormControl(product.name, [Validators.required]),
+          price: new FormControl(product.price, [Validators.required]),
         });
       });
   }
 
   public submit(): void {
-    if (this.form.invalid) {
+    if (this.editForm.invalid) {
       return;
     }
 
@@ -58,9 +55,9 @@ export class EditComponent extends WithDestroy() implements OnInit {
     this.updateSubscription = this.productService
       .update({
         ...this.product,
-        name: this.form.value.name,
-        price: this.form.value.price,
-      })
+        name: this.editForm.value.name,
+        price: this.editForm.value.price,
+      } as Product)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this.submitted = false;

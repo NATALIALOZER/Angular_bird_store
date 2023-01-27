@@ -1,18 +1,18 @@
-<div *ngIf="form; else Loading">
-  <form [formGroup]="form" (ngSubmit)="submit()">
+<div *ngIf="editForm; else Loading">
+  <form [formGroup]="editForm" (ngSubmit)="submit()">
     <div
       class="form-control text-secondary"
       [ngClass]="{
-        invalid: form.get('name')?.touched && form.get('name')?.invalid
+        invalid: editForm.get('name')?.touched && editForm.get('name')?.invalid
       }"
     >
       <label for="name">Назва товару:</label>
       <input id="name" type="text" formControlName="name" />
       <div
-        *ngIf="form.get('name')?.touched && form.get('name')?.invalid"
+        *ngIf="editForm.get('name')?.touched && editForm.get('name')?.invalid"
         class="validation"
       >
-        <small *ngIf="form.get('name')?.errors?.required">
+        <small *ngIf="editForm.get('name')?.errors?.required">
           Введіть назву
         </small>
       </div>
@@ -21,16 +21,16 @@
     <div
       class="form-control text-secondary"
       [ngClass]="{
-        invalid: form.get('price')?.touched && form.get('price')?.invalid
+        invalid: editForm.get('price')?.touched && editForm.get('price')?.invalid
       }"
     >
       <label for="price">Вартість товару:</label>
       <input id="price" type="number" formControlName="price" />
       <div
-        *ngIf="form.get('price')?.touched && form.get('price')?.invalid"
+        *ngIf="editForm.get('price')?.touched && editForm.get('price')?.invalid"
         class="validation"
       >
-        <small *ngIf="form.get('price')?.errors?.required">
+        <small *ngIf="editForm.get('price')?.errors?.required">
           Введіть вартість товару
         </small>
       </div>
@@ -39,7 +39,7 @@
     <button
       class="btn btn-primary"
       type="submit"
-      [disabled]="form.invalid || submitted"
+      [disabled]="editForm.invalid || submitted"
     >
       Оновити
     </button>
