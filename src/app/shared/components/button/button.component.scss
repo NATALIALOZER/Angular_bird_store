@@ -21,7 +21,6 @@
 
 .small {
   height: 30px;
-  width: 30px;
   border-radius: 10px !important;
 }
 .medium {
@@ -29,6 +28,5 @@
   width: 40px;
 }
 .large {
-  height: 60px;
-  width: 60px;
+  min-height: 60px;
 }

@@ -1,6 +1,10 @@
 @import "../helpers/mixins";
 @import "../helpers/variables";
 
+.btn {
+  border: none;
+}
+
 .btn-primary {
   height: 30px;
   min-width: 30px;
@@ -12,7 +16,7 @@
   @include font-numb;
   color: $primary-text-color;
   &:hover, &:focus {
-    border-color: #f3ebeb;
+    border: none;
     background-color: $hover-color-bg;
     color: $hover-text-color;
   }

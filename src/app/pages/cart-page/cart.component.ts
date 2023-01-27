@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { DialogComponent } from '@shared/components/modals/dialog/dialog.component';
 import { WithDestroy } from '@shared/mixins/destroy';
 import { takeUntil } from 'rxjs/operators';
+import { ButtonSize } from '@shared/components/button/button';
 
 @Component({
   selector: 'app-cart',
@@ -14,6 +15,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class CartComponent extends WithDestroy() implements OnInit {
   public items: Product[] = [];
+  public ButtonSize: typeof ButtonSize = ButtonSize;
 
   constructor(
     private cartService: CartService,

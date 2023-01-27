@@ -2,14 +2,10 @@
 @import "../../../assets/styles/helpers/variables";
 @import "../../../assets/styles/components/buttons";
 
-.custom_button {
-  padding: 10px 20px;
-  @include font-numb;
-  color: $secondary-text-color;
-}
 .mat-card:not([class*="mat-elevation-z"]) {
   box-shadow: $inner-shadow;
 }
+
 mat-card {
   padding: 10px 15px;
   border-radius: 10px;
@@ -34,7 +30,6 @@ mat-card {
   }
   .products-image {
     width: 70px;
-    //max-width: 600px;
     height: 90px;
     background-image: url("../../../assets/images/404.jpeg");
     background-position: center;

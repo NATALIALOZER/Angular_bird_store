@@ -1,11 +1,13 @@
 <div class="d-flex justify-content-between pt-3 pb-3">
-  <button mat-button class="btn btn-primary shadow" [routerLink]="['/']">
-    <mat-icon aria-hidden="false" aria-label="back icon">arrow_back</mat-icon>
-  </button>
-  <button mat-button class="btn btn-primary shadow custom_button">
-    Read about shipment ...
-  </button>
+  <app-button icon_name='arrow_back'
+              [size]='ButtonSize.SMALL'
+              [routerLink]="['/']"
+  ></app-button>
+  <app-button [size]='ButtonSize.SMALL' routerLink="/">
+    <span class='p-2'>Read about shipment ...</span>
+  </app-button>
 </div>
+
 <div *ngFor="let item of items">
   <mat-card>
     <mat-card-content
@@ -21,53 +23,14 @@
       <div class="item-options">
         <span>{{ item.quantity }}</span>
         <span> item added </span>
-        <button
-          mat-icon-button
-          class="btn btn-primary rounded-3 shadow"
-          (click)="removeProduct(item)"
-        >
-          <mat-icon [inline]="true">remove</mat-icon>
-        </button>
+        <app-button icon_name='delete'
+                    [size]='ButtonSize.SMALL'
+                    (click)="removeProduct(item)"
+        ></app-button>
       </div>
-      <button
-        mat-icon-button
-        class="btn btn-primary rounded-3 shadow"
-        (click)="toPayment()"
-      >
-        ORDER
-      </button>
+      <app-button [size]='ButtonSize.SMALL' (click)="toPayment()">
+        <span class='p-2'>ORDER</span>
+      </app-button>
     </mat-card-content>
   </mat-card>
 </div>
-
-<!--
-pay options dialog-1
-<div class="dialog">
-  <div class="dialog_content" #payOptions>
-    <button class="shadow long mb-5" (click)="changeDialog(payment.outerHTML)" mat-dialog-close>
-      <span>Pay by Card</span>
-    </button>
-    <div class="d-flex mb-5 justify-content-between">
-      <button class="shadow">
-        <img src="#" alt="">
-      </button>
-      <button class="shadow">
-        <img src="#" alt="">
-      </button>
-      <button class="shadow">
-        <img src="#" alt="">
-      </button>
-    </div>
-    <button class="shadow long mb-5">
-      <span>Pay by Cash</span>
-    </button>
-  </div>
-
-  &lt;!&ndash;payment dialog-2&ndash;&gt;
-  <div class="dialog_content" #payment>
-    <button class="shadow long mb-5">
-      <span>Order</span>
-    </button>
-  </div>
-</div>
--->

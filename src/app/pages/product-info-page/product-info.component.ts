@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ButtonSize } from '@shared/components/button/button';
 
 @Component({
   selector: 'app-product',
@@ -6,4 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./product-info.component.scss'],
 })
 export class ProductInfoComponent {
+  public ButtonSize: typeof ButtonSize = ButtonSize;
 }

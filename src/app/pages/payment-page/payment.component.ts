@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ButtonSize } from '@shared/components/button/button';
 
 @Component({
   selector: 'app-payment-page',
@@ -6,4 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./payment.component.scss'],
 })
 export class PaymentComponent {
+  public ButtonSize: typeof ButtonSize = ButtonSize;
 }

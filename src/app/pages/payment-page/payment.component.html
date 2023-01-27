@@ -1,21 +1,26 @@
 <mat-card>
-  <mat-card-content class="d-flex w-100 flex-column">
-    <button mat-button class="shadow long mb-5 custom_button" mat-dialog-close>
-      <span>Pay by Card</span>
-    </button>
-    <div class="d-flex mb-5 justify-content-between">
-      <button mat-button class="shadow">
-        <img src="../../../assets/images/google-pay.png" alt="" />
-      </button>
-      <button mat-button class="shadow">
-        <img src="../../../assets/images/apple-pay.png" alt="" />
-      </button>
+  <mat-card-content class="d-flex w-100 flex-column gap-5">
+    <app-button mat-dialog-close='' [size]='ButtonSize.SMALL'>
+      <span class='p-2'>Pay by Card</span>
+    </app-button>
+    <div class="d-flex justify-content-between">
+      <app-button [size]='ButtonSize.LARGE'>
+        <div class='pe-3 ps-3'>
+          <img src="../../../assets/images/google-pay.png" alt=""/>
+        </div>
+      </app-button>
+
+      <app-button [size]='ButtonSize.LARGE'>
+        <div class='pe-3 ps-3'>
+          <img src="../../../assets/images/apple-pay.png" alt="" />
+        </div>
+      </app-button>
       <button mat-button class="shadow">
         <img src="#" alt="" />
       </button>
     </div>
-    <button mat-button class="shadow long mb-5 custom_button">
-      <span>Pay by Cash</span>
-    </button>
+    <app-button [size]='ButtonSize.LARGE' class='d-grid'>
+      <span class='pe-3 ps-3'>Pay by Cash</span>
+    </app-button>
   </mat-card-content>
 </mat-card>

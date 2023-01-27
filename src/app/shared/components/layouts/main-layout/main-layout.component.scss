@@ -39,7 +39,7 @@ mat-list {
   flex-direction: column;
   /*padding-bottom: 25px;*/
   @include font-menu;
-  background-color: $secondary-color-bg;
+  background-color: transparent;
 }
 ::ng-deep .mat-list-base .mat-list-item .mat-list-item-content {
   justify-content: space-around;
