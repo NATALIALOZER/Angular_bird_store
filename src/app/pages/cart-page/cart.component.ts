@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '@shared/services/cart.service';
 import { Product } from '@shared/common_types/interfaces';
-import { MatDialog } from '@angular/material/dialog';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { Router } from '@angular/router';
 import { DialogComponent } from '@shared/components/modals/dialog/dialog.component';
 import { WithDestroy } from '@shared/mixins/destroy';
