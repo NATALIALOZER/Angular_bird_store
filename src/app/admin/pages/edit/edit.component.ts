@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { ProductService } from '@shared/services/product.service';
-import { switchMap, takeUntil } from 'rxjs/operators';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { AlertService } from '../../shared/services/alert.service';
 import { Product } from '@shared/common_types/interfaces';
 import { WithDestroy } from '@shared/mixins/destroy';
 import { IEditForm } from './types/edit';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute, Params } from '@angular/router';
+import { ProductService } from '@shared/services/product.service';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit',
