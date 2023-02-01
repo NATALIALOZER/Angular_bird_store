@@ -11,6 +11,8 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '@shared/interceptors/auth.interceptor';
 import { AdminModule } from './admin/admin.module';
 import { PaymentComponent } from './pages/payment-page/payment.component';
+import { StoreModule } from '@ngrx/store';
+import { cartReducer } from './state/cart/cart.reducer';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -27,7 +29,14 @@ const INTERCEPTOR_PROVIDER: Provider = {
     ProductInfoComponent,
     PaymentComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, SharedModule, AdminModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    SharedModule,
+    AdminModule,
+    // EffectsModule.forFeature([CartEffects]),
+    StoreModule.forRoot({ cartEntries: cartReducer }),
+  ],
   providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent],
 })

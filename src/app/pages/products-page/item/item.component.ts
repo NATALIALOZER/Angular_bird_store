@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '@shared/common_types/interfaces';
-import { CartService } from '@shared/services/cart.service';
+// import { CartService } from '@shared/services/cart.service';
 import { ButtonSize } from '@shared/components/button/button';
 import { FormControl, FormGroup } from '@angular/forms';
 import { IItemForm } from '../types/item';
+import { Store } from '@ngrx/store';
+import { addProduct } from '../../../state/cart/cart.actions';
 
 @Component({
   selector: 'app-item',
@@ -17,15 +19,19 @@ export class ItemComponent implements OnInit {
   public quantityForm!: FormGroup<IItemForm>;
   public ButtonSize: typeof ButtonSize = ButtonSize;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    // private cartService: CartService,
+    private store: Store
+  ) {}
 
   ngOnInit(): void {
     this.buildForm();
-    this.checkInCart();
+    // this.checkInCart();
   }
 
   public addToCart(product: Product, quantity: string): void {
-    this.cartService.addToCart(product, quantity);
+    // this.cartService.addToCart(product, quantity);
+    this.store.dispatch(addProduct({ product, quantity }));
   }
 
   public decreaseValue(): void {
@@ -49,9 +55,9 @@ export class ItemComponent implements OnInit {
     });
   }
 
-  private checkInCart(): void {
+  /*private checkInCart(): void {
     const item = this.cartService.getProduct(this.product);
     this.form.quantity.setValue(item?.quantity || 1);
     setTimeout(() => this.form.checkedCart.setValue(!!item), 0);
-  }
+  }*/
 }
