@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '@shared/services/cart.service';
-import { Product } from '@shared/common_types/interfaces';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { Product, ProductGroup } from '@shared/common_types/interfaces';
 import { Router } from '@angular/router';
 import { DialogComponent } from '@shared/components/modals/dialog/dialog.component';
 import { WithDestroy } from '@shared/mixins/destroy';
@@ -13,11 +11,9 @@ import {
   clearCart,
   removeProduct,
 } from '../../state/cart/cart.actions';
-import {
-  ProductGroup,
-  selectGroupedCartEntries,
-} from '../../state/cart/cart.selectors';
+import { selectGroupedCartEntries } from '../../state/cart/cart.selectors';
 import { Observable } from 'rxjs';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 
 @Component({
   selector: 'app-cart',
@@ -40,7 +36,6 @@ export class CartComponent extends WithDestroy() implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.items = this.cartService.getItems();
     this.cartEntries$ = this.store.select(selectGroupedCartEntries);
   }
 

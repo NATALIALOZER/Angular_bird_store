@@ -12,3 +12,8 @@ export interface Product {
   imageUrl: string;
   quantity?: number;
 }
+
+export interface ProductGroup {
+  product: Product;
+  count: number;
+}

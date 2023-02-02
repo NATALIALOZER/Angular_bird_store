@@ -1,10 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { Product } from '@shared/common_types/interfaces';
-
-export interface ProductGroup {
-  product: Product;
-  count: number;
-}
+import { Product, ProductGroup } from '@shared/common_types/interfaces';
 
 export const selectCountProducts = createSelector(
   createFeatureSelector('cartEntries'),

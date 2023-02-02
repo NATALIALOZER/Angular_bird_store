@@ -8,6 +8,7 @@ import { LoadingService } from '@shared/components/loading/loading.service';
 import { takeUntil } from 'rxjs/operators';
 import { LoadingIndicator } from './types/products';
 import { WithDestroy } from '@shared/mixins/destroy';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-products',
@@ -25,13 +26,13 @@ export class ProductsComponent extends WithDestroy() implements OnInit {
   public productsArray: Product[] = [];
   public page: string | number = 1;
   public productsPerPage: number = this.value;
-
   public search = '';
 
   constructor(
     public loadingService: LoadingService,
     private productService: ProductService,
-    private cartService: CartService
+    private cartService: CartService,
+    private store: Store
   ) {
     super();
     this.products$ = this.productService.getAll();
@@ -41,9 +42,7 @@ export class ProductsComponent extends WithDestroy() implements OnInit {
     this.loadingService
       .doLoading(this.products$, this, LoadingIndicator.OPERATOR)
       .pipe(takeUntil(this.destroy$))
-      .subscribe(res => {
-        this.productsArray = res;
-      });
+      .subscribe(res => (this.productsArray = res));
     this.cartService.getItems();
   }
 
