@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Product, ProductGroup } from '@shared/common_types/interfaces';
+import { IProduct, IProductGroup } from '@shared/common_types/interfaces';
 import { Router } from '@angular/router';
 import { DialogComponent } from '@shared/components/modals/dialog/dialog.component';
 import { WithDestroy } from '@shared/mixins/destroy';
@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import {
   addProduct,
   clearCart,
+  removeAllProducts,
   removeProduct,
 } from '../../state/cart/cart.actions';
 import { selectGroupedCartEntries } from '../../state/cart/cart.selectors';
@@ -21,9 +22,7 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent extends WithDestroy() implements OnInit {
-  // public items: Product[] = [];
-
-  public cartEntries$: Observable<ProductGroup[]>;
+  public cartEntries$: Observable<IProductGroup[]>;
   public ButtonSize: typeof ButtonSize = ButtonSize;
 
   constructor(
@@ -39,7 +38,7 @@ export class CartComponent extends WithDestroy() implements OnInit {
     this.cartEntries$ = this.store.select(selectGroupedCartEntries);
   }
 
-  public removeProduct(product: Product): void {
+  public removeProduct(product: IProduct): void {
     // this.cartService.removeFromCart(product);
     // this.items = this.items.filter(item => item.id !== product.id);
   }
@@ -49,7 +48,7 @@ export class CartComponent extends WithDestroy() implements OnInit {
   }
 
   public oneMore(entry: any): void {
-    this.store.dispatch(addProduct(entry.product));
+    this.store.dispatch(addProduct({ product: entry.product, quantity: '1' }));
   }
 
   public oneLess(entry: any): void {

@@ -10,7 +10,7 @@ import { AlertService } from '../../shared/services/alert.service';
 import { takeUntil } from 'rxjs/operators';
 import { ICreateForm, ImageSnippet } from './types/icreate-form';
 import { WithDestroy } from '@shared/mixins/destroy';
-import { Product } from '@shared/common_types/interfaces';
+import { IProduct } from '@shared/common_types/interfaces';
 
 @Component({
   selector: 'app-create',
@@ -45,7 +45,7 @@ export class CreateComponent extends WithDestroy() implements OnInit {
       return;
     }
     if (this.selected) {
-      const product: Product = {
+      const product: IProduct = {
         ...this.createForm.value,
         id: this.createForm.value.name,
         imageUrl: this.selectedFile.src,

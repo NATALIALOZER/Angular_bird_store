@@ -19,6 +19,7 @@
         : 'url(../../../../assets/images/404.jpeg)'
     }"
     ></mat-card-content>
+    <mat-card-content>{{item.product.description}}</mat-card-content>
     <mat-card-content>
       <div class="item-options">
 
@@ -48,5 +49,7 @@
   </mat-card>
 </div>
 <div>
-  <button class="clear-button action-button" (click)="clearCart()">REMOVE ALL</button>
+  <app-button [size]='ButtonSize.SMALL' (click)="clearCart()">
+    <span class='p-2'>REMOVE ALL</span>
+  </app-button>
 </div>

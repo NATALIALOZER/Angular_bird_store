@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subject, throwError } from 'rxjs';
-import { User } from '@shared/common_types/interfaces';
+import { IUser } from '@shared/common_types/interfaces';
 import { environment } from '../../../../environments/environment';
 import { catchError } from 'rxjs/operators';
 import { fbAuthResponse } from './services_types/auth-service';
@@ -21,7 +21,7 @@ export class AuthService {
     return <string>localStorage.getItem('fb-token');
   }
 
-  public login(user: User): Observable<any> {
+  public login(user: IUser): Observable<any> {
     user.returnSecureToken = true;
 
     return this.http

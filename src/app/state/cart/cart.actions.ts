@@ -1,12 +1,18 @@
 import { createAction, props } from '@ngrx/store';
-import { Product } from '@shared/common_types/interfaces';
+import { IProduct } from '@shared/common_types/interfaces';
 
 export const clearCart = createAction('[Cart] Clear Cart');
 export const addProduct = createAction(
   '[Cart] Add Product',
-  props<{ product: Product; quantity: string }>()
+  props<{ product: IProduct; quantity: string }>()
 );
+
 export const removeProduct = createAction(
-  '[Cart] Remove Product',
-  props<Product>()
+  '[Cart] Remove One Product',
+  props<IProduct>()
+);
+
+export const removeAllProducts = createAction(
+  '[Cart] Remove All Products',
+  props<IProduct>()
 );

@@ -1,10 +1,10 @@
-export interface User {
+export interface IUser {
   email: string;
   password: string;
   returnSecureToken?: boolean;
 }
 
-export interface Product {
+export interface IProduct {
   id: string;
   name: string;
   description: string;
@@ -13,7 +13,7 @@ export interface Product {
   quantity?: number;
 }
 
-export interface ProductGroup {
-  product: Product;
+export interface IProductGroup {
+  product: IProduct;
   count: number;
 }

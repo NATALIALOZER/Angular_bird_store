@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../shared/services/auth.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { User } from '@shared/common_types/interfaces';
+import { IUser } from '@shared/common_types/interfaces';
 import { WithDestroy } from '@shared/mixins/destroy';
 import { takeUntil } from 'rxjs/operators';
 import { ILoginForm } from './types/login';
@@ -55,10 +55,10 @@ export class LoginComponent extends WithDestroy() implements OnInit {
 
     this.submitted = true;
 
-    const user: User = {
+    const user: IUser = {
       email: this.form.value.email,
       password: this.form.value.password,
-    } as User;
+    } as IUser;
 
     this.auth
       .login(user)

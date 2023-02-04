@@ -1,37 +1,42 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Product } from '@shared/common_types/interfaces';
-// import { CartService } from '@shared/services/cart.service';
+import { IProduct } from '@shared/common_types/interfaces';
 import { ButtonSize } from '@shared/components/button/button';
 import { FormControl, FormGroup } from '@angular/forms';
 import { IItemForm } from '../types/item';
 import { Store } from '@ngrx/store';
-import { addProduct } from '../../../state/cart/cart.actions';
+import {
+  addProduct,
+  removeAllProducts,
+} from '../../../state/cart/cart.actions';
+import { WithDestroy } from '@shared/mixins/destroy';
+import { timer } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-item',
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
 })
-export class ItemComponent implements OnInit {
-  @Input() public product!: Product;
+export class ItemComponent extends WithDestroy() implements OnInit {
+  @Input() public product: IProduct;
+  @Input() public quantityById: Map<string, number>;
   @Input() public value = 5;
 
   public quantityForm!: FormGroup<IItemForm>;
   public ButtonSize: typeof ButtonSize = ButtonSize;
 
-  constructor(
-    // private cartService: CartService,
-    private store: Store
-  ) {}
+  constructor(private store: Store) {
+    super();
+  }
 
   ngOnInit(): void {
     this.buildForm();
-    // this.checkInCart();
   }
 
-  public addToCart(product: Product, quantity: string): void {
-    // this.cartService.addToCart(product, quantity);
-    this.store.dispatch(addProduct({ product, quantity }));
+  public manageCart(product: IProduct, quantity: string): void {
+    this.form.checkedCart.value
+      ? this.store.dispatch(removeAllProducts(product))
+      : this.store.dispatch(addProduct({ product, quantity }));
   }
 
   public decreaseValue(): void {
@@ -50,14 +55,16 @@ export class ItemComponent implements OnInit {
 
   private buildForm(): void {
     this.quantityForm = new FormGroup<IItemForm>({
-      quantity: new FormControl(1, { nonNullable: true }),
+      quantity: new FormControl(this.quantityById.get(this.product.id) || 1, {
+        nonNullable: true,
+      }),
       checkedCart: new FormControl(false, { nonNullable: true }),
     });
-  }
 
-  /*private checkInCart(): void {
-    const item = this.cartService.getProduct(this.product);
-    this.form.quantity.setValue(item?.quantity || 1);
-    setTimeout(() => this.form.checkedCart.setValue(!!item), 0);
-  }*/
+    timer(0)
+      .pipe(take(1))
+      .subscribe(() =>
+        this.form.checkedCart.setValue(!!this.quantityById.get(this.product.id))
+      );
+  }
 }
