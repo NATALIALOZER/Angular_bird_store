@@ -8,24 +8,38 @@
   </app-button>
 </div>
 
-<div *ngFor="let item of items">
+<div *ngFor="let item of ( cartEntries$ | async )">
   <mat-card>
     <mat-card-content
       class="products-image"
-      [routerLink]="['/product-info-page', item.id]"
+      [routerLink]="['/product-info-page', item.product.id]"
       [ngStyle]="{
-        'background-image': item.imageUrl
-          ? 'url(' + item.imageUrl + ')'
-          : 'url(../../../../assets/images/404.jpeg)'
-      }"
+      'background-image': item.product.imageUrl
+        ? 'url(' + item.product.imageUrl + ')'
+        : 'url(../../../../assets/images/404.jpeg)'
+    }"
     ></mat-card-content>
+    <mat-card-content>{{item.product.description}}</mat-card-content>
     <mat-card-content>
       <div class="item-options">
-        <span>{{ item.quantity }}</span>
+
         <span> item added </span>
+
+        <app-button (click)="oneLess(item)"
+                    icon_name='chevron_left'
+                    [size]='ButtonSize.SMALL'
+        ></app-button>
+
+        <span>{{ item.count }}</span>
+
+        <app-button (click)="oneMore(item)"
+                    icon_name='chevron_right'
+                    [size]='ButtonSize.SMALL'
+        ></app-button>
+
         <app-button icon_name='delete'
                     [size]='ButtonSize.SMALL'
-                    (click)="removeProduct(item)"
+                    (click)="removeProduct(item.product)"
         ></app-button>
       </div>
       <app-button [size]='ButtonSize.SMALL' (click)="toPayment()">
@@ -33,4 +47,9 @@
       </app-button>
     </mat-card-content>
   </mat-card>
+</div>
+<div>
+  <app-button [size]='ButtonSize.SMALL' (click)="clearCart()">
+    <span class='p-2'>REMOVE ALL</span>
+  </app-button>
 </div>

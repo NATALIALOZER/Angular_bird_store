@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '@shared/services/product.service';
 import { AlertService } from '../../shared/services/alert.service';
-import { Product } from '@shared/common_types/interfaces';
+import { IProduct } from '@shared/common_types/interfaces';
 import { WithDestroy } from '@shared/mixins/destroy';
 import { takeUntil } from 'rxjs/operators';
 
@@ -11,7 +11,7 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent extends WithDestroy() implements OnInit {
-  public products: Product[] = [];
+  public products: IProduct[] = [];
   public searchStr = '';
 
   constructor(

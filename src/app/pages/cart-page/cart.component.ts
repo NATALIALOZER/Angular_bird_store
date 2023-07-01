@@ -1,12 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '@shared/services/cart.service';
-import { Product } from '@shared/common_types/interfaces';
-import { MatDialog } from '@angular/material/dialog';
+import { IProduct, IProductGroup } from '@shared/common_types/interfaces';
 import { Router } from '@angular/router';
 import { DialogComponent } from '@shared/components/modals/dialog/dialog.component';
 import { WithDestroy } from '@shared/mixins/destroy';
 import { takeUntil } from 'rxjs/operators';
 import { ButtonSize } from '@shared/components/button/button';
+import { Store } from '@ngrx/store';
+import {
+  addProduct,
+  clearCart,
+  removeAllProducts,
+  removeProduct,
+} from '../../state/cart/cart.actions';
+import { selectGroupedCartEntries } from '../../state/cart/cart.selectors';
+import { Observable } from 'rxjs';
+import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 
 @Component({
   selector: 'app-cart',
@@ -14,24 +22,37 @@ import { ButtonSize } from '@shared/components/button/button';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent extends WithDestroy() implements OnInit {
-  public items: Product[] = [];
+  public cartEntries$: Observable<IProductGroup[]>;
   public ButtonSize: typeof ButtonSize = ButtonSize;
 
   constructor(
-    private cartService: CartService,
+    // private cartService: CartService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private store: Store
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.items = this.cartService.getItems();
+    this.cartEntries$ = this.store.select(selectGroupedCartEntries);
   }
 
-  public removeProduct(product: Product): void {
-    this.cartService.removeFromCart(product);
-    this.items = this.items.filter(item => item.id !== product.id);
+  public removeProduct(product: IProduct): void {
+    // this.cartService.removeFromCart(product);
+    // this.items = this.items.filter(item => item.id !== product.id);
+  }
+
+  public clearCart(): void {
+    this.store.dispatch(clearCart());
+  }
+
+  public oneMore(entry: any): void {
+    this.store.dispatch(addProduct({ product: entry.product, quantity: '1' }));
+  }
+
+  public oneLess(entry: any): void {
+    this.store.dispatch(removeProduct(entry.product));
   }
 
   public openDialog(): void {

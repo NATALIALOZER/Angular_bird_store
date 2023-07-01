@@ -3,16 +3,16 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { map } from 'rxjs/operators';
-import { Product } from '../common_types/interfaces';
+import { IProduct } from '../common_types/interfaces';
 import { FbCreateResponse } from '@shared/services/services_types/product-service';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
   constructor(private http: HttpClient) {}
 
-  public create(product: Product): Observable<Product> {
+  public create(product: IProduct): Observable<IProduct> {
     return this.http
-      .post<Product>(`${environment.fbDbUrl}/products.json`, product)
+      .post<IProduct>(`${environment.fbDbUrl}/products.json`, product)
       .pipe(
         map((response: FbCreateResponse) => {
           return { ...product, id: response.name, name: product.name };
@@ -20,9 +20,9 @@ export class ProductService {
       );
   }
 
-  public getAll(): Observable<Product[]> {
+  public getAll(): Observable<IProduct[]> {
     return this.http
-      .get<Product[]>(`${environment.fbDbUrl}/products.json`)
+      .get<IProduct[]>(`${environment.fbDbUrl}/products.json`)
       .pipe(
         map((response: { [key: string]: any }) => {
           return Object.keys(response).map(key => ({
@@ -34,18 +34,18 @@ export class ProductService {
       );
   }
 
-  public getById(id: string): Observable<Product> {
+  public getById(id: string): Observable<IProduct> {
     return this.http
-      .get<Product>(`${environment.fbDbUrl}/products/${id}.json`)
+      .get<IProduct>(`${environment.fbDbUrl}/products/${id}.json`)
       .pipe(
-        map((product: Product) => {
+        map((product: IProduct) => {
           return { ...product, id, name: product.name };
         })
       );
   }
 
-  public update(product: Product): Observable<Product> {
-    return this.http.patch<Product>(
+  public update(product: IProduct): Observable<IProduct> {
+    return this.http.patch<IProduct>(
       `${environment.fbDbUrl}/products/${product.id}.json`,
       product
     );

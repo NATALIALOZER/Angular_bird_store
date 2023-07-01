@@ -1,16 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../common_types/interfaces';
+import { IProduct } from '../common_types/interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  public items: Product[] = [];
+  public items: IProduct[] = [];
 
-  public addToCart(product: Product, q: string): void {
+  public addToCart(product: IProduct, q: string): void {
     let isInCart = undefined;
     if (this.items) {
-      isInCart = this.items.find((item: Product) => product.id === item.id);
+      isInCart = this.items.find((item: IProduct) => product.id === item.id);
     }
     product = { ...product, quantity: Number(q) };
     if (isInCart) {
@@ -21,24 +21,24 @@ export class CartService {
     }
   }
 
-  public removeFromCart(product: Product): void {
-    this.items = this.items.filter((item: Product) => item.id !== product.id);
+  public removeFromCart(product: IProduct): void {
+    this.items = this.items.filter((item: IProduct) => item.id !== product.id);
     localStorage.setItem('ItemsInCart', JSON.stringify(this.items));
   }
 
-  public getItems(): Product[] {
+  public getItems(): IProduct[] {
     const cartData = JSON.parse(localStorage.getItem('ItemsInCart') as string);
     this.items = cartData || [];
     return cartData;
   }
 
-  public getProduct(product: Product): Product | undefined {
+  public getProduct(product: IProduct): IProduct | undefined {
     return this.items
       ? this.items.find(item => item.id === product.id)
       : undefined;
   }
 
-  public clearCart(): Product[] {
+  public clearCart(): IProduct[] {
     this.items = [];
     localStorage.setItem('ItemsInCart', JSON.stringify(this.items));
     return this.items;

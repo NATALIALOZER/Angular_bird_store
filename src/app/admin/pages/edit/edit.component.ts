@@ -1,13 +1,13 @@
+import { AlertService } from '../../shared/services/alert.service';
+import { IProduct } from '@shared/common_types/interfaces';
+import { WithDestroy } from '@shared/mixins/destroy';
+import { IEditForm } from './types/edit';
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from '@shared/services/product.service';
 import { switchMap, takeUntil } from 'rxjs/operators';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { AlertService } from '../../shared/services/alert.service';
-import { Product } from '@shared/common_types/interfaces';
-import { WithDestroy } from '@shared/mixins/destroy';
-import { IEditForm } from './types/edit';
 
 @Component({
   selector: 'app-edit',
@@ -16,7 +16,7 @@ import { IEditForm } from './types/edit';
 })
 export class EditComponent extends WithDestroy() implements OnInit {
   public editForm: FormGroup<IEditForm>;
-  public product: Product;
+  public product: IProduct;
   public submitted = false;
   private updateSubscription: Subscription = new Subscription();
 
@@ -36,7 +36,7 @@ export class EditComponent extends WithDestroy() implements OnInit {
         }),
         takeUntil(this.destroy$)
       )
-      .subscribe((product: Product) => {
+      .subscribe((product: IProduct) => {
         this.product = product;
         this.editForm = new FormGroup<IEditForm>({
           name: new FormControl(product.name, [Validators.required]),
@@ -57,7 +57,7 @@ export class EditComponent extends WithDestroy() implements OnInit {
         ...this.product,
         name: this.editForm.value.name,
         price: this.editForm.value.price,
-      } as Product)
+      } as IProduct)
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         this.submitted = false;
