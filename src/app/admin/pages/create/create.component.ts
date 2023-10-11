@@ -5,7 +5,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { ProductService } from '@shared/services/product.service';
+import { ProductsService } from '../../../pages/products-page/products.service';
 import { AlertService } from '../../shared/services/alert.service';
 import { takeUntil } from 'rxjs/operators';
 import { ICreateForm, ImageSnippet } from './types/icreate-form';
@@ -26,7 +26,7 @@ export class CreateComponent extends WithDestroy() implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private productService: ProductService,
+    private productService: ProductsService,
     private alert: AlertService
   ) {
     super();

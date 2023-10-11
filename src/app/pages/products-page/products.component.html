@@ -3,13 +3,6 @@
 <app-custom-slider (changePageCapacity)="onPagination($event)" [value]='value'>
 </app-custom-slider>
 
-<!--<div class="row">
-  <div class="col bg-transparent mt-3">
-    <a class="text-secondary">cute items</a>
-  </div>
-</div>-->
-
-<!--pagination-->
 <div [appIsLoading]="loadingService.isLoading(this, LoadingIndicator.OPERATOR)">
   <div class="row">
     <app-item
@@ -27,12 +20,19 @@
       "
       [product]="product"
     ></app-item>
-    <pagination-controls
+
+    <div *ngIf="products$ | async as products">
+      {{ products | json }}
+    </div>
+
+
+    <!--pagination-->
+<!--    <pagination-controls
       previousLabel=""
       nextLabel=""
       (pageChange)="page = $event"
       class="paginator-custom"
-    ></pagination-controls>
+    ></pagination-controls>-->
   </div>
 </div>
 

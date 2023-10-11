@@ -24,6 +24,8 @@
         <img *ngIf="checked" src='../../../../../assets/images/Bird-logo2.png' alt="logo"/>
       </a>
 
+      <span>{{countCart$ | async}}</span>
+
       <app-button [buttonType]='ButtonType.CONTRAST'
                   [checked]='checked'
                   routerLink="/cart">

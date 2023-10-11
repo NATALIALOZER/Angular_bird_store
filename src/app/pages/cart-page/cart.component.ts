@@ -9,7 +9,8 @@ import { Store } from '@ngrx/store';
 import {
   addProduct,
   clearCart,
-  removeAllProducts,
+  loadCart,
+  removeAllEntriesOfProduct,
   removeProduct,
 } from '../../state/cart/cart.actions';
 import { selectGroupedCartEntries } from '../../state/cart/cart.selectors';
@@ -22,11 +23,10 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent extends WithDestroy() implements OnInit {
-  public cartEntries$: Observable<IProductGroup[]>;
+  public cartEntries$: Observable<IProductGroup[]> = this.store.select(selectGroupedCartEntries);
   public ButtonSize: typeof ButtonSize = ButtonSize;
 
   constructor(
-    // private cartService: CartService,
     public dialog: MatDialog,
     private router: Router,
     private store: Store
@@ -35,12 +35,11 @@ export class CartComponent extends WithDestroy() implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cartEntries$ = this.store.select(selectGroupedCartEntries);
+    this.store.dispatch(loadCart());
   }
 
   public removeProduct(product: IProduct): void {
-    // this.cartService.removeFromCart(product);
-    // this.items = this.items.filter(item => item.id !== product.id);
+    this.store.dispatch(removeAllEntriesOfProduct(product));
   }
 
   public clearCart(): void {

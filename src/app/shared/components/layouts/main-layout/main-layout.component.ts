@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { ButtonSize, ButtonType } from '@shared/components/button/button';
+import { selectTotalPrice } from '../../../../state/cart/cart.selectors';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-main-layout',
@@ -12,4 +14,9 @@ export class MainLayoutComponent {
   /*checkbox*/
   public checked = false;
   public search = '';
+
+  public countCart$ = this.store.select(selectTotalPrice);
+
+  constructor(private store: Store) {
+  }
 }

@@ -6,7 +6,7 @@ import { IItemForm } from '../types/item';
 import { Store } from '@ngrx/store';
 import {
   addProduct,
-  removeAllProducts,
+  removeAllEntriesOfProduct,
 } from '../../../state/cart/cart.actions';
 import { WithDestroy } from '@shared/mixins/destroy';
 import { timer } from 'rxjs';
@@ -35,7 +35,7 @@ export class ItemComponent extends WithDestroy() implements OnInit {
 
   public manageCart(product: IProduct, quantity: string): void {
     this.form.checkedCart.value
-      ? this.store.dispatch(removeAllProducts(product))
+      ? this.store.dispatch(removeAllEntriesOfProduct(product))
       : this.store.dispatch(addProduct({ product, quantity }));
   }
 

@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '@shared/services/product.service';
+import { ProductsService } from './products.service';
 import { Observable } from 'rxjs';
 import { IProduct, IProductGroup } from '@shared/common_types/interfaces';
-import { CartService } from '@shared/services/cart.service';
 import { IPageSizeParams } from '@shared/components/custom-slider/types/slider.interface';
 import { LoadingService } from '@shared/components/loading/loading.service';
-import { takeUntil } from 'rxjs/operators';
+import { takeUntil, tap } from 'rxjs/operators';
 import { LoadingIndicator } from './types/products';
 import { WithDestroy } from '@shared/mixins/destroy';
 import { Store } from '@ngrx/store';
 import { selectGroupedCartEntries } from '../../state/cart/cart.selectors';
+import { selectAllProducts } from '../../state/products/products.selectors';
+import { loadProducts } from '../../state/products/products.actions';
 
 @Component({
   selector: 'app-products',
@@ -17,7 +18,7 @@ import { selectGroupedCartEntries } from '../../state/cart/cart.selectors';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent extends WithDestroy() implements OnInit {
-  public products$: Observable<IProduct[]>;
+  public products$: Observable<IProduct[]> = this.store.select(selectAllProducts);
 
   /*loader*/
   public LoadingIndicator = LoadingIndicator;
@@ -34,20 +35,19 @@ export class ProductsComponent extends WithDestroy() implements OnInit {
 
   constructor(
     public loadingService: LoadingService,
-    private productService: ProductService,
-    private cartService: CartService,
     private store: Store
   ) {
     super();
   }
 
   public ngOnInit(): void {
-    this.products$ = this.productService.getAll();
+    this.store.dispatch(loadProducts());
 
     this.loadingService
       .doLoading(this.products$, this, LoadingIndicator.OPERATOR)
       .pipe(takeUntil(this.destroy$))
-      .subscribe(res => (this.productsArray = res));
+      .subscribe((res: IProduct[]) => (this.productsArray = res));
+
     this.checkInCart();
   }
 

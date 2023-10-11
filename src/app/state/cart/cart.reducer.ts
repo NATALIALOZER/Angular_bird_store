@@ -1,40 +1,68 @@
 import { ActionReducer, INIT, UPDATE, createReducer, on } from '@ngrx/store';
 import * as CartActions from './cart.actions';
 import { IProduct } from '@shared/common_types/interfaces';
+import { CartState } from './cart-state.interface';
 
 export const cartFeatureKey = 'cart';
 
-export const initialCartState: IProduct[] = [];
+export const initialCartState: CartState = {
+  items: [],
+  status: ''
+};
 
 export const cartReducer = createReducer(
   initialCartState,
-  on(CartActions.clearCart, () => []),
+  on(CartActions.clearCart, (state: CartState) => ({...state, items: []})),
 
   on(
     CartActions.addProduct,
-    (entries, req: { product: IProduct; quantity: string }) => {
-      const entriesClone: IProduct[] = JSON.parse(JSON.stringify(entries));
-      entriesClone.push(req.product);
+    (state: CartState, req: { product: IProduct; quantity: string }) => {
+      const entriesClone: CartState = JSON.parse(JSON.stringify(state));
+      entriesClone.items.push(req.product);
       for (const _ of Array(+req.quantity - 1).keys()) {
-        entriesClone.push(req.product);
+        entriesClone.items.push(req.product);
       }
       return entriesClone;
     }
   ),
 
-  on(CartActions.removeProduct, (entries, product) => {
-    const entriesClone: IProduct[] = JSON.parse(JSON.stringify(entries));
-    const clearArray = entriesClone.filter(item => item.id !== product.id);
-    const currentProducts = entriesClone.filter(item => item.id === product.id);
+  on(CartActions.removeProduct, (state: CartState, product: IProduct) => {
+    const entriesClone: CartState = JSON.parse(JSON.stringify(state));
+    const clearArray = entriesClone.items.filter((item: IProduct) => item.id !== product.id);
+    const currentProducts = entriesClone.items.filter((item: IProduct) => item.id === product.id);
     currentProducts.length = currentProducts.length - 1;
+    entriesClone.items = clearArray.concat(currentProducts)
 
-    return clearArray.concat(currentProducts);
+    return entriesClone;
   }),
 
-  on(CartActions.removeAllProducts, (entries, product) => {
-    const entriesClone: IProduct[] = JSON.parse(JSON.stringify(entries));
-    return entriesClone.filter(item => item.id !== product.id);
+  on(CartActions.removeAllEntriesOfProduct, (state: CartState, product: IProduct) => {
+    const entriesClone: CartState = JSON.parse(JSON.stringify(state));
+    entriesClone.items = entriesClone.items.filter((item: IProduct) => item.id !== product.id);
+    return entriesClone;
+  }),
+
+  on(CartActions.loadCart, (state: CartState) => {
+    return {...state, status: 'loading'}
+  }),
+
+  on(CartActions.loadCartSuccess, (state: CartState, cart) => {
+    return {
+      ...state,
+      cart: cart,
+      error: null,
+      status: 'success'
+    }
+  }),
+
+  on(CartActions.loadCartFailure, (state: CartState, error) => {
+    return {
+      ...state,
+      error: error,
+      status: 'error'
+    }
   })
+
 );
 
 export const metaReducerLocalStorage = (
@@ -54,11 +82,7 @@ export const metaReducerLocalStorage = (
     }
     const nextState = reducer(state, action);
     console.log('Products in cart NOW: ', nextState);
-    localStorage.setItem('state', JSON.stringify(nextState));
+    localStorage.setItem('cartEntries', JSON.stringify(nextState.cartEntries));
     return nextState;
   };
 };
-
-/*
-export const metaReducers: MetaReducer<any>[] = [debug];
-*/

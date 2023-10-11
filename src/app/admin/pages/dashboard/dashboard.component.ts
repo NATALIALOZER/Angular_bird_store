@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '@shared/services/product.service';
+import { ProductsService } from '../../../pages/products-page/products.service';
 import { AlertService } from '../../shared/services/alert.service';
 import { IProduct } from '@shared/common_types/interfaces';
 import { WithDestroy } from '@shared/mixins/destroy';
@@ -15,7 +15,7 @@ export class DashboardComponent extends WithDestroy() implements OnInit {
   public searchStr = '';
 
   constructor(
-    private productService: ProductService,
+    private productService: ProductsService,
     private alert: AlertService
   ) {
     super();

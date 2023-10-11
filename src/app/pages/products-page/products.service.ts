@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { Observable } from 'rxjs';
-import { environment } from '../../../environments/environment';
 import { map } from 'rxjs/operators';
-import { IProduct } from '../common_types/interfaces';
-import { FbCreateResponse } from '@shared/services/services_types/product-service';
+
+import { environment } from '../../../environments/environment';
+import { IProduct } from '@shared/common_types/interfaces';
+import { FbCreateResponse } from './types/product-service';
 
 @Injectable({ providedIn: 'root' })
-export class ProductService {
+export class ProductsService {
   constructor(private http: HttpClient) {}
 
   public create(product: IProduct): Observable<IProduct> {

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
-import { ProductService } from '@shared/services/product.service';
+import { ProductsService } from '../../../pages/products-page/products.service';
 import { switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
@@ -22,7 +22,7 @@ export class EditComponent extends WithDestroy() implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService,
+    private productService: ProductsService,
     private alert: AlertService
   ) {
     super();
