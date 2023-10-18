@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IProduct } from '@shared/common_types/interfaces';
 import { ButtonSize } from '@shared/components/button/button';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { IItemForm } from '../types/item';
 import { Store } from '@ngrx/store';
 import {
@@ -11,15 +11,32 @@ import {
 import { WithDestroy } from '@shared/mixins/destroy';
 import { timer } from 'rxjs';
 import { take } from 'rxjs/operators';
+import { MaterialModule } from '@shared/material/material.module';
+import { CurrencyPipe, NgClass, NgIf, NgStyle } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { ButtonComponent } from '@shared/components/button/button.component';
+import { ButtonCheckboxComponent } from '@shared/components/button-checkbox/button-checkbox.component';
 
 @Component({
   selector: 'app-item',
+  standalone: true,
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.scss'],
+  imports: [
+    MaterialModule,
+    NgClass,
+    RouterLink,
+    NgStyle,
+    ReactiveFormsModule,
+    ButtonComponent,
+    ButtonCheckboxComponent,
+    CurrencyPipe,
+    NgIf
+  ]
 })
 export class ItemComponent extends WithDestroy() implements OnInit {
-  @Input() public product: IProduct;
-  @Input() public quantityById: Map<string, number>;
+  @Input() public product!: IProduct;
+  @Input() public quantityById!: Map<string, number>;
   @Input() public value = 5;
 
   public quantityForm!: FormGroup<IItemForm>;

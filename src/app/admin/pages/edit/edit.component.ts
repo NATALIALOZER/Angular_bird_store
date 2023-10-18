@@ -3,16 +3,23 @@ import { IProduct } from '@shared/common_types/interfaces';
 import { WithDestroy } from '@shared/mixins/destroy';
 import { IEditForm } from './types/edit';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ProductsService } from '../../../pages/products-page/products.service';
 import { switchMap, takeUntil } from 'rxjs/operators';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-edit',
+  standalone: true,
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss'],
+  imports: [
+    ReactiveFormsModule,
+    NgClass,
+    NgIf
+  ]
 })
 export class EditComponent extends WithDestroy() implements OnInit {
   public editForm: FormGroup<IEditForm>;

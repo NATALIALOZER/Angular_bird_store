@@ -12,7 +12,8 @@ import { LoaderComponent } from './loader/loader.component';
 const OVERLAY_CLASS = 'loading-overlay';
 
 @Directive({
-  selector: '[appIsLoading]'
+  selector: '[appIsLoading]',
+  standalone: true
 })
 export class LoadingDirective implements OnChanges {
   @Input('appIsLoading')

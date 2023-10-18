@@ -20,7 +20,6 @@ export class ProductsEffects {
     this.actions$.pipe(
       ofType(loadProducts),
       switchMap(() => from(this.productsService.getAll()).pipe(
-        tap((e) => console.log(e)),
         map((products: IProduct[]) => loadProductsSuccess({ products: products })),
         catchError((error: Error) => of(loadProductsFailure({ error })))
       ))

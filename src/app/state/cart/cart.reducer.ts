@@ -28,8 +28,8 @@ export const cartReducer = createReducer(
 
   on(CartActions.removeProduct, (state: CartState, product: IProduct) => {
     const entriesClone: CartState = JSON.parse(JSON.stringify(state));
-    const clearArray = entriesClone.items.filter((item: IProduct) => item.id !== product.id);
-    const currentProducts = entriesClone.items.filter((item: IProduct) => item.id === product.id);
+    const clearArray = entriesClone.items?.filter((item: IProduct) => item.id !== product.id);
+    const currentProducts = entriesClone.items?.filter((item: IProduct) => item.id === product.id);
     currentProducts.length = currentProducts.length - 1;
     entriesClone.items = clearArray.concat(currentProducts)
 
@@ -38,7 +38,7 @@ export const cartReducer = createReducer(
 
   on(CartActions.removeAllEntriesOfProduct, (state: CartState, product: IProduct) => {
     const entriesClone: CartState = JSON.parse(JSON.stringify(state));
-    entriesClone.items = entriesClone.items.filter((item: IProduct) => item.id !== product.id);
+    entriesClone.items = entriesClone.items?.filter((item: IProduct) => item.id !== product.id);
     return entriesClone;
   }),
 

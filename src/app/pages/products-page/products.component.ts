@@ -1,20 +1,41 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+
 import { Observable } from 'rxjs';
-import { IProduct, IProductGroup } from '@shared/common_types/interfaces';
-import { IPageSizeParams } from '@shared/components/custom-slider/types/slider.interface';
-import { LoadingService } from '@shared/components/loading/loading.service';
 import { takeUntil } from 'rxjs/operators';
-import { LoadingIndicator } from './types/products';
-import { WithDestroy } from '@shared/mixins/destroy';
+
+import { NgxPaginationModule } from 'ngx-pagination';
+
 import { Store } from '@ngrx/store';
 import { selectGroupedCartEntries } from '../../state/cart/cart.selectors';
 import { selectAllProducts } from '../../state/products/products.selectors';
 import { loadProducts } from '../../state/products/products.actions';
 
+import { WithDestroy } from '@shared/mixins/destroy';
+import { SearchInputComponent } from '@shared/components/search-input/search-input.component';
+import { IPageSizeParams } from '@shared/components/custom-slider/types/slider.interface';
+import { CustomSliderComponent } from '@shared/components/custom-slider/custom-slider.component';
+import { LoadingDirective } from '@shared/components/loading/loading.directive';
+import { LoadingService } from '@shared/components/loading/loading.service';
+import { IProduct, IProductGroup } from '@shared/common_types/interfaces';
+import { ItemComponent } from './item/item.component';
+import { LoadingIndicator } from './types/products';
+import { SearchPipe } from '../../admin/shared/pipes/search.pipe';
+
 @Component({
   selector: 'app-products',
+  standalone: true,
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
+  imports: [
+    SearchInputComponent,
+    CustomSliderComponent,
+    LoadingDirective,
+    NgxPaginationModule,
+    ItemComponent,
+    CommonModule,
+    SearchPipe,
+  ]
 })
 export class ProductsComponent extends WithDestroy() implements OnInit {
   public products$: Observable<IProduct[]> = this.store.select(selectAllProducts);

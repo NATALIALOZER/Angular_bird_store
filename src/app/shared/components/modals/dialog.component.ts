@@ -1,10 +1,15 @@
 import { Component, HostListener, Inject } from '@angular/core';
 import { MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA, MatLegacyDialogRef as MatDialogRef } from '@angular/material/legacy-dialog';
+import { MaterialModule } from '@shared/material/material.module';
 
 @Component({
   selector: 'app-dialog',
+  standalone: true,
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
+  imports: [
+    MaterialModule
+  ]
 })
 export class DialogComponent {
   constructor(

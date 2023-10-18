@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormGroup,
+  FormGroup, ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
 import { ProductsService } from '../../../pages/products-page/products.service';
@@ -11,11 +11,21 @@ import { takeUntil } from 'rxjs/operators';
 import { ICreateForm, ImageSnippet } from './types/icreate-form';
 import { WithDestroy } from '@shared/mixins/destroy';
 import { IProduct } from '@shared/common_types/interfaces';
+import { MaterialModule } from '@shared/material/material.module';
+import { NgClass, NgIf, NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-create',
+  standalone: true,
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.scss'],
+  imports: [
+    ReactiveFormsModule,
+    MaterialModule,
+    NgClass,
+    NgIf,
+    NgStyle
+  ]
 })
 export class CreateComponent extends WithDestroy() implements OnInit {
   @Output() public imageSnippetEventEmitter: EventEmitter<ImageSnippet> =

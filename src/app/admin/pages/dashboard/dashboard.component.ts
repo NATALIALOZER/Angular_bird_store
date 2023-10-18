@@ -4,11 +4,23 @@ import { AlertService } from '../../shared/services/alert.service';
 import { IProduct } from '@shared/common_types/interfaces';
 import { WithDestroy } from '@shared/mixins/destroy';
 import { takeUntil } from 'rxjs/operators';
+import { FormsModule } from '@angular/forms';
+import { NgForOf, NgIf } from '@angular/common';
+import { SearchPipe } from '../../shared/pipes/search.pipe';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
+  standalone: true,
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
+  imports: [
+    FormsModule,
+    NgIf,
+    SearchPipe,
+    NgForOf,
+    RouterLink
+  ]
 })
 export class DashboardComponent extends WithDestroy() implements OnInit {
   public products: IProduct[] = [];

@@ -2,11 +2,17 @@ import { Component, Input, OnInit } from '@angular/core';
 import { AlertService } from '../../services/alert.service';
 import { WithDestroy } from '@shared/mixins/destroy';
 import { takeUntil } from 'rxjs/operators';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-alert',
+  standalone: true,
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
+  imports: [
+    NgClass,
+    NgIf
+  ]
 })
 export class AlertComponent extends WithDestroy() implements OnInit {
   @Input() delay = 5000;

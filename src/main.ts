@@ -1,13 +1,54 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { importProvidersFrom, InjectionToken, Provider } from '@angular/core';
+import { provideRouter } from '@angular/router';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import {
+  BrowserAnimationsModule,
+  provideAnimations,
+  provideNoopAnimations
+} from '@angular/platform-browser/animations';
 
-import { AppModule } from './app/app.module';
+
 import { environment } from './environments/environment';
+import { AppComponent } from './app/app.component';
+import { appRoutes } from './app/app.routes';
+import { provideEffects } from '@ngrx/effects';
+import { provideStore } from '@ngrx/store';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { AuthInterceptor } from '@shared/interceptors/auth.interceptor';
+import { cartReducer, metaReducerLocalStorage } from './app/state/cart/cart.reducer';
+import { productsReducer } from './app/state/products/products.reducer';
+import { ProductsEffects } from './app/state/products/products.effects';
 
-if (environment.production) {
-  enableProdMode();
-}
 
-platformBrowserDynamic()
-  .bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+export const ENV = new InjectionToken('environment');
+
+const INTERCEPTOR_PROVIDER: Provider = {
+  provide: HTTP_INTERCEPTORS,
+  multi: true,
+  useClass: AuthInterceptor,
+};
+
+const ROOT_REDUCERS = {
+  cartEntries: cartReducer,
+  productsEntries: productsReducer
+};
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideRouter(appRoutes),
+    provideHttpClient(),
+    importProvidersFrom(BrowserAnimationsModule),
+    provideAnimations(),
+    provideNoopAnimations(),
+    provideEffects([ProductsEffects]),
+    provideStore(
+      ROOT_REDUCERS,
+      {metaReducers: [metaReducerLocalStorage]
+    }),
+    provideStoreDevtools({
+      logOnly: environment.production
+    }),
+    { provide: ENV, useValue: environment }
+  ]
+}).catch((error) => console.log(error));

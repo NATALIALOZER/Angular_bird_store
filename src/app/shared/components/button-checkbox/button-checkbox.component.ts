@@ -1,11 +1,19 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ButtonSize } from '@shared/components/button/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ButtonComponent } from '@shared/components/button/button.component';
 
 @Component({
   selector: 'app-button-checkbox',
+  standalone: true,
   templateUrl: './button-checkbox.component.html',
   styleUrls: ['./button-checkbox.component.scss'],
+  imports: [
+    MatCheckboxModule,
+    ButtonComponent,
+    ReactiveFormsModule
+  ]
 })
 export class ButtonCheckboxComponent {
   @Input() public iconName = '';

@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { ProductsComponent } from './pages/products-page/products.component';
+import { Route } from '@angular/router';
+
 import { MainLayoutComponent } from '@shared/layouts/main-layout/main-layout.component';
-import { CartComponent } from './pages/cart-page/cart.component';
+import { ProductsComponent } from './pages/products-page/products.component';
 import { ProductInfoComponent } from './pages/product-info-page/product-info.component';
+import { CartComponent } from './pages/cart-page/cart.component';
 import { PaymentComponent } from './pages/payment-page/payment.component';
 
-const routes: Routes = [
+export const appRoutes: Route[] = [
   {
     path: '',
     component: MainLayoutComponent,
@@ -36,16 +36,6 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+    loadChildren: () => import('./admin/admin.routes')
   },
 ];
-
-@NgModule({
-  imports: [
-    RouterModule.forRoot(routes, {
-      preloadingStrategy: PreloadAllModules,
-    }),
-  ],
-  exports: [RouterModule],
-})
-export class AppRoutingModule {}

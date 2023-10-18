@@ -1,26 +1,35 @@
-import { Component, OnInit } from '@angular/core';
-import { IProduct, IProductGroup } from '@shared/common_types/interfaces';
-import { Router } from '@angular/router';
-import { DialogComponent } from '@shared/components/modals/dialog/dialog.component';
-import { WithDestroy } from '@shared/mixins/destroy';
-import { takeUntil } from 'rxjs/operators';
-import { ButtonSize } from '@shared/components/button/button';
-import { Store } from '@ngrx/store';
-import {
-  addProduct,
-  clearCart,
-  loadCart,
-  removeAllEntriesOfProduct,
-  removeProduct,
-} from '../../state/cart/cart.actions';
-import { selectGroupedCartEntries, selectTotalPrice } from '../../state/cart/cart.selectors';
-import { Observable } from 'rxjs';
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
+import { MatCardModule } from '@angular/material/card';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+
+import { Router, RouterLink } from '@angular/router';
+
+import { takeUntil } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
+import { Store } from '@ngrx/store';
+import { selectGroupedCartEntries, selectTotalPrice } from '../../state/cart/cart.selectors';
+import { addProduct, clearCart, loadCart, removeAllEntriesOfProduct, removeProduct
+} from '../../state/cart/cart.actions';
+
+import { IProduct, IProductGroup } from '@shared/common_types/interfaces';
+import { DialogComponent } from '@shared/components/modals/dialog.component';
+import { WithDestroy } from '@shared/mixins/destroy';
+import { ButtonSize } from '@shared/components/button/button';
+import { ButtonComponent } from '@shared/components/button/button.component';
 
 @Component({
   selector: 'app-cart',
+  standalone: true,
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
+  imports: [
+    ButtonComponent,
+    MatCardModule,
+    RouterLink,
+    CommonModule
+  ]
 })
 export class CartComponent extends WithDestroy() implements OnInit {
   public cartEntries$: Observable<IProductGroup[]> = this.store.select(selectGroupedCartEntries);

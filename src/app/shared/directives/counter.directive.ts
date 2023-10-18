@@ -8,6 +8,7 @@ import {
 
 @Directive({
   selector: '[appCounterOf]',
+  standalone: true,
 })
 export class CounterDirective implements OnChanges {
   constructor(

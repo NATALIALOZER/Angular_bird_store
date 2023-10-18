@@ -1,16 +1,24 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../../shared/services/auth.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
+import { takeUntil } from 'rxjs/operators';
+
+import { AuthService } from '../../shared/services/auth.service';
 import { IUser } from '@shared/common_types/interfaces';
 import { WithDestroy } from '@shared/mixins/destroy';
-import { takeUntil } from 'rxjs/operators';
 import { ILoginForm } from './types/login';
 
 @Component({
   selector: 'app-login',
+  standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
+  imports: [
+    ReactiveFormsModule,
+    CommonModule
+  ]
 })
 export class LoginComponent extends WithDestroy() implements OnInit {
   public form!: FormGroup<ILoginForm>;
