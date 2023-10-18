@@ -21,6 +21,7 @@ import { environment } from '../environments/environment.prod';
 import { ProductsEffects } from './state/products/products.effects';
 import { EffectsModule } from '@ngrx/effects';
 import { productsReducer } from './state/products/products.reducer';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 const INTERCEPTOR_PROVIDER: Provider = {
   provide: HTTP_INTERCEPTORS,
@@ -50,11 +51,12 @@ const ROOT_REDUCERS = {
     EffectsModule.forRoot([ProductsEffects]),
     StoreModule.forRoot(
       ROOT_REDUCERS,
-      { metaReducers: [metaReducerLocalStorage] }
+      {metaReducers: [metaReducerLocalStorage]}
     ),
     StoreDevtoolsModule.instrument({
       logOnly: environment.production
     }),
+    NgxPaginationModule,
   ],
   providers: [INTERCEPTOR_PROVIDER],
   bootstrap: [AppComponent],
