@@ -13,7 +13,7 @@ import {
   removeAllEntriesOfProduct,
   removeProduct,
 } from '../../state/cart/cart.actions';
-import { selectGroupedCartEntries } from '../../state/cart/cart.selectors';
+import { selectGroupedCartEntries, selectTotalPrice } from '../../state/cart/cart.selectors';
 import { Observable } from 'rxjs';
 import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 
@@ -25,6 +25,7 @@ import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 export class CartComponent extends WithDestroy() implements OnInit {
   public cartEntries$: Observable<IProductGroup[]> = this.store.select(selectGroupedCartEntries);
   public ButtonSize: typeof ButtonSize = ButtonSize;
+  public countCart$ = this.store.select(selectTotalPrice);
 
   constructor(
     public dialog: MatDialog,

@@ -25,8 +25,7 @@ export class ProductsComponent extends WithDestroy() implements OnInit {
 
   /*paginator_native*/
   public value = 5;
-  public productsArray: IProduct[] = [];
-  public page: string | number = 1;
+  public page: any = 1;
   public productsPerPage: number = this.value;
   public search = '';
   public quantityById: Map<string, number> = new Map();
@@ -43,15 +42,16 @@ export class ProductsComponent extends WithDestroy() implements OnInit {
   public ngOnInit(): void {
     this.store.dispatch(loadProducts());
 
-    this.loadingService
-      .doLoading(this.products$, this, LoadingIndicator.OPERATOR)
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((res: IProduct[]) => (this.productsArray = res));
+    // this.loadingService
+    //   .doLoading(this.products$, this, LoadingIndicator.OPERATOR)
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe((res: IProduct[]) => (this.productsArray = res));
 
     this.checkInCart();
   }
 
   public searchItem(newItem: string): void {
+    this.page = 1;
     this.search = newItem;
   }
 

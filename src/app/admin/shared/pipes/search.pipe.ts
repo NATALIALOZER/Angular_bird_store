@@ -5,12 +5,12 @@ import { IProduct } from '@shared/common_types/interfaces';
   name: 'searchProducts',
 })
 export class SearchPipe implements PipeTransform {
-  public transform(products: IProduct[], search = ''): IProduct[] {
-    if (!search.trim()) {
+  public transform(products: IProduct[] | null, search = ''): IProduct[] {
+    if (products && !search.trim()) {
       return products;
     }
 
-    return products.filter(product => {
+    return products!.filter(product => {
       return product.name.toLowerCase().includes(search.toLowerCase());
     });
   }

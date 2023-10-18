@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { ProductsComponent } from './pages/products-page/products.component';
-import { MainLayoutComponent } from '@shared/components/layouts/main-layout/main-layout.component';
+import { MainLayoutComponent } from '@shared/layouts/main-layout/main-layout.component';
 import { CartComponent } from './pages/cart-page/cart.component';
 import { ProductInfoComponent } from './pages/product-info-page/product-info.component';
 import { PaymentComponent } from './pages/payment-page/payment.component';

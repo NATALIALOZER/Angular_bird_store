@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { ProductsComponent } from './pages/products-page/products.component';
 import { CartComponent } from './pages/cart-page/cart.component';
 import { ProductInfoComponent } from './pages/product-info-page/product-info.component';
-import { MainLayoutComponent } from '@shared/components/layouts/main-layout/main-layout.component';
+import { MainLayoutComponent } from '@shared/layouts/main-layout/main-layout.component';
 import { SharedModule } from '@shared/shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from '@shared/interceptors/auth.interceptor';

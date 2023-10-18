@@ -48,8 +48,12 @@
     </mat-card-content>
   </mat-card>
 </div>
-<div>
+<div class="d-flex justify-content-between">
   <app-button [size]='ButtonSize.SMALL' (click)="clearCart()">
     <span class='p-2'>REMOVE ALL</span>
   </app-button>
+
+  <div class="d-flex align-items-center p-2">
+    <span *ngIf="(cartEntries$ | async)?.length" class="text-secondary">Total price: {{countCart$ | async}}</span>
+  </div>
 </div>

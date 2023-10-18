@@ -8,31 +8,26 @@
     <app-item
       [quantityById]='quantityById'
       [ngClass]="{
-        'col-12': value === 5,
+       'col-12': value === 5,
         'col-12 col-md-4': value === 20,
         'col-6 col-md-3': value === 35
       }"
       [value]="value"
       *ngFor="
-        let product of productsArray
+        let product of (products$ | async)
           | searchProducts: search
           | paginate: { itemsPerPage: productsPerPage, currentPage: page }
       "
       [product]="product"
     ></app-item>
 
-    <div *ngIf="products$ | async as products">
-      {{ products | json }}
-    </div>
-
-
-    <!--pagination-->
-<!--    <pagination-controls
+<!--    pagination-->
+    <pagination-controls
       previousLabel=""
       nextLabel=""
       (pageChange)="page = $event"
       class="paginator-custom"
-    ></pagination-controls>-->
+    ></pagination-controls>
   </div>
 </div>
 
