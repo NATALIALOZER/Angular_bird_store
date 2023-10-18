@@ -4,7 +4,6 @@ import { AppRoutingModule } from '../app-routing.module';
 import { ItemComponent } from '../pages/products-page/item/item.component';
 import { MaterialModule } from './material/material.module';
 import { HttpClientModule } from '@angular/common/http';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SearchInputComponent } from './components/search-input/search-input.component';
@@ -33,7 +32,6 @@ import { ButtonCheckboxComponent } from './components/button-checkbox/button-che
     AppRoutingModule,
     MaterialModule,
     HttpClientModule,
-    NgxPaginationModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -42,7 +40,6 @@ import { ButtonCheckboxComponent } from './components/button-checkbox/button-che
     ItemComponent,
     HttpClientModule,
     MaterialModule,
-    NgxPaginationModule,
     BrowserAnimationsModule,
     FormsModule,
     SearchInputComponent,
