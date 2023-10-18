@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from './products.service';
 import { Observable } from 'rxjs';
 import { IProduct, IProductGroup } from '@shared/common_types/interfaces';
 import { IPageSizeParams } from '@shared/components/custom-slider/types/slider.interface';
 import { LoadingService } from '@shared/components/loading/loading.service';
-import { takeUntil, tap } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 import { LoadingIndicator } from './types/products';
 import { WithDestroy } from '@shared/mixins/destroy';
 import { Store } from '@ngrx/store';

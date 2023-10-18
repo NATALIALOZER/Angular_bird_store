@@ -7,10 +7,7 @@ import { AuthService } from '../services/auth.service';
 export class AuthGuard  {
   constructor(private auth: AuthService, private router: Router) {}
 
-  public canActivate(
-    route: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot
-  ): Observable<boolean> | Promise<boolean> | boolean | any {
+  public canActivate(): Observable<boolean> | Promise<boolean> | boolean | any {
     if (this.auth.isAuthenticated()) {
       return true;
     } else {
