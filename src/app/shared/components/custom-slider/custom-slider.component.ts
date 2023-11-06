@@ -1,17 +1,17 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IPageSizeParams } from './types/slider.interface';
-import { MaterialModule } from '@shared/material/material.module';
 import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatSliderModule } from '@angular/material/slider';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+
+import { IPageSizeParams } from './types/slider.interface';
+
 
 @Component({
   selector: 'app-custom-slider',
   standalone: true,
   templateUrl: './custom-slider.component.html',
   styleUrls: ['./custom-slider.component.scss'],
-  imports: [
-    MaterialModule,
-    FormsModule
-  ]
+  imports: [FormsModule, MatSliderModule, MatCardModule]
 })
 export class CustomSliderComponent {
   @Input() public value = 5;

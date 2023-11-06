@@ -8,14 +8,29 @@
   box-shadow: $inner-shadow;
 
   ::ng-deep {
-    .mat-form-field-infix {
+    .mat-mdc-form-field-infix {
       display: flex;
     }
-    .mat-form-field-wrapper {
+    .mat-mdc-form-field-wrapper {
       padding: 3px 15px;
     }
-    .mat-form-field-flex {
+    .mat-mdc-form-field-flex {
       align-items: center;
+    }
+
+    .mdc-line-ripple::before, .mdc-line-ripple::after,
+    .mdc-text-field--filled .mdc-line-ripple::before,
+    .mdc-text-field--filled .mdc-line-ripple::after {
+      border-bottom: none !important;
+    }
+
+    .mat-mdc-form-field-subscript-wrapper {
+      display: none !important;
+      height: 0 !important;
+    }
+
+    .mdc-text-field {
+      padding: .5em 1em !important;
     }
   }
 }
