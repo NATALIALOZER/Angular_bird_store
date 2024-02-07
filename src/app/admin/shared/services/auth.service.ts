@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, Subject, throwError } from 'rxjs';
 import { IUser } from '@shared/common_types/interfaces';
 import { environment } from '../../../../environments/environment';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { fbAuthResponse } from './services_types/auth-service';
 
 @Injectable({ providedIn: 'root' })
@@ -29,7 +29,10 @@ export class AuthService {
         `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.apiKey}`,
         user
       )
-      .pipe(catchError(this.handleError.bind(this)));
+      .pipe(
+        tap(res => this.setToken(res as fbAuthResponse)),
+        catchError(this.handleError.bind(this))
+      );
   }
 
   public logout(): void {

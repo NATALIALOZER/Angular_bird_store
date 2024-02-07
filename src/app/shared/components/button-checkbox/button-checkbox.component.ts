@@ -1,32 +1,66 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import {
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { ButtonSize } from '@shared/components/button/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ButtonComponent } from '@shared/components/button/button.component';
 
 @Component({
-  selector: 'app-button-checkbox',
   standalone: true,
+  selector: 'app-button-checkbox',
   templateUrl: './button-checkbox.component.html',
   styleUrls: ['./button-checkbox.component.scss'],
-  imports: [
-    MatCheckboxModule,
-    ButtonComponent,
-    ReactiveFormsModule
-  ]
+  imports: [MatCheckboxModule, ButtonComponent, ReactiveFormsModule],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      multi: true,
+      useExisting: ButtonCheckboxComponent,
+    },
+  ],
 })
-export class ButtonCheckboxComponent {
+export class ButtonCheckboxComponent implements ControlValueAccessor {
   @Input() public iconName = '';
+  @Input() public value = false;
   @Input() public buttonSize: ButtonSize = ButtonSize.SMALL;
-  @Input() public checked = false;
-  @Input() public sharedVal: unknown;
-  @Input() public control: FormControl<boolean> = new FormControl();
-  @Output() public sharedChanges: EventEmitter<unknown> =
-    new EventEmitter<unknown>();
 
-  public change(newValue: unknown): void {
-    this.sharedVal = newValue;
-    newValue = newValue !== 0 ? newValue : '';
-    this.sharedChanges.emit(newValue);
+  onChange = (value: boolean) => {};
+  onTouched = () => {};
+
+  public touched = false;
+  public disabled = false;
+
+  public onAdd() {
+    this.markAsTouched();
+    if (!this.disabled) {
+      this.value = !this.value;
+      this.onChange(this.value);
+    }
+  }
+
+  writeValue(value: boolean) {
+    this.value = value;
+  }
+
+  registerOnChange(onChange: any) {
+    this.onChange = onChange;
+  }
+
+  registerOnTouched(onTouched: any) {
+    this.onTouched = onTouched;
+  }
+
+  markAsTouched() {
+    if (!this.touched) {
+      this.onTouched();
+      this.touched = true;
+    }
+  }
+
+  setDisabledState(disabled: boolean) {
+    this.disabled = disabled;
   }
 }

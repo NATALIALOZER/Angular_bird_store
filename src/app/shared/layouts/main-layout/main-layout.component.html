@@ -1,34 +1,49 @@
 <header>
   <mat-toolbar
     class="d-flex flex-column"
-    [ngStyle]="{ backgroundColor: checked ? '#526AF2' : '#F2E9E9' }"
-  >
+    [ngStyle]="{ backgroundColor: checked ? '#526AF2' : '#F2E9E9' }">
     <div class="d-flex justify-content-between align-items-end">
       <section class="check-section">
-        <mat-checkbox class="check_margin" [(ngModel)]="checked">
-          <button
-            mat-icon-button
-            class="btn btn-primary shadow rounded active"
-            [ngStyle]="{ backgroundColor: checked ? '#526AF2' : '#F2E9E9' }"
-          >
-            <mat-icon>
-              <img *ngIf="!checked" src='../../../../assets/images/Menu.png' alt="menu"/>
-              <img *ngIf="checked" src='../../../../assets/images/Menu2.png' alt="menu"/>
-            </mat-icon>
-          </button>
-        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="checked"> </mat-checkbox>
+
+        <button
+          mat-icon-button
+          class="btn btn-primary shadow rounded active"
+          [ngStyle]="{ backgroundColor: checked ? '#526AF2' : '#F2E9E9' }">
+          <img
+            *ngIf="!checked"
+            src="../../../../assets/images/Menu.png"
+            alt="menu" />
+          <img
+            *ngIf="checked"
+            src="../../../../assets/images/Menu2.png"
+            alt="menu" />
+        </button>
       </section>
 
       <a routerLink="/">
-        <img *ngIf="!checked" src='../../../../assets/images/Bird-logo.png' alt="logo"/>
-        <img *ngIf="checked" src='../../../../assets/images/Bird-logo2.png' alt="logo"/>
+        <img
+          *ngIf="!checked"
+          src="../../../../assets/images/Bird-logo.png"
+          alt="logo" />
+        <img
+          *ngIf="checked"
+          src="../../../../assets/images/Bird-logo2.png"
+          alt="logo" />
       </a>
 
-      <app-button [buttonType]='ButtonType.CONTRAST'
-                  [checked]='checked'
-                  routerLink="/cart">
-        <img *ngIf="!checked" src='../../../../assets/images/Cart.png' alt="cart"/>
-        <img *ngIf="checked" src='../../../../assets/images/Cart2.png' alt="cart"/>
+      <app-button
+        [buttonType]="ButtonType.CONTRAST"
+        [checked]="checked"
+        routerLink="/cart">
+        <img
+          *ngIf="!checked"
+          src="../../../../assets/images/Cart.png"
+          alt="cart" />
+        <img
+          *ngIf="checked"
+          src="../../../../assets/images/Cart2.png"
+          alt="cart" />
       </app-button>
     </div>
 

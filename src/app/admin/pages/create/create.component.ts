@@ -1,15 +1,22 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  DestroyRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  inject,
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
-  FormGroup, ReactiveFormsModule,
+  FormGroup,
+  ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProductsService } from '../../../pages/products-page/products.service';
 import { AlertService } from '../../shared/services/alert.service';
-import { takeUntil } from 'rxjs/operators';
 import { ICreateForm, ImageSnippet } from './types/icreate-form';
-import { WithDestroy } from '@shared/mixins/destroy';
 import { IProduct } from '@shared/common_types/interfaces';
 import { MaterialModule } from '@shared/material/material.module';
 import { NgClass, NgIf, NgStyle } from '@angular/common';
@@ -19,28 +26,19 @@ import { NgClass, NgIf, NgStyle } from '@angular/common';
   standalone: true,
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.scss'],
-  imports: [
-    ReactiveFormsModule,
-    MaterialModule,
-    NgClass,
-    NgIf,
-    NgStyle
-  ]
+  imports: [ReactiveFormsModule, MaterialModule, NgClass, NgIf, NgStyle],
 })
-export class CreateComponent extends WithDestroy() implements OnInit {
+export class CreateComponent implements OnInit {
   @Output() public imageSnippetEventEmitter: EventEmitter<ImageSnippet> =
     new EventEmitter<ImageSnippet>();
   public selectedFile: ImageSnippet = { src: '' };
   public selected = false;
   public createForm: FormGroup = new FormGroup({});
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private productService: ProductsService,
-    private alert: AlertService
-  ) {
-    super();
-  }
+  private destroyRef = inject(DestroyRef);
+  private formBuilder = inject(FormBuilder);
+  private productService = inject(ProductsService);
+  private alert = inject(AlertService);
 
   ngOnInit(): void {
     this.buildForm();
@@ -62,7 +60,7 @@ export class CreateComponent extends WithDestroy() implements OnInit {
       };
       this.productService
         .create(product)
-        .pipe(takeUntil(this.destroy$))
+        .pipe(takeUntilDestroyed(this.destroyRef))
         .subscribe(() => {
           this.createForm.reset();
           this.createForm.markAsUntouched();

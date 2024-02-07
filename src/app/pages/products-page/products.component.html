@@ -1,34 +1,30 @@
 <app-search-input (searchEvent)="searchItem($event)"></app-search-input>
 
-<app-custom-slider (changePageCapacity)="onPagination($event)" [value]='value'>
+<app-custom-slider (changePageCapacity)="onPagination($event)" [value]="value">
 </app-custom-slider>
 
 <div [appIsLoading]="loadingService.isLoading(this, LoadingIndicator.OPERATOR)">
   <div class="row">
     <app-item
-      [quantityById]='quantityById'
+      [quantityById]="quantityById"
       [ngClass]="{
-       'col-12': value === 5,
+        'col-12': value === 5,
         'col-12 col-md-4': value === 20,
         'col-6 col-md-3': value === 35
       }"
       [value]="value"
       *ngFor="
-        let product of (products$ | async)
+        let product of products$
+          | async
           | searchProducts: search
           | paginate: { itemsPerPage: productsPerPage, currentPage: page }
       "
-      [product]="product"
-    ></app-item>
-
-<!--    pagination-->
+      [product]="product"></app-item>
+    <!-- pagination -->
     <pagination-controls
       previousLabel=""
       nextLabel=""
       (pageChange)="page = $event"
-      class="paginator-custom"
-    ></pagination-controls>
+      class="paginator-custom"></pagination-controls>
   </div>
 </div>
-
-

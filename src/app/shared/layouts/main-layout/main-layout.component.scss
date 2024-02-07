@@ -1,5 +1,5 @@
-@import "../../../../assets/styles/helpers/mixins";
-@import "../../../../assets/styles/helpers/variables";
+@import '../../../../assets/styles/helpers/mixins';
+@import '../../../../assets/styles/helpers/variables';
 
 /*header*/
 .mat-toolbar {
@@ -8,43 +8,51 @@
   align-items: inherit;
   height: auto;
 }
-.mat-icon {
-  width: 40px;
-  height: 40px;
-  padding: 3px;
-  border-radius: 5px;
-}
+// .mat-icon {
+//   width: 40px;
+//   height: 40px;
+//   padding: 3px;
+//   border-radius: 5px;
+// }
 
 /*checkbox btn for menu button*/
 .check-section {
-  display: flex;
-  align-content: center;
-  align-items: center;
-  height: auto;
-  ::ng-deep .mat-checkbox-layout .mat-checkbox-inner-container {
+  position: relative;
+  mat-checkbox {
     position: absolute;
+    left: 15px;
+    top: 8px;
     z-index: 1000;
-    width: 45px;
-    height: 45px;
-    opacity: 0;
+    opacity: 0 !important;
   }
-  button {
-    width: 45px;
-    height: 45px;
-  }
+  // display: flex;
+  // align-content: center;
+  // align-items: center;
+  // height: auto;
+  // ::ng-deep .mat-mdc-checkbox-layout .mat-mdc-checkbox-inner-container {
+  //   position: absolute;
+  //   z-index: 1000;
+  //   width: 45px;
+  //   height: 45px;
+  //   opacity: 0;
+  // }
+  // button {
+  //   width: 45px;
+  //   height: 45px;
+  // }
 }
 
-mat-list {
-  display: flex;
-  flex-direction: column;
-  /*padding-bottom: 25px;*/
-  @include font-menu;
-  background-color: transparent;
-}
-::ng-deep .mat-list-base .mat-list-item .mat-list-item-content {
-  justify-content: space-around;
-  color: $secondary-text-color;
-}
+// mat-list {
+//   display: flex;
+//   flex-direction: column;
+//   /*padding-bottom: 25px;*/
+//   @include font-menu;
+//   background-color: transparent;
+// }
+// ::ng-deep .mat-list-base .mat-list-item .mat-list-item-content {
+//   justify-content: space-around;
+//   color: $secondary-text-color;
+// }
 
 /*search line*/
 /*.search_field{
@@ -65,10 +73,10 @@ mat-list {
   }
 }*/
 
-::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
-  opacity: 0;
-}
-::ng-deep .mat-form-field-infix {
-  padding: 0;
-  border-top: 0;
-}
+// ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+//   opacity: 0;
+// }
+// ::ng-deep .mat-form-field-infix {
+//   padding: 0;
+//   border-top: 0;
+// }

@@ -5,11 +5,13 @@ import { AuthGuard } from './shared/guards/auth.guard';
 import { CreateComponent } from './pages/create/create.component';
 import { EditComponent } from './pages/edit/edit.component';
 import { Route } from '@angular/router';
+import { AlertService } from './shared/services/alert.service';
 
 export default [
   {
     path: '',
     component: AdminLayoutComponent,
+    providers: [AlertService, AuthGuard],
     children: [
       {
         path: '',
@@ -37,4 +39,4 @@ export default [
       },
     ],
   },
-] as Route[]
+] as Route[];

@@ -1,10 +1,7 @@
-<mat-checkbox class="bird-button-checkbox"
-              [formControl]="control"
-              [ngModel]="sharedVal"
-              (ngModelChange)="change($event)"
->
-  <app-button [checked]='control.value'
-              [icon_name]='iconName'
-              [size]='buttonSize'
-  ></app-button>
-</mat-checkbox>
+<section class="buttton__checkbox">
+  <app-button
+    [checked]="value"
+    [icon_name]="iconName"
+    [size]="buttonSize"
+    (click)="onAdd()"></app-button>
+</section>

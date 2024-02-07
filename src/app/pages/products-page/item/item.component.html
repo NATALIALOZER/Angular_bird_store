@@ -1,54 +1,54 @@
 <mat-card
   class="card p-0 mt-3 bg-transparent d-flex flex-column align-items-center col-12 pe-sm-5 ps-sm-5"
-  xmlns="http://www.w3.org/1999/html"
->
+  xmlns="http://www.w3.org/1999/html">
   <mat-card-content
     class="products-image"
-    [ngClass]="{ 'small': value === 20, 'small-two-columns': value === 35 }"
+    [ngClass]="{ small: value === 20, 'small-two-columns': value === 35 }"
     [routerLink]="['/product-info-page', product.id]"
     [ngStyle]="{
-        'background-image': product.imageUrl
+      'background-image': product.imageUrl
         ? 'url(' + product.imageUrl + ')'
         : 'url(../../../../assets/images/404.jpeg)'
-    }"
-  ></mat-card-content>
+    }"></mat-card-content>
 
-  <mat-card-subtitle class="card-text bg-transparent p-1" title='{{product.description}}'>
-    <div>{{ product.name }}
+  <mat-card-subtitle
+    class="card-text bg-transparent p-1"
+    title="{{ product.description }}">
+    <div>
+      {{ product.name }}
       <span class="badge-pill badge-primary">
-        {{ product.price | currency: "USD":"symbol":"2.2-2" }}
+        {{ product.price | currency: 'USD':'symbol':'2.2-2' }}
       </span>
     </div>
-    <div>{{product.description}}</div>
+    <div>{{ product.description }}</div>
   </mat-card-subtitle>
 
   <mat-card-actions class="d-flex">
-    <!--quantity buttons-->
+    <!-- quantity buttons -->
     <form [formGroup]="quantityForm" class="quantity-form">
-      <app-button *ngIf="!form.checkedCart.value"
-                  (click)="decreaseValue()"
-                  icon_name='chevron_left'
-                  [size]='ButtonSize.SMALL'
-      ></app-button>
+      <app-button
+        *ngIf="!form.checkedCart.value"
+        (click)="decreaseValue()"
+        icon_name="chevron_left"
+        [size]="ButtonSize.SMALL"></app-button>
       <input
         matInput
         type="text"
         formControlName="quantity"
-        [ngClass]="{'inner-shadow': !form.checkedCart.value}"
-        #quantity
-      />
-      <app-button *ngIf="!form.checkedCart.value"
-                  (click)="increaseValue()"
-                  icon_name='chevron_right'
-                  [size]='ButtonSize.SMALL'
-      ></app-button>
+        [ngClass]="{ 'inner-shadow': !form.checkedCart.value }"
+        #quantity />
+      <app-button
+        *ngIf="!form.checkedCart.value"
+        (click)="increaseValue()"
+        icon_name="chevron_right"
+        [size]="ButtonSize.SMALL"></app-button>
 
-      <!--add to cart button-->
+      <!-- add to cart button -->
       <section class="check-section" [ngClass]="{ 'cart-upper': value === 35 }">
-        <app-button-checkbox [control]='form.checkedCart'
-                             iconName='add_shopping_cart'
-                             (click)="manageCart(product, quantity.value)"
-        ></app-button-checkbox>
+        <app-button-checkbox
+          formControlName="checkedCart"
+          iconName="add_shopping_cart"
+          (click)="manageCart(product, quantity.value)"></app-button-checkbox>
       </section>
     </form>
   </mat-card-actions>

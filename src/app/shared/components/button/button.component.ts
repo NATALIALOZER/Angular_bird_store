@@ -8,11 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
   standalone: true,
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
-  imports: [
-    NgClass,
-    MatIconModule,
-    NgIf
-  ]
+  imports: [NgClass, MatIconModule, NgIf],
 })
 export class ButtonComponent {
   @Input() public icon_name = '';

@@ -9,15 +9,16 @@
         per page</label
       >
     </div>
+
     <mat-slider
+      class="example-margin"
       [disabled]="disabled"
       [max]="max"
       [min]="min"
       [step]="step"
-      [(ngModel)]="value"
-      (change)="changePageSize()"
-    >
+      [discrete]="thumbLabel"
+      [showTickMarks]="false">
+      <input matSliderThumb [(ngModel)]="value" (change)="changePageSize()" #slider>
     </mat-slider>
   </mat-card-content>
 </mat-card>
-<!--[thumbLabel]="thumbLabel"-->

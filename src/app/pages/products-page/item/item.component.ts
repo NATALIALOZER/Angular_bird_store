@@ -31,8 +31,8 @@ import { ButtonCheckboxComponent } from '@shared/components/button-checkbox/butt
     ButtonComponent,
     ButtonCheckboxComponent,
     CurrencyPipe,
-    NgIf
-  ]
+    NgIf,
+  ],
 })
 export class ItemComponent extends WithDestroy() implements OnInit {
   @Input() public product!: IProduct;
@@ -52,8 +52,8 @@ export class ItemComponent extends WithDestroy() implements OnInit {
 
   public manageCart(product: IProduct, quantity: string): void {
     this.form.checkedCart.value
-      ? this.store.dispatch(removeAllEntriesOfProduct(product))
-      : this.store.dispatch(addProduct({ product, quantity }));
+      ? this.store.dispatch(addProduct({ product, quantity }))
+      : this.store.dispatch(removeAllEntriesOfProduct(product));
   }
 
   public decreaseValue(): void {
@@ -78,10 +78,8 @@ export class ItemComponent extends WithDestroy() implements OnInit {
       checkedCart: new FormControl(false, { nonNullable: true }),
     });
 
-    timer(0)
-      .pipe(take(1))
-      .subscribe(() =>
-        this.form.checkedCart.setValue(!!this.quantityById.get(this.product.id))
-      );
+    timer(0).subscribe(() =>
+      this.form.checkedCart.setValue(!!this.quantityById.get(this.product.id))
+    );
   }
 }

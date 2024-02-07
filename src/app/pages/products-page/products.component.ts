@@ -35,10 +35,11 @@ import { SearchPipe } from '../../admin/shared/pipes/search.pipe';
     ItemComponent,
     CommonModule,
     SearchPipe,
-  ]
+  ],
 })
 export class ProductsComponent extends WithDestroy() implements OnInit {
-  public products$: Observable<IProduct[]> = this.store.select(selectAllProducts);
+  public products$: Observable<IProduct[]> =
+    this.store.select(selectAllProducts);
 
   /*loader*/
   public LoadingIndicator = LoadingIndicator;
@@ -52,10 +53,7 @@ export class ProductsComponent extends WithDestroy() implements OnInit {
 
   private cartEntries$: Observable<IProductGroup[]>;
 
-  constructor(
-    public loadingService: LoadingService,
-    private store: Store
-  ) {
+  constructor(public loadingService: LoadingService, private store: Store) {
     super();
   }
 
@@ -83,6 +81,7 @@ export class ProductsComponent extends WithDestroy() implements OnInit {
   private checkInCart(): void {
     this.cartEntries$ = this.store.select(selectGroupedCartEntries);
     this.cartEntries$.pipe(takeUntil(this.destroy$)).subscribe(cartEntries => {
+      this.quantityById.clear();
       cartEntries.forEach(item =>
         this.quantityById.set(item.product.id, item.count)
       );
