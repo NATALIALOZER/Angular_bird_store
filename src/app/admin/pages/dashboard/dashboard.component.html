@@ -1,71 +1,68 @@
-<div *ngIf="products.length; else Loading">
-  <div class="row">
-    <div class="form-control col-12">
-      <input
-        class="w-100"
-        type="text"
-        placeholder="Шукати товар..."
-        [(ngModel)]="searchStr"
-      />
-    </div>
-    <table class="col-12 text-center">
-      <thead class="bg-secondary">
-        <tr>
-          <th>#</th>
-          <th>ID товару</th>
-          <th>Назва товару</th>
-          <th>Опис</th>
-          <th>Ціна</th>
-          <th>Фото</th>
-          <th>Дія</th>
-        </tr>
-      </thead>
-      <tbody class="text-center">
-        <tr
-          *ngFor="
-            let product of products | searchProducts: searchStr;
-            let i = index
-          "
-        >
-          <td>{{ i }}</td>
-          <td>{{ product.id }}</td>
-          <td>{{ product.name }}</td>
-          <!--<td>{{ product-info-page.category }}</td>-->
-          <td>{{ product.description }}</td>
-          <td>{{ product.price }}</td>
-          <td>
-            <img
-              src="{{ product.imageUrl }}"
-              alt="product photo"
-              width="40px"
-              *ngIf="product.imageUrl; else noPhoto"
-            />
-            <ng-template #noPhoto>
+<ng-container *ngIf="products$ | async as products">
+  <ng-container *ngIf="products.length; else Loading">
+    <div class="row">
+      <div class="form-control col-12">
+        <input
+          class="w-100"
+          type="text"
+          placeholder="Шукати товар..."
+          [(ngModel)]="searchStr" />
+      </div>
+      <table class="col-12 text-center">
+        <thead class="bg-secondary">
+          <tr>
+            <th>#</th>
+            <th>ID товару</th>
+            <th>Назва товару</th>
+            <th>Опис</th>
+            <th>Ціна</th>
+            <th>Фото</th>
+            <th>Дія</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+          <tr
+            *ngFor="
+              let product of products | searchProducts: searchStr;
+              let i = index
+            ">
+            <td>{{ i }}</td>
+            <td>{{ product.id }}</td>
+            <td>{{ product.name }}</td>
+            <!--<td>{{ product-info-page.category }}</td>-->
+            <td>{{ product.description }}</td>
+            <td>{{ product.price }}</td>
+            <td>
               <img
-                src="assets/images/no-product-image.png"
+                src="{{ product.imageUrl }}"
                 alt="product photo"
                 width="40px"
-              />
-            </ng-template>
-          </td>
-          <!--<td>{{ product-info-page.date | date: 'medium' }}</td>-->
-          <td>
-            <button
-              class="btn btn-outline-dark m-1"
-              [routerLink]="['/admin', 'product', product.id, 'edit']"
-            >
-              Відкрити
-            </button>
-            <a class="btn btn-danger m-1" (click)="remove(product.id)"
-              >Видалити</a
-            >
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+                *ngIf="product.imageUrl; else noPhoto" />
+              <ng-template #noPhoto>
+                <img
+                  src="assets/images/no-product-image.png"
+                  alt="product photo"
+                  width="40px" />
+              </ng-template>
+            </td>
+            <!--<td>{{ product-info-page.date | date: 'medium' }}</td>-->
+            <td>
+              <button
+                class="btn btn-outline-dark m-1"
+                [routerLink]="['/admin', 'product', product.id, 'edit']">
+                Відкрити
+              </button>
+              <a class="btn btn-danger m-1" (click)="remove(product.id)"
+                >Видалити</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
 
-<ng-template #Loading>
-  <p class="text-center">Дані завантажуються...</p>
-</ng-template>
+  <ng-template #Loading>
+    <p class="text-center">Дані завантажуються...</p>
+  </ng-template>
+</ng-container>

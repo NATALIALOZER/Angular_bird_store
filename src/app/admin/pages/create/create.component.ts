@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   EventEmitter,
@@ -13,13 +14,14 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { NgClass, NgIf, NgStyle } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
 import { ProductsService } from '../../../pages/products-page/products.service';
 import { AlertService } from '../../shared/services/alert.service';
 import { ICreateForm, ImageSnippet } from './types/icreate-form';
 import { IProduct } from '@shared/common_types/interfaces';
 import { MaterialModule } from '@shared/material/material.module';
-import { NgClass, NgIf, NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-create',
@@ -27,6 +29,7 @@ import { NgClass, NgIf, NgStyle } from '@angular/common';
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.scss'],
   imports: [ReactiveFormsModule, MaterialModule, NgClass, NgIf, NgStyle],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CreateComponent implements OnInit {
   @Output() public imageSnippetEventEmitter: EventEmitter<ImageSnippet> =

@@ -3,10 +3,10 @@
 <app-custom-slider (changePageCapacity)="onPagination($event)" [value]="value">
 </app-custom-slider>
 
-<div [appIsLoading]="loadingService.isLoading(this, LoadingIndicator.OPERATOR)">
+<div>
   <div class="row">
     <app-item
-      [quantityById]="quantityById"
+      [addedToCart]="cartEntries$ | async"
       [ngClass]="{
         'col-12': value === 5,
         'col-12 col-md-4': value === 20,

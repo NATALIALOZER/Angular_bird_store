@@ -1,13 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
-import { takeUntil } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { AuthService } from '../../shared/services/auth.service';
 import { IUser } from '@shared/common_types/interfaces';
-import { WithDestroy } from '@shared/mixins/destroy';
 import { ILoginForm } from './types/login';
 
 @Component({
@@ -15,45 +20,21 @@ import { ILoginForm } from './types/login';
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
-  imports: [
-    ReactiveFormsModule,
-    CommonModule
-  ]
+  imports: [ReactiveFormsModule, CommonModule],
 })
-export class LoginComponent extends WithDestroy() implements OnInit {
+export class LoginComponent implements OnInit {
   public form!: FormGroup<ILoginForm>;
   public submitted = false;
   public message = '';
+  public auth = inject(AuthService);
 
-  constructor(
-    public auth: AuthService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {
-    super();
-  }
+  private router = inject(Router);
+  private route$ = inject(ActivatedRoute).queryParams;
+  private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this.route.queryParams
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((params: Params) => {
-        if (params['loginAgain']) {
-          this.message = 'Будь ласака, внесіть дані';
-        } else if (params['authFailed']) {
-          this.message = 'Сесія закінчилась. Веддіть дані повторно';
-        }
-      });
-
-    this.form = new FormGroup<ILoginForm>({
-      email: new FormControl<string | null>(null, [
-        Validators.required,
-        Validators.email,
-      ]),
-      password: new FormControl<string | null>(null, [
-        Validators.required,
-        Validators.minLength(6),
-      ]),
-    });
+    this.getRouteState();
+    this.createLoginForm();
   }
 
   public submit(): void {
@@ -70,7 +51,7 @@ export class LoginComponent extends WithDestroy() implements OnInit {
 
     this.auth
       .login(user)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(
         () => {
           this.form.reset();
@@ -79,5 +60,33 @@ export class LoginComponent extends WithDestroy() implements OnInit {
         },
         () => (this.submitted = false)
       );
+  }
+
+  private getRouteState(): void {
+    this.route$
+      .pipe(
+        map((params: Params) => {
+          this.message = params['loginAgain']
+            ? 'Будь ласака, внесіть дані'
+            : params['authFailed']
+            ? 'Сесія закінчилась. Веддіть дані повторно'
+            : '';
+        }),
+        takeUntilDestroyed(this.destroyRef)
+      )
+      .subscribe();
+  }
+
+  private createLoginForm(): void {
+    this.form = new FormGroup<ILoginForm>({
+      email: new FormControl<string | null>(null, [
+        Validators.required,
+        Validators.email,
+      ]),
+      password: new FormControl<string | null>(null, [
+        Validators.required,
+        Validators.minLength(6),
+      ]),
+    });
   }
 }

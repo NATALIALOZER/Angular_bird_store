@@ -89,7 +89,6 @@ export const metaReducerLocalStorage = (
       }
     }
     const nextState = reducer(state, action);
-    console.log('Products in cart NOW: ', nextState);
     localStorage.setItem('cartEntries', JSON.stringify(nextState.cartEntries));
     return nextState;
   };

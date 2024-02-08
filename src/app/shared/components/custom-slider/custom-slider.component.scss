@@ -1,6 +1,5 @@
-@import "../../../../assets/styles/helpers/mixins";
-@import "../../../../assets/styles/helpers/variables";
-@import "../loading/loader/loader";
+@import '../../../../assets/styles/helpers/mixins';
+@import '../../../../assets/styles/helpers/variables';
 
 /*slider*/
 .slider {
@@ -66,16 +65,15 @@
 //  }
 //}
 
-
 ::ng-deep {
   .mdc-slider__track--inactive,
   .mdc-slider__track--active {
     height: 12px;
     background: linear-gradient(
-        90deg,
-        rgba(82, 106, 242, 1) 5%,
-        rgba(242, 121, 234, 1) 47%,
-        rgba(242, 203, 5, 1) 93%
+      90deg,
+      rgba(82, 106, 242, 1) 5%,
+      rgba(242, 121, 234, 1) 47%,
+      rgba(242, 203, 5, 1) 93%
     );
   }
 }

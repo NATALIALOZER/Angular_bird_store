@@ -1,38 +1,36 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { AlertService } from '../../services/alert.service';
-import { WithDestroy } from '@shared/mixins/destroy';
-import { takeUntil } from 'rxjs/operators';
+import { Component, DestroyRef, Input, OnInit, inject } from '@angular/core';
 import { NgClass, NgIf } from '@angular/common';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-alert',
   standalone: true,
   templateUrl: './alert.component.html',
   styleUrls: ['./alert.component.scss'],
-  imports: [
-    NgClass,
-    NgIf
-  ]
+  imports: [NgClass, NgIf],
 })
-export class AlertComponent extends WithDestroy() implements OnInit {
+export class AlertComponent implements OnInit {
   @Input() delay = 5000;
 
   public text = '';
   public type = 'success';
 
-  constructor(private alertService: AlertService) {
-    super();
-  }
+  private alertService = inject(AlertService);
+  private destroyRef = inject(DestroyRef);
 
   ngOnInit(): void {
-    this.alertService.alert$.pipe(takeUntil(this.destroy$)).subscribe(alert => {
-      this.text = alert.text;
-      this.type = alert.type;
+    this.alertService.alert$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(alert => {
+        this.text = alert.text;
+        this.type = alert.type;
 
-      const timeout = setTimeout(() => {
-        clearTimeout(timeout);
-        this.text = '';
-      }, this.delay);
-    });
+        const timeout = setTimeout(() => {
+          clearTimeout(timeout);
+          this.text = '';
+        }, this.delay);
+      });
   }
 }

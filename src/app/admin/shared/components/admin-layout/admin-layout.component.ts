@@ -1,5 +1,10 @@
-import { Component } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import {
+  Router,
+  RouterLink,
+  RouterLinkActive,
+  RouterOutlet,
+} from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { AlertComponent } from '../alert/alert.component';
 import { NgIf } from '@angular/common';
@@ -9,16 +14,12 @@ import { NgIf } from '@angular/common';
   standalone: true,
   templateUrl: './admin-layout.component.html',
   styleUrls: ['./admin-layout.component.scss'],
-  imports: [
-    AlertComponent,
-    RouterLink,
-    NgIf,
-    RouterLinkActive,
-    RouterOutlet
-  ]
+  imports: [AlertComponent, RouterLink, NgIf, RouterLinkActive, RouterOutlet],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AdminLayoutComponent {
-  constructor(private router: Router, public auth: AuthService) {}
+  public auth = inject(AuthService);
+  private router = inject(Router);
 
   public logout(event: Event): void {
     event.preventDefault();

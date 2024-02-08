@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
@@ -21,6 +21,7 @@ import { ButtonComponent } from '@shared/components/button/button.component';
       useExisting: ButtonCheckboxComponent,
     },
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonCheckboxComponent implements ControlValueAccessor {
   @Input() public iconName = '';

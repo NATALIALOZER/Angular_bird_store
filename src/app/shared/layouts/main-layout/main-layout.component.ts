@@ -6,7 +6,6 @@ import { FormsModule } from '@angular/forms';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { ButtonComponent } from '@shared/components/button/button.component';
 
-
 @Component({
   selector: 'app-main-layout',
   standalone: true,
@@ -19,13 +18,12 @@ import { ButtonComponent } from '@shared/components/button/button.component';
     RouterLink,
     ButtonComponent,
     RouterOutlet,
-    NgIf
-  ]
+    NgIf,
+  ],
 })
 export class MainLayoutComponent {
   public ButtonSize: typeof ButtonSize = ButtonSize;
   public ButtonType: typeof ButtonType = ButtonType;
   /*checkbox*/
   public checked = false;
-  public search = '';
 }

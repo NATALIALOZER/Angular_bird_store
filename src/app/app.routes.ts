@@ -36,6 +36,6 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'admin',
-    loadChildren: () => import('./admin/admin.routes')
+    loadChildren: () => import('./admin/admin.routes'),
   },
 ];

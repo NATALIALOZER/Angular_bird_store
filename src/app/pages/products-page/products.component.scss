@@ -1,6 +1,5 @@
-@import "../../../assets/styles/helpers/mixins";
-@import "../../../assets/styles/helpers/variables";
-@import "../../shared/components/loading/loader/loader";
+@import '../../../assets/styles/helpers/mixins';
+@import '../../../assets/styles/helpers/variables';
 
 /*main*/
 /*paginator*/
@@ -14,7 +13,7 @@
     .pagination-previous.disabled::before,
     .pagination-next a::after,
     .pagination-next.disabled::after {
-      content: "";
+      content: '';
     }
     .pagination-next,
     .pagination-previous {

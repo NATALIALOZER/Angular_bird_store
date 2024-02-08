@@ -1,4 +1,9 @@
-import { Component, HostListener, Inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  HostListener,
+  Inject,
+} from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MaterialModule } from '@shared/material/material.module';
 
@@ -7,9 +12,8 @@ import { MaterialModule } from '@shared/material/material.module';
   standalone: true,
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss'],
-  imports: [
-    MaterialModule
-  ]
+  imports: [MaterialModule],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DialogComponent {
   constructor(
